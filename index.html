@@ -27,7 +27,7 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: linear-gradient(145deg, #0d1f3c 0%, #162d50 40%, #1a3a5c 100%);
+    background: #f0f4f7;
     min-height: 100vh;
     padding: 40px 20px 80px;
     color: var(--text);
@@ -39,8 +39,8 @@
     position: fixed;
     inset: 0;
     background-image: 
-      radial-gradient(circle at 20% 20%, rgba(26,122,138,0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
+      radial-gradient(circle at 20% 20%, rgba(26,122,138,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
   }
@@ -62,12 +62,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(201,168,76,0.3);
+    background: #ffffff;
+    border: 1px solid var(--grey-mid);
     border-radius: 16px;
     padding: 16px 36px;
     margin-bottom: 24px;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
   }
 
   .logo-img {
@@ -81,24 +81,24 @@
     font-family: 'Playfair Display', serif;
     font-size: 2.8rem;
     font-weight: 600;
-    color: var(--white);
+    color: var(--navy);
     letter-spacing: 0.12em;
     line-height: 1;
     display: none;
   }
 
-  .logo-img-fallback span { color: var(--gold); }
+  .logo-img-fallback span { color: var(--teal); }
 
   .header-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.6rem;
-    color: var(--white);
+    color: var(--navy);
     font-weight: 400;
     letter-spacing: 0.02em;
   }
 
   .header-sub {
-    color: rgba(255,255,255,0.5);
+    color: var(--grey-text);
     font-size: 0.88rem;
     margin-top: 8px;
     font-weight: 300;
@@ -108,7 +108,7 @@
   .sep {
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
     margin: 16px auto;
   }
 
@@ -117,7 +117,7 @@
     background: var(--white);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 0 0 1px var(--grey-mid);
   }
 
   /* Section */
@@ -641,22 +641,22 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    border: 2px solid rgba(255,255,255,0.2);
+    background: var(--grey-mid);
+    border: 2px solid var(--grey-mid);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.72rem;
     font-weight: 700;
-    color: rgba(255,255,255,0.4);
+    color: var(--grey-text);
     transition: all 0.3s;
     z-index: 1;
   }
 
   .step.active .step-dot {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--navy);
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
   }
 
   .step.done .step-dot {
@@ -667,19 +667,19 @@
 
   .step-label {
     font-size: 0.65rem;
-    color: rgba(255,255,255,0.35);
+    color: var(--grey-text);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     white-space: nowrap;
   }
 
-  .step.active .step-label { color: var(--gold); }
-  .step.done .step-label { color: var(--teal-light); }
+  .step.active .step-label { color: var(--teal); font-weight: 600; }
+  .step.done .step-label { color: var(--teal); }
 
   .step-line {
     width: 40px;
     height: 2px;
-    background: rgba(255,255,255,0.1);
+    background: var(--grey-mid);
     margin-bottom: 20px;
   }
 
