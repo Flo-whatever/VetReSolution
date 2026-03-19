@@ -1291,7 +1291,8 @@
 
 <script>
   // ── GLOBALES ─────────────────────────────────────────────────
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mvzwlngk';
+  const FORMSPREE_ENDPOINT = 'https://api.web3forms.com/submit';
+  const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
   let uploadedFileUrls = [];
   const toggleState = {};
 
@@ -1582,10 +1583,15 @@ document.addEventListener('DOMContentLoaded', function() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Nouvelle demande scanner — ${data['Prénom de l\'animal'] || 'Animal'} (${data['Espèce'] || ''})`,
+          ...data
+        })
       });
 
-      if (res.ok) {
+      const result = await res.json();
+      if (result.success) {
         // Succès
         const overlay = document.getElementById('successOverlay');
         overlay.style.display = 'flex';
