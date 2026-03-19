@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VRS — Fiche de liaison</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Uploadcare widget -->
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+<script>UPLOADCARE_PUBLIC_KEY = 'ac78eea68d9ec156e585';</script>
 <style>
   :root {
     --navy: #0d1f3c;
@@ -270,7 +273,62 @@
   .toggle-btn.active-yes { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); font-weight: 600; }
   .toggle-btn.active-no { background: #fef3f2; border-color: #e74c3c; color: #e74c3c; font-weight: 600; }
 
-  /* Upload zone */
+  /* Upload zone Uploadcare */
+  .upload-zone-uc {
+    border: 2px dashed var(--grey-mid);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--grey-light);
+    position: relative;
+  }
+
+  .upload-zone-uc:hover {
+    border-color: var(--teal-light);
+    background: var(--teal-pale);
+  }
+
+  /* Cacher le widget Uploadcare natif visuellement */
+  .uploadcare-widget {
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0; left: 0;
+    cursor: pointer;
+  }
+  .uploadcare-widget-button { display: none !important; }
+
+  /* Fichiers uploadés */
+  .uploaded-file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--teal-pale);
+    border: 1px solid var(--teal-light);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    color: var(--teal);
+  }
+
+  .uploaded-file-item a {
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 600;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .uploaded-file-item a:hover { text-decoration: underline; }
+
+  .uploaded-file-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* Upload zone custom */
   .upload-zone {
     border: 2px dashed var(--grey-mid);
     border-radius: 12px;
@@ -1145,17 +1203,27 @@
 
         <!-- Upload documents -->
         <div class="field">
-          <label>Documents complémentaires (compte-rendu, ordonnance...)</label>
-          <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+          <label>Documents complémentaires (compte-rendu, ordonnance, biologie...)</label>
+          <div class="upload-zone-uc" id="uploadZone">
             <div class="upload-icon">
               <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
             </div>
             <div class="upload-text">
               <strong>Glissez vos fichiers ici</strong> ou cliquez pour parcourir
             </div>
-            <div class="upload-limit">Taille maximale : 100 MB — PDF, JPG, PNG acceptés</div>
+            <div class="upload-limit">PDF, JPG, PNG — max 100 MB par fichier</div>
+            <!-- Widget caché, déclenché par la zone -->
+            <input type="hidden" role="uploadcare-uploader"
+              id="ucWidget"
+              data-multiple="true"
+              data-image-shrink="1600x1600"
+              data-preview-step="true"
+              data-clearable="true"
+            >
           </div>
-          <input type="file" id="fileInput" style="display:none" multiple>
+          <!-- Liste des fichiers uploadés -->
+          <div id="uploadedFiles" style="display:none; margin-top:12px; display:flex; flex-direction:column; gap:8px;"></div>
+          <div id="uploadStatus" style="display:none; margin-top:8px; font-size:0.82rem; color:var(--teal); font-weight:500;"></div>
         </div>
 
       </div>
@@ -1247,7 +1315,39 @@
   // 3. Remplace la valeur ci-dessous
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqybnyr';
 
-  function toggleAnatomy(el) {
+  // ── UPLOADCARE ───────────────────────────────────────────────
+  // ⚠️ Remplace 'TA_CLE_PUBLIQUE_ICI' dans le <head> par ta clé Uploadcare
+  // https://uploadcare.com → Settings → API Keys → Public Key
+
+  let uploadedFileUrls = [];
+
+  window.addEventListener('load', () => {
+    const widget = uploadcare.Widget('#ucWidget');
+    const zone = document.getElementById('uploadZone');
+
+    // Clic sur la zone → ouvre le widget
+    zone.addEventListener('click', () => widget.openDialog());
+
+    widget.onUploadComplete(function(fileInfo) {
+      const url = fileInfo.cdnUrl;
+      const name = fileInfo.name;
+      const ext = name.split('.').pop().toLowerCase();
+      const icon = ext === 'pdf' ? '📄' : ['jpg','jpeg','png'].includes(ext) ? '🖼️' : '📎';
+
+      uploadedFileUrls.push({ name, url });
+
+      const list = document.getElementById('uploadedFiles');
+      list.style.display = 'flex';
+      const item = document.createElement('div');
+      item.className = 'uploaded-file-item';
+      item.innerHTML = `<span class="uploaded-file-icon">${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
+      list.appendChild(item);
+
+      document.getElementById('uploadStatus').style.display = 'block';
+      document.getElementById('uploadStatus').textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
+    });
+  });
+  // ─────────────────────────────────────────────────────────────
     el.classList.toggle('selected');
     updateRegionSummary();
     updateStepper();
@@ -1488,6 +1588,11 @@
     const dicomState = document.getElementById('dicomState');
     data['Statut DICOM'] = dicomState.textContent.trim();
 
+    // Fichiers uploadés via Uploadcare
+    if (uploadedFileUrls.length > 0) {
+      data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
+    }
+
     // UI : chargement
     btn.textContent = 'Envoi en cours...';
     btn.disabled = true;
@@ -1530,6 +1635,10 @@
     document.querySelectorAll('.anatomy-card.selected, .antecedent-tag.selected').forEach(el => el.classList.remove('selected'));
     document.querySelectorAll('.toggle-btn').forEach(el => el.classList.remove('active-yes','active-no'));
     Object.keys(toggleState).forEach(k => delete toggleState[k]);
+    uploadedFileUrls = [];
+    document.getElementById('uploadedFiles').innerHTML = '';
+    document.getElementById('uploadedFiles').style.display = 'none';
+    document.getElementById('uploadStatus').style.display = 'none';
     document.getElementById('regionSummary').style.display = 'none';
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Soumettre la fiche →';
