@@ -287,15 +287,8 @@
     background: var(--teal-pale);
   }
 
-  /* Cacher le widget Uploadcare natif visuellement */
-  .uploadcare-widget {
-    position: absolute !important;
-    opacity: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    top: 0; left: 0;
-    cursor: pointer;
-  }
+  /* Cacher le widget Uploadcare natif — sans bloquer les clics */
+  .uploadcare-widget { display: none !important; }
   .uploadcare-widget-button { display: none !important; }
 
   /* Fichiers uploadés */
@@ -1206,20 +1199,11 @@
               <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
             </div>
             <div class="upload-text">
-              <strong>Glissez vos fichiers ici</strong> ou cliquez pour parcourir
+              <strong>Cliquez pour ajouter des fichiers</strong>
             </div>
             <div class="upload-limit">PDF, JPG, PNG — max 100 MB par fichier</div>
-            <!-- Widget caché, déclenché par la zone -->
-            <input type="hidden" role="uploadcare-uploader"
-              id="ucWidget"
-              data-multiple="true"
-              data-image-shrink="1600x1600"
-              data-preview-step="true"
-              data-clearable="true"
-            >
           </div>
-          <!-- Liste des fichiers uploadés -->
-          <div id="uploadedFiles" style="display:none; margin-top:12px; display:flex; flex-direction:column; gap:8px;"></div>
+          <div id="uploadedFiles" style="margin-top:12px; display:flex; flex-direction:column; gap:8px;"></div>
           <div id="uploadStatus" style="display:none; margin-top:8px; font-size:0.82rem; color:var(--teal); font-weight:500;"></div>
         </div>
 
@@ -1317,32 +1301,36 @@
 
   function initUploadcare() {
     if (typeof uploadcare === 'undefined') return;
-    const widget = uploadcare.Widget('#ucWidget');
-    const zone = document.getElementById('uploadZone');
 
-    zone.addEventListener('click', (e) => {
-      e.stopPropagation();
-      widget.openDialog();
-    });
+    document.getElementById('uploadZone').addEventListener('click', function() {
+      const dialog = uploadcare.openDialog(null, {
+        multiple: true,
+        imagesOnly: false,
+        publicKey: 'ac78eea68d9ec156e585'
+      });
 
-    widget.onUploadComplete(function(fileInfo) {
-      const url = fileInfo.cdnUrl;
-      const name = fileInfo.name;
-      const ext = name.split('.').pop().toLowerCase();
-      const icon = ext === 'pdf' ? '📄' : ['jpg','jpeg','png'].includes(ext) ? '🖼️' : '📎';
+      dialog.done(function(fileGroup) {
+        fileGroup.files().forEach(function(file) {
+          file.done(function(fileInfo) {
+            const url = fileInfo.cdnUrl;
+            const name = fileInfo.name;
+            const ext = (name.split('.').pop() || '').toLowerCase();
+            const icon = ext === 'pdf' ? '📄' : ['jpg','jpeg','png'].includes(ext) ? '🖼️' : '📎';
 
-      uploadedFileUrls.push({ name, url });
+            uploadedFileUrls.push({ name, url });
 
-      const list = document.getElementById('uploadedFiles');
-      list.style.display = 'flex';
-      const item = document.createElement('div');
-      item.className = 'uploaded-file-item';
-      item.innerHTML = `<span class="uploaded-file-icon">${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
-      list.appendChild(item);
+            const list = document.getElementById('uploadedFiles');
+            const item = document.createElement('div');
+            item.className = 'uploaded-file-item';
+            item.innerHTML = `<span class="uploaded-file-icon">${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
+            list.appendChild(item);
 
-      const status = document.getElementById('uploadStatus');
-      status.style.display = 'block';
-      status.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
+            const status = document.getElementById('uploadStatus');
+            status.style.display = 'block';
+            status.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
+          });
+        });
+      });
     });
   }
   // ─────────────────────────────────────────────────────────────
