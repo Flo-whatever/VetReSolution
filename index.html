@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VRS — Fiche de liaison</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- Uploadcare widget -->
-<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-<script>UPLOADCARE_PUBLIC_KEY = 'ac78eea68d9ec156e585';</script>
 <style>
   :root {
     --navy: #0d1f3c;
@@ -1316,17 +1313,17 @@
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqybnyr';
 
   // ── UPLOADCARE ───────────────────────────────────────────────
-  // ⚠️ Remplace 'TA_CLE_PUBLIQUE_ICI' dans le <head> par ta clé Uploadcare
-  // https://uploadcare.com → Settings → API Keys → Public Key
-
   let uploadedFileUrls = [];
 
-  window.addEventListener('load', () => {
+  function initUploadcare() {
+    if (typeof uploadcare === 'undefined') return;
     const widget = uploadcare.Widget('#ucWidget');
     const zone = document.getElementById('uploadZone');
 
-    // Clic sur la zone → ouvre le widget
-    zone.addEventListener('click', () => widget.openDialog());
+    zone.addEventListener('click', (e) => {
+      e.stopPropagation();
+      widget.openDialog();
+    });
 
     widget.onUploadComplete(function(fileInfo) {
       const url = fileInfo.cdnUrl;
@@ -1343,10 +1340,11 @@
       item.innerHTML = `<span class="uploaded-file-icon">${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
       list.appendChild(item);
 
-      document.getElementById('uploadStatus').style.display = 'block';
-      document.getElementById('uploadStatus').textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
+      const status = document.getElementById('uploadStatus');
+      status.style.display = 'block';
+      status.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
     });
-  });
+  }
   // ─────────────────────────────────────────────────────────────
     el.classList.toggle('selected');
     updateRegionSummary();
@@ -1648,6 +1646,14 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
+
+<!-- Uploadcare chargé en dernier pour ne pas bloquer les événements -->
+<script>
+  window.UPLOADCARE_PUBLIC_KEY = 'ac78eea68d9ec156e585';
+  window.UPLOADCARE_LOCALE = 'fr';
+</script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"
+  onload="initUploadcare()"></script>
 
 </body>
 </html>
