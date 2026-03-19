@@ -65,32 +65,29 @@
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(201,168,76,0.3);
     border-radius: 16px;
-    padding: 20px 36px;
+    padding: 16px 36px;
     margin-bottom: 24px;
     backdrop-filter: blur(10px);
   }
 
-  .logo-text {
+  .logo-img {
+    height: 72px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .logo-img-fallback {
     font-family: 'Playfair Display', serif;
     font-size: 2.8rem;
     font-weight: 600;
     color: var(--white);
     letter-spacing: 0.12em;
     line-height: 1;
+    display: none;
   }
 
-  .logo-text span {
-    color: var(--gold);
-  }
-
-  .logo-subtitle {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-top: 6px;
-    font-weight: 300;
-  }
+  .logo-img-fallback span { color: var(--gold); }
 
   .header-title {
     font-family: 'Playfair Display', serif;
@@ -475,6 +472,268 @@
   .zone-tag:hover { border-color: var(--teal-light); color: var(--teal); }
   .zone-tag.selected { background: var(--navy); border-color: var(--navy); color: white; }
 
+  /* Region groups */
+  .region-group { margin-bottom: 16px; }
+
+  .region-group-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .region-group-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--navy);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .region-group-badge.supplement {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
+  }
+
+  .supplement-card { border-style: dashed; }
+  .supplement-card.selected { background: var(--teal); border-color: var(--teal); border-style: solid; }
+
+  .anatomy-card small {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: var(--grey-text);
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+
+  .anatomy-card.selected small { color: rgba(255,255,255,0.6); }
+
+  /* Region summary */
+  .region-summary {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .region-summary-icon { font-size: 1.4rem; }
+
+  .region-summary-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  .region-summary-value {
+    font-size: 0.88rem;
+    color: var(--white);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .region-count-badge {
+    margin-left: auto;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* Anatomy selector */
+  .anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .anatomy-card {
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--grey-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+  }
+
+  .anatomy-card:hover { border-color: var(--teal-light); background: var(--teal-pale); }
+
+  .anatomy-card.selected {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+  }
+
+  .anatomy-card.selected .anatomy-icon { background: rgba(255,255,255,0.15); }
+  .anatomy-card.selected .anatomy-name { color: white; }
+  .anatomy-card.selected .anatomy-check { opacity: 1; }
+
+  .anatomy-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(26,122,138,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+
+  .anatomy-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.2;
+  }
+
+  .anatomy-check {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+    font-size: 0.6rem;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  /* Stepper progress */
+  .stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+  }
+
+  .step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    transition: all 0.3s;
+    z-index: 1;
+  }
+
+  .step.active .step-dot {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+  }
+
+  .step.done .step-dot {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+  }
+
+  .step-label {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .step.active .step-label { color: var(--gold); }
+  .step.done .step-label { color: var(--teal-light); }
+
+  .step-line {
+    width: 40px;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+  }
+
+  .step-line.done { background: var(--teal); }
+
+  /* Antécédents */
+  .antecedent-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .antecedent-tag {
+    padding: 6px 12px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--grey-text);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--grey-light);
+    font-weight: 500;
+  }
+  .antecedent-tag:hover { border-color: var(--teal-light); color: var(--teal); }
+  .antecedent-tag.selected { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); }
+
+  /* Radio custom */
+  .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .radio-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--grey-light);
+  }
+  .radio-opt:hover { border-color: var(--teal-light); }
+  .radio-opt.selected { border-color: var(--teal); background: var(--teal-pale); }
+  .radio-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-mid);
+    transition: all 0.2s;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .radio-opt.selected .radio-dot { border-color: var(--teal); background: var(--teal); }
+  .radio-opt.selected .radio-dot::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: white;
+  }
+  .radio-opt-label { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+  .radio-opt.selected .radio-opt-label { color: var(--teal); font-weight: 600; }
+
   @media (max-width: 600px) {
     .section { padding: 24px 20px; }
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
@@ -482,7 +741,7 @@
     .date-row { grid-template-columns: 1fr 1fr; }
     .form-footer { flex-direction: column; align-items: stretch; }
     .submit-btn { text-align: center; }
-    .logo-text { font-size: 2rem; }
+    .anatomy-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -493,14 +752,45 @@
   <!-- Header -->
   <div class="header">
     <div class="logo-container">
-      <div>
-        <div class="logo-text">V<span>R</span>S</div>
-        <div class="logo-subtitle">Vet ReSolutions</div>
-      </div>
+      <img
+        class="logo-img"
+        src="/VetResolution.png"
+        alt="VetResolution"
+        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';"
+      >
+      <div class="logo-img-fallback" id="logo-fallback">V<span>R</span>S</div>
     </div>
     <h1 class="header-title">Fiche de liaison téléradiologique</h1>
     <div class="sep"></div>
     <p class="header-sub">Merci de remplir le formulaire pour démarrer la prise en charge</p>
+
+    <!-- Stepper -->
+    <div class="stepper" style="margin-top:24px;">
+      <div class="step active" id="step1">
+        <div class="step-dot">1</div>
+        <div class="step-label">Clinique</div>
+      </div>
+      <div class="step-line" id="line1"></div>
+      <div class="step" id="step2">
+        <div class="step-dot">2</div>
+        <div class="step-label">Patient</div>
+      </div>
+      <div class="step-line" id="line2"></div>
+      <div class="step" id="step3">
+        <div class="step-dot">3</div>
+        <div class="step-label">Clinique</div>
+      </div>
+      <div class="step-line" id="line3"></div>
+      <div class="step" id="step4">
+        <div class="step-dot">4</div>
+        <div class="step-label">Examen</div>
+      </div>
+      <div class="step-line" id="line4"></div>
+      <div class="step" id="step5">
+        <div class="step-dot">5</div>
+        <div class="step-label">Options</div>
+      </div>
+    </div>
   </div>
 
   <!-- Form card -->
@@ -617,8 +907,30 @@
             </select>
           </div>
         </div>
+        <div class="field">
+          <label>Poids (kg)</label>
+          <input type="number" placeholder="ex: 12.5" min="0.1" step="0.1">
+        </div>
       </div>
-    </div>
+
+      <!-- Antécédents -->
+      <div style="margin-top:18px;">
+        <div class="field">
+          <label>Antécédents médicaux / chirurgicaux</label>
+          <div class="antecedent-tags">
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Aucun connu</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Cardiopathie</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Insuffisance rénale</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Diabète</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Epilepsie</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Néoplasie</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Chirurgie récente</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Traumatisme</span>
+            <span class="antecedent-tag" onclick="toggleAntecedent(this)">Autre</span>
+          </div>
+          <textarea style="margin-top:10px; min-height:60px;" placeholder="Précisez si nécessaire..."></textarea>
+        </div>
+      </div>
 
     <!-- Section 3 : Clinique médicale -->
     <div class="section">
@@ -677,20 +989,142 @@
               </select>
             </div>
           </div>
+          <div class="field">
+            <label>Protocole d'injection de contraste</label>
+            <div class="select-wrap">
+              <select>
+                <option value="">Sélectionner...</option>
+                <option>Sans injection</option>
+                <option>Avec injection IV</option>
+                <option>Triple phase (art. / port. / tardive)</option>
+                <option>Double phase</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Type d'anesthésie</label>
+            <div class="select-wrap">
+              <select>
+                <option value="">Sélectionner...</option>
+                <option>AG (anesthésie générale)</option>
+                <option>Sédation légère</option>
+                <option>Sans anesthésie</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="field">
-          <label>Région(s) à interpréter</label>
-          <div class="tag-row" id="zoneTags">
-            <span class="zone-tag" onclick="toggleTag(this)">Thorax</span>
-            <span class="zone-tag" onclick="toggleTag(this)">Abdomen</span>
-            <span class="zone-tag" onclick="toggleTag(this)">Rachis</span>
-            <span class="zone-tag" onclick="toggleTag(this)">Crâne / Encéphale</span>
-            <span class="zone-tag" onclick="toggleTag(this)">Membres antérieurs</span>
-            <span class="zone-tag" onclick="toggleTag(this)">Membres postérieurs</span>
-            <span class="zone-tag" onclick="toggleTag(this)">Pelvis</span>
-            <span class="zone-tag" onclick="toggleTag(this)">Corps entier</span>
+          <label>Région(s) à interpréter <span class="req">*</span></label>
+
+          <!-- Groupe : 1 région -->
+          <div class="region-group">
+            <div class="region-group-title">
+              <span class="region-group-badge">1 région</span>
+            </div>
+            <div class="anatomy-grid">
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="1">
+                <div class="anatomy-icon">😮</div>
+                <div class="anatomy-name">Massif facial / Cou</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="1">
+                <div class="anatomy-icon">🫁</div>
+                <div class="anatomy-name">Thorax</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="1">
+                <div class="anatomy-icon">🫃</div>
+                <div class="anatomy-name">Abdomen</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="1">
+                <div class="anatomy-icon">🦴</div>
+                <div class="anatomy-name">Colonne cervico-thoracique</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="1">
+                <div class="anatomy-icon">🦴</div>
+                <div class="anatomy-name">Colonne thoraco-lombaire</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+            </div>
           </div>
+
+          <!-- Groupe : Articulations -->
+          <div class="region-group">
+            <div class="region-group-title">
+              <span class="region-group-badge">Articulations</span>
+            </div>
+            <div class="anatomy-grid">
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="1">
+                <div class="anatomy-icon">🦾</div>
+                <div class="anatomy-name">1 articulation<br><small>coudes / épaules / carpes<br>pelvis / grassets / tarses</small></div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="2">
+                <div class="anatomy-icon">🦾</div>
+                <div class="anatomy-name">2 articulations<br><small>coudes/épaules • carpes/coudes<br>pelvis/grassets • grassets/tarses</small></div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="3">
+                <div class="anatomy-icon">🦾</div>
+                <div class="anatomy-name">3 articulations<br><small>carpes/coudes/épaules<br>pelvis/grassets/tarses</small></div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card" onclick="toggleAnatomy(this)" data-regions="2">
+                <div class="anatomy-icon">🐾</div>
+                <div class="anatomy-name">Membres — bilan extension<br><small>Corps entier (codé 2 régions)</small></div>
+                <div class="anatomy-check">✓</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Groupe : Suppléments -->
+          <div class="region-group">
+            <div class="region-group-title">
+              <span class="region-group-badge supplement">Supplément</span>
+            </div>
+            <div class="anatomy-grid">
+              <div class="anatomy-card supplement-card" onclick="toggleAnatomy(this)" data-regions="0">
+                <div class="anatomy-icon">💉</div>
+                <div class="anatomy-name">Myéloscanner</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card supplement-card" onclick="toggleAnatomy(this)" data-regions="0">
+                <div class="anatomy-icon">🩸</div>
+                <div class="anatomy-name">Angioscanner multiphase</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card supplement-card" onclick="toggleAnatomy(this)" data-regions="0">
+                <div class="anatomy-icon">🔬</div>
+                <div class="anatomy-name">Lymphangioscanner</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+              <div class="anatomy-card supplement-card" onclick="toggleAnatomy(this)" data-regions="0">
+                <div class="anatomy-icon">🔍</div>
+                <div class="anatomy-name">Fistulographie</div>
+                <div class="anatomy-check">✓</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Résumé sélection -->
+          <div class="region-summary" id="regionSummary" style="display:none;">
+            <div class="region-summary-icon">📋</div>
+            <div class="region-summary-text">
+              <div class="region-summary-label">Sélection actuelle</div>
+              <div class="region-summary-value" id="regionSummaryText">—</div>
+            </div>
+            <div class="region-count-badge" id="regionCount">0 région</div>
+          </div>
+
+          <!-- Autre besoin -->
+          <div class="field" style="margin-top:12px;">
+            <label>Autre besoin de lecture (précisez)</label>
+            <textarea style="min-height:60px;" placeholder="Décrivez ici tout besoin spécifique non listé ci-dessus..."></textarea>
+          </div>
+
         </div>
 
         <!-- DICOM Checker -->
@@ -770,7 +1204,40 @@
 </div>
 
 <script>
-  function toggleTag(el) {
+  function toggleAnatomy(el) {
+    el.classList.toggle('selected');
+    updateRegionSummary();
+    updateStepper();
+  }
+
+  function updateRegionSummary() {
+    const selected = document.querySelectorAll('.anatomy-card.selected');
+    const summary = document.getElementById('regionSummary');
+    const summaryText = document.getElementById('regionSummaryText');
+    const countBadge = document.getElementById('regionCount');
+
+    if (selected.length === 0) {
+      summary.style.display = 'none';
+      return;
+    }
+
+    summary.style.display = 'flex';
+
+    let totalRegions = 0;
+    const names = [];
+    selected.forEach(card => {
+      const r = parseInt(card.dataset.regions || 1);
+      totalRegions += r;
+      names.push(card.querySelector('.anatomy-name').childNodes[0].textContent.trim());
+    });
+
+    summaryText.textContent = names.join(' + ');
+    countBadge.textContent = totalRegions === 0
+      ? 'Supplément'
+      : `${totalRegions} région${totalRegions > 1 ? 's' : ''}`;
+  }
+
+  function toggleAntecedent(el) {
     el.classList.toggle('selected');
   }
 
@@ -784,12 +1251,16 @@
     toggleState[group] = val;
   }
 
+  function setRadio(el, group) {
+    document.querySelectorAll(`[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
   function checkDicom() {
     const state = document.getElementById('dicomState');
     state.className = 'dicom-state pending';
     state.textContent = 'Vérification en cours...';
     setTimeout(() => {
-      // Simule une réponse — en production, appel API REST Orthanc
       const received = Math.random() > 0.4;
       if (received) {
         state.className = 'dicom-state received';
@@ -801,8 +1272,50 @@
     }, 1800);
   }
 
+  // Stepper visuel (décoratif — scroll-based)
+  function updateStepper() {
+    const sections = document.querySelectorAll('.section');
+    const steps = [
+      document.getElementById('step1'),
+      document.getElementById('step2'),
+      document.getElementById('step3'),
+      document.getElementById('step4'),
+      document.getElementById('step5'),
+    ];
+    const lines = [
+      document.getElementById('line1'),
+      document.getElementById('line2'),
+      document.getElementById('line3'),
+      document.getElementById('line4'),
+    ];
+
+    sections.forEach((section, i) => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.5 && steps[i]) {
+        steps.forEach((s, j) => {
+          if (j < i) { s.classList.add('done'); s.classList.remove('active'); s.querySelector('.step-dot').textContent = '✓'; }
+          else if (j === i) { s.classList.add('active'); s.classList.remove('done'); }
+          else { s.classList.remove('active','done'); }
+        });
+        lines.forEach((l, j) => {
+          if (l) l.classList.toggle('done', j < i);
+        });
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateStepper);
+
   function submitForm() {
-    alert('Fiche soumise avec succès !\nVotre téléradiologue a été notifié.');
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = '✓ Fiche soumise avec succès !';
+    btn.style.background = 'linear-gradient(135deg, #1a7a5a, #0f5a40)';
+    btn.style.color = 'white';
+    setTimeout(() => {
+      btn.textContent = 'Soumettre la fiche →';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
   }
 </script>
 
