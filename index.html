@@ -1351,6 +1351,114 @@
   async function submitForm() {
     const btn = document.getElementById('submitBtn');
 
+    // ── VALIDATION ──────────────────────────────────────────────
+    const errors = [];
+
+    function markError(el, msg) {
+      el.style.border = '1.5px solid #c0392b';
+      el.style.background = '#fff5f5';
+      errors.push({ el, msg });
+    }
+    function clearErrors() {
+      document.querySelectorAll('input, select, textarea').forEach(el => {
+        el.style.border = '';
+        el.style.background = '';
+      });
+      document.querySelectorAll('.field-error').forEach(e => e.remove());
+    }
+
+    clearErrors();
+
+    // Clinique
+    const clinique = document.querySelector('input[placeholder="Nom de votre clinique vétérinaire"]');
+    if (!clinique.value.trim()) markError(clinique, 'Nom de clinique requis');
+
+    // Prénom vétérinaire
+    const prenomVet = document.querySelector('input[placeholder="Prénom"]');
+    if (!prenomVet.value.trim()) markError(prenomVet, 'Prénom requis');
+
+    // Nom vétérinaire
+    const nomVet = document.querySelector('input[placeholder="Nom"]');
+    if (!nomVet.value.trim()) markError(nomVet, 'Nom requis');
+
+    // Email
+    const email = document.querySelector('input[type="email"]');
+    if (!email.value.trim()) {
+      markError(email, 'Email requis');
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+      markError(email, 'Email invalide');
+    }
+
+    // Prénom animal
+    const prenomAnimal = document.querySelectorAll('input[placeholder="Prénom"]')[1];
+    if (prenomAnimal && !prenomAnimal.value.trim()) markError(prenomAnimal, 'Prénom animal requis');
+
+    // Espèce
+    const espece = document.querySelector('select');
+    if (!espece.value) markError(espece, 'Espèce requise');
+
+    // Anamnèse
+    const anam = document.querySelector('textarea[placeholder="Décrivez le contexte clinique, les signes observés, l\'évolution..."]');
+    if (anam && !anam.value.trim()) markError(anam, 'Anamnèse requise');
+
+    // Au moins 1 région
+    const regionsSelected = document.querySelectorAll('.anatomy-card.selected');
+    if (regionsSelected.length === 0) {
+      errors.push({ el: document.getElementById('regionSummary').parentElement, msg: 'Sélectionnez au moins une région' });
+      const regionField = document.querySelector('.anatomy-grid');
+      if (regionField) {
+        regionField.style.outline = '2px solid #c0392b';
+        regionField.style.borderRadius = '12px';
+      }
+    } else {
+      const regionField = document.querySelector('.anatomy-grid');
+      if (regionField) { regionField.style.outline = ''; }
+    }
+
+    // Télé-expertise
+    if (!toggleState['expertise']) {
+      errors.push({ el: null, msg: 'Télé-expertise non renseignée' });
+      document.querySelectorAll('[onclick*="expertise"]').forEach(b => {
+        b.parentElement.style.outline = '2px solid #c0392b';
+        b.parentElement.style.borderRadius = '10px';
+      });
+    } else {
+      document.querySelectorAll('[onclick*="expertise"]').forEach(b => {
+        b.parentElement.style.outline = '';
+      });
+    }
+
+    // Urgence
+    if (!toggleState['urgence']) {
+      errors.push({ el: null, msg: 'Urgence non renseignée' });
+      document.querySelectorAll('[onclick*="urgence"]').forEach(b => {
+        b.parentElement.style.outline = '2px solid #c0392b';
+        b.parentElement.style.borderRadius = '10px';
+      });
+    } else {
+      document.querySelectorAll('[onclick*="urgence"]').forEach(b => {
+        b.parentElement.style.outline = '';
+      });
+    }
+
+    // S'il y a des erreurs → scroll vers la première et stop
+    if (errors.length > 0) {
+      const firstEl = errors.find(e => e.el)?.el;
+      if (firstEl) {
+        firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      // Petit shake sur le bouton
+      btn.style.animation = 'none';
+      btn.textContent = `✗ ${errors.length} champ${errors.length > 1 ? 's' : ''} requis`;
+      btn.style.background = '#c0392b';
+      setTimeout(() => {
+        btn.textContent = 'Soumettre la fiche →';
+        btn.style.background = '';
+      }, 2500);
+      return;
+    }
+    // ── FIN VALIDATION ───────────────────────────────────────────
+
     // Collecte toutes les données
     const inputs = document.querySelectorAll('input, select, textarea');
     const data = {};
