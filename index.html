@@ -1290,27 +1290,20 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-
-  // ⚠️ REMPLACE PAR TON ENDPOINT FORMSPREE
-  // 1. Va sur https://formspree.io → crée un compte gratuit
-  // 2. Crée un nouveau form → copie l'endpoint (ex: https://formspree.io/f/xabcdefg)
-  // 3. Remplace la valeur ci-dessous
+  // ── GLOBALES ─────────────────────────────────────────────────
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqybnyr';
-
-  // ── UPLOADCARE ───────────────────────────────────────────────
   let uploadedFileUrls = [];
+  const toggleState = {};
 
+  // ── UPLOADCARE (doit être globale pour onload) ────────────────
   function initUploadcare() {
     if (typeof uploadcare === 'undefined') return;
-
     document.getElementById('uploadZone').addEventListener('click', function() {
       const dialog = uploadcare.openDialog(null, {
         multiple: true,
         imagesOnly: false,
         publicKey: 'ac78eea68d9ec156e585'
       });
-
       dialog.done(function(fileGroup) {
         fileGroup.files().forEach(function(file) {
           file.done(function(fileInfo) {
@@ -1318,15 +1311,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = fileInfo.name;
             const ext = (name.split('.').pop() || '').toLowerCase();
             const icon = ext === 'pdf' ? '📄' : ['jpg','jpeg','png'].includes(ext) ? '🖼️' : '📎';
-
             uploadedFileUrls.push({ name, url });
-
             const list = document.getElementById('uploadedFiles');
             const item = document.createElement('div');
             item.className = 'uploaded-file-item';
             item.innerHTML = `<span class="uploaded-file-icon">${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
             list.appendChild(item);
-
             const status = document.getElementById('uploadStatus');
             status.style.display = 'block';
             status.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
@@ -1335,7 +1325,10 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
-  // ─────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  function toggleAnatomy(el) {
     el.classList.toggle('selected');
     updateRegionSummary();
     updateStepper();
@@ -1372,7 +1365,6 @@ document.addEventListener('DOMContentLoaded', function() {
     el.classList.toggle('selected');
   }
 
-  const toggleState = {};
   function setToggle(btn, group, val) {
     const parent = btn.parentElement;
     const btns = parent.querySelectorAll('.toggle-btn');
