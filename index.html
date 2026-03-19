@@ -1192,10 +1192,10 @@
     <!-- Footer -->
     <div class="form-footer">
       <div class="footer-info">
-        <strong>Vet Radiology Solutions</strong><br>
+        <strong>VetResolution</strong><br>
         Votre rapport sera transmis par email dans les délais convenus.
       </div>
-      <button class="submit-btn" onclick="submitForm()">
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">
         Soumettre la fiche →
       </button>
     </div>
@@ -1203,7 +1203,50 @@
   </div>
 </div>
 
+<!-- Overlay succès -->
+<div id="successOverlay" style="
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(240,244,247,0.97);
+  flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:40px;
+">
+  <div style="
+    background:white; border-radius:24px; padding:48px 40px;
+    box-shadow:0 8px 60px rgba(0,0,0,0.12); max-width:460px; width:100%;
+  ">
+    <div style="
+      width:72px; height:72px; background:#1a7a8a; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 24px; font-size:2rem;
+    ">✓</div>
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:#0d1f3c; margin-bottom:12px;">
+      Fiche envoyée avec succès !
+    </h2>
+    <p style="color:#6b7f91; font-size:0.92rem; line-height:1.6; margin-bottom:8px;">
+      Votre demande a bien été transmise à VetResolution.<br>
+      Vous recevrez une confirmation par email.
+    </p>
+    <div id="successUrgence" style="display:none; margin:16px 0; padding:12px 20px;
+      background:#fff3cd; border-radius:10px; border-left:3px solid #c9a84c;
+      font-size:0.85rem; color:#7a5c00; font-weight:500;">
+      ⚡ Demande urgente — traitement prioritaire en cours
+    </div>
+    <button onclick="resetForm()" style="
+      margin-top:24px; background:#1a7a8a; color:white;
+      border:none; border-radius:10px; padding:12px 28px;
+      font-family:'DM Sans',sans-serif; font-size:0.92rem;
+      font-weight:600; cursor:pointer; letter-spacing:0.03em;
+    ">Nouvelle demande</button>
+  </div>
+</div>
+
 <script>
+  // ⚠️ REMPLACE PAR TON ENDPOINT FORMSPREE
+  // 1. Va sur https://formspree.io → crée un compte gratuit
+  // 2. Crée un nouveau form → copie l'endpoint (ex: https://formspree.io/f/xabcdefg)
+  // 3. Remplace la valeur ci-dessous
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqybnyr';
+
   function toggleAnatomy(el) {
     el.classList.toggle('selected');
     updateRegionSummary();
@@ -1272,7 +1315,6 @@
     }, 1800);
   }
 
-  // Stepper visuel (décoratif — scroll-based)
   function updateStepper() {
     const sections = document.querySelectorAll('.section');
     const steps = [
@@ -1306,16 +1348,87 @@
 
   window.addEventListener('scroll', updateStepper);
 
-  function submitForm() {
-    const btn = document.querySelector('.submit-btn');
-    btn.textContent = '✓ Fiche soumise avec succès !';
-    btn.style.background = 'linear-gradient(135deg, #1a7a5a, #0f5a40)';
-    btn.style.color = 'white';
-    setTimeout(() => {
-      btn.textContent = 'Soumettre la fiche →';
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 3000);
+  async function submitForm() {
+    const btn = document.getElementById('submitBtn');
+
+    // Collecte toutes les données
+    const inputs = document.querySelectorAll('input, select, textarea');
+    const data = {};
+    inputs.forEach(el => {
+      if (el.id === 'fileInput') return;
+      const label = el.closest('.field')?.querySelector('label')?.textContent?.replace('*','').trim() || el.name || el.id;
+      if (el.value && el.value !== 'Jour' && el.value !== 'Mois' && el.value !== 'Année') {
+        data[label] = el.value;
+      }
+    });
+
+    // Régions sélectionnées
+    const regions = [...document.querySelectorAll('.anatomy-card.selected')]
+      .map(c => c.querySelector('.anatomy-name').childNodes[0].textContent.trim());
+    if (regions.length) data['Régions à interpréter'] = regions.join(', ');
+
+    // Antécédents sélectionnés
+    const antecedents = [...document.querySelectorAll('.antecedent-tag.selected')]
+      .map(t => t.textContent.trim());
+    if (antecedents.length) data['Antécédents'] = antecedents.join(', ');
+
+    // Toggles (Oui/Non)
+    data['Télé-expertise'] = toggleState['expertise'] === 'yes' ? 'Oui' : toggleState['expertise'] === 'no' ? 'Non' : 'Non renseigné';
+    data['Urgence'] = toggleState['urgence'] === 'yes' ? 'Oui' : toggleState['urgence'] === 'no' ? 'Non' : 'Non renseigné';
+
+    // Statut DICOM
+    const dicomState = document.getElementById('dicomState');
+    data['Statut DICOM'] = dicomState.textContent.trim();
+
+    // UI : chargement
+    btn.textContent = 'Envoi en cours...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        // Succès
+        const overlay = document.getElementById('successOverlay');
+        overlay.style.display = 'flex';
+        if (toggleState['urgence'] === 'yes') {
+          document.getElementById('successUrgence').style.display = 'block';
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('Erreur serveur');
+      }
+    } catch (e) {
+      btn.textContent = '✗ Erreur d\'envoi — réessayez';
+      btn.style.background = '#c0392b';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = 'Soumettre la fiche →';
+        btn.style.background = '';
+      }, 4000);
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('successOverlay').style.display = 'none';
+    document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+    document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+    document.querySelectorAll('.anatomy-card.selected, .antecedent-tag.selected').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.toggle-btn').forEach(el => el.classList.remove('active-yes','active-no'));
+    Object.keys(toggleState).forEach(k => delete toggleState[k]);
+    document.getElementById('regionSummary').style.display = 'none';
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Soumettre la fiche →';
+    btn.style.background = '';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
 
