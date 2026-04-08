@@ -33,7 +33,6 @@
     color: var(--text);
   }
 
-  /* Background texture */
   body::before {
     content: '';
     position: fixed;
@@ -52,7 +51,6 @@
     margin: 0 auto;
   }
 
-  /* Header */
   .header {
     text-align: center;
     margin-bottom: 36px;
@@ -104,7 +102,6 @@
     font-weight: 300;
   }
 
-  /* Gold separator */
   .sep {
     width: 60px;
     height: 2px;
@@ -112,7 +109,6 @@
     margin: 16px auto;
   }
 
-  /* Card */
   .card {
     background: var(--white);
     border-radius: 20px;
@@ -120,7 +116,6 @@
     box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 0 0 1px var(--grey-mid);
   }
 
-  /* Section */
   .section {
     padding: 32px 40px;
     border-bottom: 1px solid var(--grey-mid);
@@ -171,12 +166,10 @@
     text-transform: uppercase;
   }
 
-  /* Grid */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
   .span-2 { grid-column: span 2; }
 
-  /* Field */
   .field { display: flex; flex-direction: column; gap: 6px; }
 
   .field label {
@@ -228,7 +221,6 @@
     line-height: 1.5;
   }
 
-  /* Select custom arrow */
   .select-wrap { position: relative; }
   .select-wrap::after {
     content: '▾';
@@ -242,14 +234,9 @@
   }
   .select-wrap select { padding-right: 36px; cursor: pointer; }
 
-  /* Date row */
   .date-row { display: grid; grid-template-columns: 2fr 3fr 2fr; gap: 10px; }
 
-  /* Toggle buttons (Oui/Non) */
-  .toggle-group {
-    display: flex;
-    gap: 10px;
-  }
+  .toggle-group { display: flex; gap: 10px; }
 
   .toggle-btn {
     flex: 1;
@@ -270,7 +257,6 @@
   .toggle-btn.active-yes { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); font-weight: 600; }
   .toggle-btn.active-no { background: #fef3f2; border-color: #e74c3c; color: #e74c3c; font-weight: 600; }
 
-  /* Upload zone Uploadcare */
   .upload-zone-uc {
     border: 2px dashed var(--grey-mid);
     border-radius: 12px;
@@ -287,11 +273,9 @@
     background: var(--teal-pale);
   }
 
-  /* Cacher le widget Uploadcare natif — sans bloquer les clics */
   .uploadcare-widget { display: none !important; }
   .uploadcare-widget-button { display: none !important; }
 
-  /* Fichiers uploadés */
   .uploaded-file-item {
     display: flex;
     align-items: center;
@@ -315,10 +299,8 @@
   }
 
   .uploaded-file-item a:hover { text-decoration: underline; }
-
   .uploaded-file-icon { font-size: 1.1rem; flex-shrink: 0; }
 
-  /* Upload zone custom */
   .upload-zone {
     border: 2px dashed var(--grey-mid);
     border-radius: 12px;
@@ -354,14 +336,8 @@
   }
 
   .upload-text strong { color: var(--teal); }
+  .upload-limit { font-size: 0.75rem; color: #b0bec5; margin-top: 6px; }
 
-  .upload-limit {
-    font-size: 0.75rem;
-    color: #b0bec5;
-    margin-top: 6px;
-  }
-
-  /* DICOM checker */
   .dicom-checker {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
     border-radius: 14px;
@@ -439,7 +415,6 @@
     border-color: var(--teal-light);
   }
 
-  /* Urgency pill */
   .urgency-note {
     font-size: 0.76rem;
     color: var(--grey-text);
@@ -447,7 +422,6 @@
     font-style: italic;
   }
 
-  /* Footer / Submit */
   .form-footer {
     background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
     padding: 32px 40px;
@@ -489,7 +463,6 @@
 
   .submit-btn:active { transform: translateY(0); }
 
-  /* Info note */
   .info-note {
     display: flex;
     gap: 10px;
@@ -503,62 +476,112 @@
     line-height: 1.5;
   }
 
-  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-
-  .zone-tag {
-    padding: 7px 14px;
-    border: 1.5px solid var(--grey-mid);
-    border-radius: 20px;
-    font-size: 0.82rem;
+  /* ── CHECKBOX REGIONS (new style) ── */
+  .region-field-label {
+    font-size: 0.78rem;
+    font-weight: 600;
     color: var(--grey-text);
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--grey-light);
-    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    display: block;
   }
 
-  .zone-tag:hover { border-color: var(--teal-light); color: var(--teal); }
-  .zone-tag.selected { background: var(--navy); border-color: var(--navy); color: white; }
+  .region-field-label .req { color: var(--teal); margin-left: 2px; }
 
-  /* Region groups */
-  .region-group { margin-bottom: 16px; }
+  .checkbox-region {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 16px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 10px;
+    background: var(--grey-light);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    user-select: none;
+    line-height: 1.45;
+  }
 
-  .region-group-title {
+  .checkbox-region:hover {
+    border-color: var(--teal-light);
+    background: var(--teal-pale);
+  }
+
+  .checkbox-region input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .cb-box {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 2px solid var(--grey-mid);
+    border-radius: 5px;
+    background: white;
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
+    justify-content: center;
+    transition: all 0.18s ease;
+    position: relative;
   }
 
-  .region-group-badge {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .checkbox-region input:checked ~ .cb-box {
     background: var(--navy);
-    color: var(--gold);
-    padding: 4px 12px;
-    border-radius: 20px;
+    border-color: var(--navy);
   }
 
-  .region-group-badge.supplement {
-    background: linear-gradient(135deg, var(--teal), var(--teal-light));
-    color: white;
-  }
-
-  .supplement-card { border-style: dashed; }
-  .supplement-card.selected { background: var(--teal); border-color: var(--teal); border-style: solid; }
-
-  .anatomy-card small {
+  .checkbox-region input:checked ~ .cb-box::after {
+    content: '';
     display: block;
-    font-size: 0.68rem;
-    font-weight: 400;
-    color: var(--grey-text);
-    line-height: 1.3;
-    margin-top: 2px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translate(-1px, -1px);
   }
 
-  .anatomy-card.selected small { color: rgba(255,255,255,0.6); }
+  .checkbox-region input:checked ~ .cb-text {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .checkbox-region:has(input:checked) {
+    border-color: var(--navy);
+    background: #eef2f7;
+  }
+
+  /* Supplément style */
+  .checkbox-region.is-supplement .cb-box {
+    border-color: var(--teal);
+  }
+
+  .checkbox-region.is-supplement:has(input:checked) {
+    border-color: var(--teal);
+    background: var(--teal-pale);
+  }
+
+  .checkbox-region.is-supplement input:checked ~ .cb-box {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+
+  .checkbox-region.is-supplement input:checked ~ .cb-text {
+    color: var(--teal);
+  }
+
+  .cb-text {
+    font-size: 0.88rem;
+    color: var(--text);
+    font-weight: 400;
+    flex: 1;
+    transition: color 0.18s;
+  }
 
   /* Region summary */
   .region-summary {
@@ -568,7 +591,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-top: 12px;
+    margin-top: 14px;
   }
 
   .region-summary-icon { font-size: 1.4rem; }
@@ -599,76 +622,21 @@
     white-space: nowrap;
   }
 
-  /* Anatomy selector */
-  .anatomy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-    margin-top: 4px;
-  }
-
-  .anatomy-card {
+  .antecedent-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .antecedent-tag {
+    padding: 6px 12px;
     border: 1.5px solid var(--grey-mid);
-    border-radius: 12px;
-    padding: 12px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--grey-text);
     cursor: pointer;
     transition: all 0.2s;
     background: var(--grey-light);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    user-select: none;
+    font-weight: 500;
   }
+  .antecedent-tag:hover { border-color: var(--teal-light); color: var(--teal); }
+  .antecedent-tag.selected { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); }
 
-  .anatomy-card:hover { border-color: var(--teal-light); background: var(--teal-pale); }
-
-  .anatomy-card.selected {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: white;
-  }
-
-  .anatomy-card.selected .anatomy-icon { background: rgba(255,255,255,0.15); }
-  .anatomy-card.selected .anatomy-name { color: white; }
-  .anatomy-card.selected .anatomy-check { opacity: 1; }
-
-  .anatomy-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: rgba(26,122,138,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 1rem;
-  }
-
-  .anatomy-name {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text);
-    flex: 1;
-    line-height: 1.2;
-  }
-
-  .anatomy-check {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s;
-    flex-shrink: 0;
-    font-size: 0.6rem;
-    color: var(--navy);
-    font-weight: 700;
-  }
-
-  /* Stepper progress */
   .stepper {
     display: flex;
     align-items: center;
@@ -701,17 +669,8 @@
     z-index: 1;
   }
 
-  .step.active .step-dot {
-    background: var(--teal);
-    border-color: var(--teal);
-    color: white;
-  }
-
-  .step.done .step-dot {
-    background: var(--teal);
-    border-color: var(--teal);
-    color: white;
-  }
+  .step.active .step-dot { background: var(--teal); border-color: var(--teal); color: white; }
+  .step.done .step-dot { background: var(--teal); border-color: var(--teal); color: white; }
 
   .step-label {
     font-size: 0.65rem;
@@ -733,55 +692,6 @@
 
   .step-line.done { background: var(--teal); }
 
-  /* Antécédents */
-  .antecedent-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .antecedent-tag {
-    padding: 6px 12px;
-    border: 1.5px solid var(--grey-mid);
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: var(--grey-text);
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--grey-light);
-    font-weight: 500;
-  }
-  .antecedent-tag:hover { border-color: var(--teal-light); color: var(--teal); }
-  .antecedent-tag.selected { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); }
-
-  /* Radio custom */
-  .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
-  .radio-opt {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border: 1.5px solid var(--grey-mid);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--grey-light);
-  }
-  .radio-opt:hover { border-color: var(--teal-light); }
-  .radio-opt.selected { border-color: var(--teal); background: var(--teal-pale); }
-  .radio-dot {
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--grey-mid);
-    transition: all 0.2s;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .radio-opt.selected .radio-dot { border-color: var(--teal); background: var(--teal); }
-  .radio-opt.selected .radio-dot::after {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: white;
-  }
-  .radio-opt-label { font-size: 0.88rem; color: var(--text); font-weight: 500; }
-  .radio-opt.selected .radio-opt-label { color: var(--teal); font-weight: 600; }
-
   @media (max-width: 600px) {
     .section { padding: 24px 20px; }
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
@@ -789,7 +699,6 @@
     .date-row { grid-template-columns: 1fr 1fr; }
     .form-footer { flex-direction: column; align-items: stretch; }
     .submit-btn { text-align: center; }
-    .anatomy-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -812,7 +721,6 @@
     <div class="sep"></div>
     <p class="header-sub">Merci de remplir le formulaire pour démarrer la prise en charge</p>
 
-    <!-- Stepper -->
     <div class="stepper" style="margin-top:24px;">
       <div class="step active" id="step1">
         <div class="step-dot">1</div>
@@ -961,7 +869,6 @@
         </div>
       </div>
 
-      <!-- Antécédents -->
       <div style="margin-top:18px;">
         <div class="field">
           <label>Antécédents médicaux / chirurgicaux</label>
@@ -979,8 +886,9 @@
           <textarea style="margin-top:10px; min-height:60px;" placeholder="Précisez si nécessaire..."></textarea>
         </div>
       </div>
+    </div>
 
-    <!-- Section 3 : Clinique médicale -->
+    <!-- Section 3 : Contexte clinique -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">
@@ -1062,118 +970,98 @@
           </div>
         </div>
 
-        <div class="field">
-          <label>Région(s) à interpréter <span class="req">*</span></label>
+        <!-- ── RÉGION(S) À INTERPRÉTER — nouvelle liste checkbox ── -->
+        <div>
+          <span class="region-field-label">Région(s) à interpréter <span class="req">*</span></span>
 
-          <!-- Groupe : 1 région -->
-          <div class="region-group">
-            <div class="region-group-title">
-              <span class="region-group-badge">1 région</span>
-            </div>
-            <div class="anatomy-grid">
-              <div class="anatomy-card" data-regions="1">
-                <div class="anatomy-icon">😮</div>
-                <div class="anatomy-name">Massif facial / Cou</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card" data-regions="1">
-                <div class="anatomy-icon">🫁</div>
-                <div class="anatomy-name">Thorax</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card" data-regions="1">
-                <div class="anatomy-icon">🫃</div>
-                <div class="anatomy-name">Abdomen</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card" data-regions="1">
-                <div class="anatomy-icon">🦴</div>
-                <div class="anatomy-name">Colonne cervico-thoracique</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card" data-regions="1">
-                <div class="anatomy-icon">🦴</div>
-                <div class="anatomy-name">Colonne thoraco-lombaire</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-            </div>
-          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;" id="regionsList">
 
-          <!-- Groupe : Articulations -->
-          <div class="region-group">
-            <div class="region-group-title">
-              <span class="region-group-badge">Articulations</span>
-            </div>
-            <div class="anatomy-grid">
-              <div class="anatomy-card" data-regions="1">
-                <div class="anatomy-icon">🦾</div>
-                <div class="anatomy-name">1 articulation<br><small>coudes / épaules / carpes<br>pelvis / grassets / tarses</small></div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card" data-regions="2">
-                <div class="anatomy-icon">🦾</div>
-                <div class="anatomy-name">2 articulations<br><small>coudes/épaules • carpes/coudes<br>pelvis/grassets • grassets/tarses</small></div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card" data-regions="3">
-                <div class="anatomy-icon">🦾</div>
-                <div class="anatomy-name">3 articulations<br><small>carpes/coudes/épaules<br>pelvis/grassets/tarses</small></div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card" data-regions="2">
-                <div class="anatomy-icon">🐾</div>
-                <div class="anatomy-name">Membres — bilan extension<br><small>Corps entier (codé 2 régions)</small></div>
-                <div class="anatomy-check">✓</div>
-              </div>
-            </div>
-          </div>
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Massif facical / cou">
+              <span class="cb-box"></span>
+              <span class="cb-text">1 région : Massif facical / cou</span>
+            </label>
 
-          <!-- Groupe : Suppléments -->
-          <div class="region-group">
-            <div class="region-group-title">
-              <span class="region-group-badge supplement">Supplément</span>
-            </div>
-            <div class="anatomy-grid">
-              <div class="anatomy-card supplement-card" data-regions="0">
-                <div class="anatomy-icon">💉</div>
-                <div class="anatomy-name">Myéloscanner</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card supplement-card" data-regions="0">
-                <div class="anatomy-icon">🩸</div>
-                <div class="anatomy-name">Angioscanner multiphase</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card supplement-card" data-regions="0">
-                <div class="anatomy-icon">🔬</div>
-                <div class="anatomy-name">Lymphangioscanner</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-              <div class="anatomy-card supplement-card" data-regions="0">
-                <div class="anatomy-icon">🔍</div>
-                <div class="anatomy-name">Fistulographie</div>
-                <div class="anatomy-check">✓</div>
-              </div>
-            </div>
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Thorax">
+              <span class="cb-box"></span>
+              <span class="cb-text">1 région : Thorax</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Abdomen">
+              <span class="cb-box"></span>
+              <span class="cb-text">1 région : Abdomen</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)">
+              <span class="cb-box"></span>
+              <span class="cb-text">1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)">
+              <span class="cb-box"></span>
+              <span class="cb-text">1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)</span>
+            </label>
+
+            <label class="checkbox-region is-supplement">
+              <input type="checkbox" class="region-cb" data-regions="0" data-label="Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)">
+              <span class="cb-box"></span>
+              <span class="cb-text">Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)">
+              <span class="cb-box"></span>
+              <span class="cb-text">1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="2" data-label="2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)">
+              <span class="cb-box"></span>
+              <span class="cb-text">2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="3" data-label="3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)">
+              <span class="cb-box"></span>
+              <span class="cb-text">3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="2" data-label='2 régions : Étude "membres" dans le cadre d&apos;un bilan d&apos;extension "corps entier" uniquement (codé 2 régions au lieu de 3)'>
+              <span class="cb-box"></span>
+              <span class="cb-text">2 régions : Étude "membres" dans le cadre d'un bilan d'extension "corps entier" uniquement (codé 2 régions au lieu de 3)</span>
+            </label>
+
+            <label class="checkbox-region">
+              <input type="checkbox" class="region-cb" data-regions="0" data-label="Autres : précisez clairement le besoin ci-après">
+              <span class="cb-box"></span>
+              <span class="cb-text">Autres : précisez clairement le besoin ci-après</span>
+            </label>
+
           </div>
 
           <!-- Résumé sélection -->
-          <div class="region-summary" id="regionSummary" style="display:none;">
+          <div class="region-summary" id="regionSummary" style="display:none; margin-top:14px;">
             <div class="region-summary-icon">📋</div>
-            <div class="region-summary-text">
+            <div>
               <div class="region-summary-label">Sélection actuelle</div>
               <div class="region-summary-value" id="regionSummaryText">—</div>
             </div>
             <div class="region-count-badge" id="regionCount">0 région</div>
           </div>
 
-          <!-- Autre besoin -->
-          <div class="field" style="margin-top:12px;">
-            <label>Autre besoin de lecture (précisez)</label>
+          <!-- Champ texte libre pour "Autres" -->
+          <div class="field" style="margin-top:12px;" id="autreBesoins">
+            <label>Précisez votre besoin si nécessaire</label>
             <textarea style="min-height:60px;" placeholder="Décrivez ici tout besoin spécifique non listé ci-dessus..."></textarea>
           </div>
 
         </div>
+        <!-- ── FIN RÉGION(S) ── -->
 
         <!-- DICOM Checker -->
         <div class="field">
@@ -1290,13 +1178,11 @@
 </div>
 
 <script>
-  // ── GLOBALES ─────────────────────────────────────────────────
   const FORMSPREE_ENDPOINT = 'https://api.web3forms.com/submit';
   const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
   let uploadedFileUrls = [];
   const toggleState = {};
 
-  // ── UPLOADCARE (doit être globale pour onload) ────────────────
   function initUploadcare() {
     if (typeof uploadcare === 'undefined') return;
     document.getElementById('uploadZone').addEventListener('click', function() {
@@ -1329,19 +1215,14 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  function toggleAnatomy(el) {
-    el.classList.toggle('selected');
-    updateRegionSummary();
-    updateStepper();
-  }
-
+  // ── Régions checkboxes ──────────────────────────────────────
   function updateRegionSummary() {
-    const selected = document.querySelectorAll('.anatomy-card.selected');
+    const checked = document.querySelectorAll('.region-cb:checked');
     const summary = document.getElementById('regionSummary');
     const summaryText = document.getElementById('regionSummaryText');
     const countBadge = document.getElementById('regionCount');
 
-    if (selected.length === 0) {
+    if (checked.length === 0) {
       summary.style.display = 'none';
       return;
     }
@@ -1350,36 +1231,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let totalRegions = 0;
     const names = [];
-    selected.forEach(card => {
-      const r = parseInt(card.dataset.regions || 1);
+    checked.forEach(cb => {
+      const r = parseInt(cb.dataset.regions || 0);
       totalRegions += r;
-      names.push(card.querySelector('.anatomy-name').childNodes[0].textContent.trim());
+      names.push(cb.dataset.label);
     });
 
     summaryText.textContent = names.join(' + ');
-    countBadge.textContent = totalRegions === 0
-      ? 'Supplément'
-      : `${totalRegions} région${totalRegions > 1 ? 's' : ''}`;
+
+    if (totalRegions === 0) {
+      countBadge.textContent = 'Supplément';
+    } else {
+      countBadge.textContent = `${totalRegions} région${totalRegions > 1 ? 's' : ''}`;
+    }
   }
 
-  function toggleAntecedent(el) {
-    el.classList.toggle('selected');
-  }
+  document.querySelectorAll('.region-cb').forEach(cb => {
+    cb.addEventListener('change', updateRegionSummary);
+  });
 
+  // ── Antécédents ─────────────────────────────────────────────
+  document.querySelectorAll('.antecedent-tag').forEach(el => {
+    el.addEventListener('click', () => el.classList.toggle('selected'));
+  });
+
+  // ── Toggles Oui/Non ─────────────────────────────────────────
   function setToggle(btn, group, val) {
     const parent = btn.parentElement;
-    const btns = parent.querySelectorAll('.toggle-btn');
-    btns.forEach(b => { b.classList.remove('active-yes','active-no'); });
-    if (val === 'yes') btn.classList.add('active-yes');
-    else btn.classList.add('active-no');
+    parent.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active-yes','active-no'));
+    btn.classList.add(val === 'yes' ? 'active-yes' : 'active-no');
     toggleState[group] = val;
   }
 
-  function setRadio(el, group) {
-    document.querySelectorAll(`[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
-  }
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setToggle(btn, btn.dataset.group, btn.dataset.val);
+    });
+  });
 
+  // ── DICOM ────────────────────────────────────────────────────
   function checkDicom() {
     const state = document.getElementById('dicomState');
     state.className = 'dicom-state pending';
@@ -1396,185 +1286,112 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1800);
   }
 
+  document.querySelector('.dicom-check-btn').addEventListener('click', checkDicom);
+
+  // ── Stepper ──────────────────────────────────────────────────
   function updateStepper() {
     const sections = document.querySelectorAll('.section');
-    const steps = [
-      document.getElementById('step1'),
-      document.getElementById('step2'),
-      document.getElementById('step3'),
-      document.getElementById('step4'),
-      document.getElementById('step5'),
-    ];
-    const lines = [
-      document.getElementById('line1'),
-      document.getElementById('line2'),
-      document.getElementById('line3'),
-      document.getElementById('line4'),
-    ];
+    const steps = ['step1','step2','step3','step4','step5'].map(id => document.getElementById(id));
+    const lines = ['line1','line2','line3','line4'].map(id => document.getElementById(id));
 
     sections.forEach((section, i) => {
       const rect = section.getBoundingClientRect();
       if (rect.top < window.innerHeight * 0.5 && steps[i]) {
         steps.forEach((s, j) => {
+          if (!s) return;
           if (j < i) { s.classList.add('done'); s.classList.remove('active'); s.querySelector('.step-dot').textContent = '✓'; }
           else if (j === i) { s.classList.add('active'); s.classList.remove('done'); }
           else { s.classList.remove('active','done'); }
         });
-        lines.forEach((l, j) => {
-          if (l) l.classList.toggle('done', j < i);
-        });
+        lines.forEach((l, j) => { if (l) l.classList.toggle('done', j < i); });
       }
     });
   }
 
   window.addEventListener('scroll', updateStepper);
 
+  // ── Submit ───────────────────────────────────────────────────
   async function submitForm() {
     const btn = document.getElementById('submitBtn');
-
-    // ── VALIDATION ──────────────────────────────────────────────
     const errors = [];
 
-    function markError(el, msg) {
+    function markError(el) {
       el.style.border = '1.5px solid #c0392b';
       el.style.background = '#fff5f5';
-      errors.push({ el, msg });
-    }
-    function clearErrors() {
-      document.querySelectorAll('input, select, textarea').forEach(el => {
-        el.style.border = '';
-        el.style.background = '';
-      });
-      document.querySelectorAll('.field-error').forEach(e => e.remove());
+      errors.push(el);
     }
 
-    clearErrors();
+    // Clear previous errors
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+      el.style.border = '';
+      el.style.background = '';
+    });
 
-    // Clinique
+    // Validation
     const clinique = document.querySelector('input[placeholder="Nom de votre clinique vétérinaire"]');
-    if (!clinique.value.trim()) markError(clinique, 'Nom de clinique requis');
+    if (!clinique.value.trim()) markError(clinique);
 
-    // Prénom vétérinaire
     const prenomVet = document.querySelector('input[placeholder="Prénom"]');
-    if (!prenomVet.value.trim()) markError(prenomVet, 'Prénom requis');
+    if (!prenomVet.value.trim()) markError(prenomVet);
 
-    // Nom vétérinaire
     const nomVet = document.querySelector('input[placeholder="Nom"]');
-    if (!nomVet.value.trim()) markError(nomVet, 'Nom requis');
+    if (!nomVet.value.trim()) markError(nomVet);
 
-    // Email
     const email = document.querySelector('input[type="email"]');
-    if (!email.value.trim()) {
-      markError(email, 'Email requis');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-      markError(email, 'Email invalide');
-    }
+    if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email);
 
-    // Prénom animal
-    const prenomAnimal = document.querySelectorAll('input[placeholder="Prénom"]')[1];
-    if (prenomAnimal && !prenomAnimal.value.trim()) markError(prenomAnimal, 'Prénom animal requis');
-
-    // Espèce
     const espece = document.querySelector('select');
-    if (!espece.value) markError(espece, 'Espèce requise');
+    if (!espece.value) markError(espece);
 
-    // Anamnèse
     const anam = document.querySelector('textarea[placeholder="Décrivez le contexte clinique, les signes observés, l\'évolution..."]');
-    if (anam && !anam.value.trim()) markError(anam, 'Anamnèse requise');
+    if (anam && !anam.value.trim()) markError(anam);
 
-    // Au moins 1 région
-    const regionsSelected = document.querySelectorAll('.anatomy-card.selected');
-    if (regionsSelected.length === 0) {
-      errors.push({ el: document.getElementById('regionSummary').parentElement, msg: 'Sélectionnez au moins une région' });
-      const regionField = document.querySelector('.anatomy-grid');
-      if (regionField) {
-        regionField.style.outline = '2px solid #c0392b';
-        regionField.style.borderRadius = '12px';
-      }
+    // Au moins 1 région cochée
+    const checkedRegions = document.querySelectorAll('.region-cb:checked');
+    if (checkedRegions.length === 0) {
+      document.getElementById('regionsList').style.outline = '2px solid #c0392b';
+      document.getElementById('regionsList').style.borderRadius = '10px';
+      errors.push(document.getElementById('regionsList'));
     } else {
-      const regionField = document.querySelector('.anatomy-grid');
-      if (regionField) { regionField.style.outline = ''; }
+      document.getElementById('regionsList').style.outline = '';
     }
 
-    // Télé-expertise
-    if (!toggleState['expertise']) {
-      errors.push({ el: null, msg: 'Télé-expertise non renseignée' });
-      document.querySelectorAll('[onclick*="expertise"]').forEach(b => {
-        b.parentElement.style.outline = '2px solid #c0392b';
-        b.parentElement.style.borderRadius = '10px';
-      });
-    } else {
-      document.querySelectorAll('[onclick*="expertise"]').forEach(b => {
-        b.parentElement.style.outline = '';
-      });
-    }
+    if (!toggleState['expertise']) errors.push(null);
+    if (!toggleState['urgence']) errors.push(null);
 
-    // Urgence
-    if (!toggleState['urgence']) {
-      errors.push({ el: null, msg: 'Urgence non renseignée' });
-      document.querySelectorAll('[onclick*="urgence"]').forEach(b => {
-        b.parentElement.style.outline = '2px solid #c0392b';
-        b.parentElement.style.borderRadius = '10px';
-      });
-    } else {
-      document.querySelectorAll('[onclick*="urgence"]').forEach(b => {
-        b.parentElement.style.outline = '';
-      });
-    }
-
-    // S'il y a des erreurs → scroll vers la première et stop
     if (errors.length > 0) {
-      const firstEl = errors.find(e => e.el)?.el;
-      if (firstEl) {
-        firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      // Petit shake sur le bouton
-      btn.style.animation = 'none';
+      const firstEl = errors.find(e => e);
+      if (firstEl) firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       btn.textContent = `✗ ${errors.length} champ${errors.length > 1 ? 's' : ''} requis`;
       btn.style.background = '#c0392b';
-      setTimeout(() => {
-        btn.textContent = 'Soumettre la fiche →';
-        btn.style.background = '';
-      }, 2500);
+      setTimeout(() => { btn.textContent = 'Soumettre la fiche →'; btn.style.background = ''; }, 2500);
       return;
     }
-    // ── FIN VALIDATION ───────────────────────────────────────────
 
-    // Collecte toutes les données
-    const inputs = document.querySelectorAll('input, select, textarea');
+    // Collecte données
     const data = {};
-    inputs.forEach(el => {
-      if (el.id === 'fileInput') return;
+    document.querySelectorAll('input:not(.region-cb), select, textarea').forEach(el => {
       const label = el.closest('.field')?.querySelector('label')?.textContent?.replace('*','').trim() || el.name || el.id;
       if (el.value && el.value !== 'Jour' && el.value !== 'Mois' && el.value !== 'Année') {
         data[label] = el.value;
       }
     });
 
-    // Régions sélectionnées
-    const regions = [...document.querySelectorAll('.anatomy-card.selected')]
-      .map(c => c.querySelector('.anatomy-name').childNodes[0].textContent.trim());
-    if (regions.length) data['Régions à interpréter'] = regions.join(', ');
+    // Régions cochées
+    const regions = [...document.querySelectorAll('.region-cb:checked')].map(cb => cb.dataset.label);
+    if (regions.length) data['Régions à interpréter'] = regions.join('\n');
 
-    // Antécédents sélectionnés
-    const antecedents = [...document.querySelectorAll('.antecedent-tag.selected')]
-      .map(t => t.textContent.trim());
+    const antecedents = [...document.querySelectorAll('.antecedent-tag.selected')].map(t => t.textContent.trim());
     if (antecedents.length) data['Antécédents'] = antecedents.join(', ');
 
-    // Toggles (Oui/Non)
-    data['Télé-expertise'] = toggleState['expertise'] === 'yes' ? 'Oui' : toggleState['expertise'] === 'no' ? 'Non' : 'Non renseigné';
-    data['Urgence'] = toggleState['urgence'] === 'yes' ? 'Oui' : toggleState['urgence'] === 'no' ? 'Non' : 'Non renseigné';
+    data['Télé-expertise'] = toggleState['expertise'] === 'yes' ? 'Oui' : 'Non';
+    data['Urgence'] = toggleState['urgence'] === 'yes' ? 'Oui' : 'Non';
+    data['Statut DICOM'] = document.getElementById('dicomState').textContent.trim();
 
-    // Statut DICOM
-    const dicomState = document.getElementById('dicomState');
-    data['Statut DICOM'] = dicomState.textContent.trim();
-
-    // Fichiers uploadés via Uploadcare
     if (uploadedFileUrls.length > 0) {
       data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
     }
 
-    // UI : chargement
     btn.textContent = 'Envoi en cours...';
     btn.disabled = true;
     btn.style.opacity = '0.7';
@@ -1592,7 +1409,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const result = await res.json();
       if (result.success) {
-        // Succès
         const overlay = document.getElementById('successOverlay');
         overlay.style.display = 'flex';
         if (toggleState['urgence'] === 'yes') {
@@ -1607,18 +1423,19 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.style.background = '#c0392b';
       btn.style.opacity = '1';
       btn.disabled = false;
-      setTimeout(() => {
-        btn.textContent = 'Soumettre la fiche →';
-        btn.style.background = '';
-      }, 4000);
+      setTimeout(() => { btn.textContent = 'Soumettre la fiche →'; btn.style.background = ''; }, 4000);
     }
   }
 
+  document.getElementById('submitBtn').addEventListener('click', submitForm);
+
+  // ── Reset ────────────────────────────────────────────────────
   function resetForm() {
     document.getElementById('successOverlay').style.display = 'none';
-    document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input:not(.region-cb), textarea').forEach(el => el.value = '');
     document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
-    document.querySelectorAll('.anatomy-card.selected, .antecedent-tag.selected').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.region-cb').forEach(cb => { cb.checked = false; });
+    document.querySelectorAll('.antecedent-tag.selected').forEach(el => el.classList.remove('selected'));
     document.querySelectorAll('.toggle-btn').forEach(el => el.classList.remove('active-yes','active-no'));
     Object.keys(toggleState).forEach(k => delete toggleState[k]);
     uploadedFileUrls = [];
@@ -1633,42 +1450,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ── EVENT LISTENERS (remplace tous les onclick inline) ───────
-  // Régions anatomiques
-  document.querySelectorAll('.anatomy-card').forEach(el => {
-    el.addEventListener('click', () => toggleAnatomy(el));
-  });
-
-  // Antécédents
-  document.querySelectorAll('.antecedent-tag').forEach(el => {
-    el.addEventListener('click', () => toggleAntecedent(el));
-  });
-
-  // Toggles Oui/Non
-  document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const group = btn.getAttribute('data-group');
-      const val = btn.getAttribute('data-val');
-      setToggle(btn, group, val);
-    });
-  });
-
-  // Bouton submit
-  document.getElementById('submitBtn').addEventListener('click', submitForm);
-
-  // Bouton DICOM
-  document.querySelector('.dicom-check-btn').addEventListener('click', checkDicom);
-
-  // Bouton reset overlay
   document.querySelector('#successOverlay button').addEventListener('click', resetForm);
-
-  // Scroll stepper
-  window.addEventListener('scroll', updateStepper);
 
 }); // fin DOMContentLoaded
 </script>
 
-<!-- Uploadcare chargé en dernier -->
 <script>
   window.UPLOADCARE_PUBLIC_KEY = 'ac78eea68d9ec156e585';
   window.UPLOADCARE_LOCALE = 'fr';
