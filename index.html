@@ -27,6 +27,7 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
     background: #f0f4f7;
     min-height: 100vh;
     padding: 40px 20px 80px;
@@ -189,6 +190,7 @@
   .field select,
   .field textarea {
     font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
     font-size: 0.92rem;
     color: var(--text);
     background: var(--grey-light);
@@ -245,8 +247,8 @@
     border-radius: 10px;
     background: var(--grey-light);
     font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
     font-size: 0.92rem;
-    font-weight: 500;
     color: var(--grey-text);
     cursor: pointer;
     transition: all 0.2s;
@@ -254,8 +256,8 @@
   }
 
   .toggle-btn:hover { border-color: var(--teal-light); color: var(--teal); }
-  .toggle-btn.active-yes { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); font-weight: 600; }
-  .toggle-btn.active-no { background: #fef3f2; border-color: #e74c3c; color: #e74c3c; font-weight: 600; }
+  .toggle-btn.active-yes { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); font-weight: 500; }
+  .toggle-btn.active-no { background: #fef3f2; border-color: #e74c3c; color: #e74c3c; font-weight: 500; }
 
   .upload-zone-uc {
     border: 2px dashed var(--grey-mid);
@@ -291,7 +293,7 @@
   .uploaded-file-item a {
     color: var(--teal);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 400;
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -300,21 +302,6 @@
 
   .uploaded-file-item a:hover { text-decoration: underline; }
   .uploaded-file-icon { font-size: 1.1rem; flex-shrink: 0; }
-
-  .upload-zone {
-    border: 2px dashed var(--grey-mid);
-    border-radius: 12px;
-    padding: 28px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--grey-light);
-  }
-
-  .upload-zone:hover {
-    border-color: var(--teal-light);
-    background: var(--teal-pale);
-  }
 
   .upload-icon {
     width: 44px;
@@ -335,7 +322,7 @@
     line-height: 1.5;
   }
 
-  .upload-text strong { color: var(--teal); }
+  .upload-text strong { color: var(--teal); font-weight: 500; }
   .upload-limit { font-size: 0.75rem; color: #b0bec5; margin-top: 6px; }
 
   .dicom-checker {
@@ -388,7 +375,7 @@
   .dicom-state {
     font-size: 0.95rem;
     color: var(--white);
-    font-weight: 500;
+    font-weight: 300;
     margin-top: 3px;
   }
 
@@ -402,7 +389,7 @@
     color: white;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.82rem;
-    font-weight: 500;
+    font-weight: 300;
     padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
@@ -437,14 +424,14 @@
     line-height: 1.5;
   }
 
-  .footer-info strong { color: rgba(255,255,255,0.7); }
+  .footer-info strong { color: rgba(255,255,255,0.7); font-weight: 500; }
 
   .submit-btn {
     background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%);
     color: var(--navy);
     font-family: 'DM Sans', sans-serif;
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 14px 36px;
     border: none;
     border-radius: 12px;
@@ -476,7 +463,7 @@
     line-height: 1.5;
   }
 
-  /* ── CHECKBOX REGIONS (new style) ── */
+  /* ── CHECKBOX REGIONS ── */
   .region-field-label {
     font-size: 0.78rem;
     font-weight: 600;
@@ -548,7 +535,7 @@
 
   .checkbox-region input:checked ~ .cb-text {
     color: var(--navy);
-    font-weight: 600;
+    font-weight: 400;
   }
 
   .checkbox-region:has(input:checked) {
@@ -556,34 +543,19 @@
     background: #eef2f7;
   }
 
-  /* Supplément style */
-  .checkbox-region.is-supplement .cb-box {
-    border-color: var(--teal);
-  }
-
-  .checkbox-region.is-supplement:has(input:checked) {
-    border-color: var(--teal);
-    background: var(--teal-pale);
-  }
-
-  .checkbox-region.is-supplement input:checked ~ .cb-box {
-    background: var(--teal);
-    border-color: var(--teal);
-  }
-
-  .checkbox-region.is-supplement input:checked ~ .cb-text {
-    color: var(--teal);
-  }
+  .checkbox-region.is-supplement .cb-box { border-color: var(--teal); }
+  .checkbox-region.is-supplement:has(input:checked) { border-color: var(--teal); background: var(--teal-pale); }
+  .checkbox-region.is-supplement input:checked ~ .cb-box { background: var(--teal); border-color: var(--teal); }
+  .checkbox-region.is-supplement input:checked ~ .cb-text { color: var(--teal); }
 
   .cb-text {
     font-size: 0.88rem;
     color: var(--text);
-    font-weight: 400;
+    font-weight: 300;
     flex: 1;
     transition: color 0.18s;
   }
 
-  /* Region summary */
   .region-summary {
     background: linear-gradient(135deg, var(--navy), var(--navy-mid));
     border-radius: 12px;
@@ -607,7 +579,7 @@
   .region-summary-value {
     font-size: 0.88rem;
     color: var(--white);
-    font-weight: 500;
+    font-weight: 300;
     margin-top: 2px;
   }
 
@@ -616,7 +588,7 @@
     background: var(--gold);
     color: var(--navy);
     font-size: 0.78rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 5px 14px;
     border-radius: 20px;
     white-space: nowrap;
@@ -632,7 +604,7 @@
     cursor: pointer;
     transition: all 0.2s;
     background: var(--grey-light);
-    font-weight: 500;
+    font-weight: 300;
   }
   .antecedent-tag:hover { border-color: var(--teal-light); color: var(--teal); }
   .antecedent-tag.selected { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); }
@@ -663,7 +635,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--grey-text);
     transition: all 0.3s;
     z-index: 1;
@@ -678,9 +650,10 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     white-space: nowrap;
+    font-weight: 300;
   }
 
-  .step.active .step-label { color: var(--teal); font-weight: 600; }
+  .step.active .step-label { color: var(--teal); font-weight: 500; }
   .step.done .step-label { color: var(--teal); }
 
   .step-line {
@@ -709,12 +682,8 @@
   <!-- Header -->
   <div class="header">
     <div class="logo-container">
-      <img
-        class="logo-img"
-        src="/VetResolution.png"
-        alt="VetResolution"
-        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';"
-      >
+      <img class="logo-img" src="/VetResolution.png" alt="VetResolution"
+        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
       <div class="logo-img-fallback" id="logo-fallback">V<span>R</span>S</div>
     </div>
     <h1 class="header-title">Fiche de liaison téléradiologique</h1>
@@ -722,37 +691,21 @@
     <p class="header-sub">Merci de remplir le formulaire pour démarrer la prise en charge</p>
 
     <div class="stepper" style="margin-top:24px;">
-      <div class="step active" id="step1">
-        <div class="step-dot">1</div>
-        <div class="step-label">Référent</div>
-      </div>
+      <div class="step active" id="step1"><div class="step-dot">1</div><div class="step-label">Référent</div></div>
       <div class="step-line" id="line1"></div>
-      <div class="step" id="step2">
-        <div class="step-dot">2</div>
-        <div class="step-label">Patient</div>
-      </div>
+      <div class="step" id="step2"><div class="step-dot">2</div><div class="step-label">Patient</div></div>
       <div class="step-line" id="line2"></div>
-      <div class="step" id="step3">
-        <div class="step-dot">3</div>
-        <div class="step-label">Clinique</div>
-      </div>
+      <div class="step" id="step3"><div class="step-dot">3</div><div class="step-label">Clinique</div></div>
       <div class="step-line" id="line3"></div>
-      <div class="step" id="step4">
-        <div class="step-dot">4</div>
-        <div class="step-label">Examen</div>
-      </div>
+      <div class="step" id="step4"><div class="step-dot">4</div><div class="step-label">Examen</div></div>
       <div class="step-line" id="line4"></div>
-      <div class="step" id="step5">
-        <div class="step-dot">5</div>
-        <div class="step-label">Options</div>
-      </div>
+      <div class="step" id="step5"><div class="step-dot">5</div><div class="step-label">Options</div></div>
     </div>
   </div>
 
-  <!-- Form card -->
   <div class="card">
 
-    <!-- Section 1 : Clinique -->
+    <!-- Section 1 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">
@@ -761,18 +714,15 @@
         <span class="section-title">Clinique & Vétérinaire référent</span>
         <span class="section-badge">Obligatoire</span>
       </div>
-
       <div class="grid-2">
         <div class="field span-2">
           <label>Clinique sollicitant une relecture <span class="req">*</span></label>
           <input type="text" placeholder="Nom de votre clinique vétérinaire">
         </div>
-
         <div class="field">
           <label>Nom du vétérinaire <span class="req">*</span></label>
           <input type="text" placeholder="Nom">
         </div>
-
         <div class="field">
           <label>Email du centre d'examen Scanner <span class="req">*</span></label>
           <input type="email" placeholder="exemple@clinique.fr">
@@ -780,7 +730,7 @@
       </div>
     </div>
 
-    <!-- Section 2 : Patient -->
+    <!-- Section 2 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">
@@ -789,7 +739,6 @@
         <span class="section-title">Identification du patient</span>
         <span class="section-badge">Obligatoire</span>
       </div>
-
       <div class="grid-2">
         <div class="field">
           <label>Prénom de l'animal <span class="req">*</span></label>
@@ -866,7 +815,7 @@
       </div>
     </div>
 
-    <!-- Section 3 : Contexte clinique -->
+    <!-- Section 3 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">
@@ -874,7 +823,6 @@
         </div>
         <span class="section-title">Contexte clinique</span>
       </div>
-
       <div style="display:flex; flex-direction:column; gap:18px;">
         <div class="field">
           <label>Anamnèse <span class="req">*</span></label>
@@ -886,7 +834,7 @@
       </div>
     </div>
 
-    <!-- Section 4 : Examen -->
+    <!-- Section 4 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">
@@ -903,84 +851,58 @@
             <label>Nombre d'images de l'examen</label>
             <input type="number" placeholder="ex: 342" min="1">
           </div>
-          </div>
         </div>
 
-        <!-- ── RÉGION(S) À INTERPRÉTER — nouvelle liste checkbox ── -->
+        <!-- Régions -->
         <div>
           <span class="region-field-label">Région(s) à interpréter <span class="req">*</span></span>
-
           <div style="display:flex; flex-direction:column; gap:8px;" id="regionsList">
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Massif facical / cou">
-              <span class="cb-box"></span>
-              <span class="cb-text">1 région : Massif facical / cou</span>
+              <span class="cb-box"></span><span class="cb-text">1 région : Massif facical / cou</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Thorax">
-              <span class="cb-box"></span>
-              <span class="cb-text">1 région : Thorax</span>
+              <span class="cb-box"></span><span class="cb-text">1 région : Thorax</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Abdomen">
-              <span class="cb-box"></span>
-              <span class="cb-text">1 région : Abdomen</span>
+              <span class="cb-box"></span><span class="cb-text">1 région : Abdomen</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)">
-              <span class="cb-box"></span>
-              <span class="cb-text">1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)</span>
+              <span class="cb-box"></span><span class="cb-text">1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)">
-              <span class="cb-box"></span>
-              <span class="cb-text">1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)</span>
+              <span class="cb-box"></span><span class="cb-text">1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)</span>
             </label>
-
             <label class="checkbox-region is-supplement">
               <input type="checkbox" class="region-cb" data-regions="0" data-label="Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)">
-              <span class="cb-box"></span>
-              <span class="cb-text">Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)</span>
+              <span class="cb-box"></span><span class="cb-text">Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)">
-              <span class="cb-box"></span>
-              <span class="cb-text">1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)</span>
+              <span class="cb-box"></span><span class="cb-text">1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="2" data-label="2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)">
-              <span class="cb-box"></span>
-              <span class="cb-text">2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)</span>
+              <span class="cb-box"></span><span class="cb-text">2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="3" data-label="3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)">
-              <span class="cb-box"></span>
-              <span class="cb-text">3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)</span>
+              <span class="cb-box"></span><span class="cb-text">3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="2" data-label='2 régions : Étude "membres" dans le cadre d&apos;un bilan d&apos;extension "corps entier" uniquement (codé 2 régions au lieu de 3)'>
-              <span class="cb-box"></span>
-              <span class="cb-text">2 régions : Étude "membres" dans le cadre d'un bilan d'extension "corps entier" uniquement (codé 2 régions au lieu de 3)</span>
+              <span class="cb-box"></span><span class="cb-text">2 régions : Étude "membres" dans le cadre d'un bilan d'extension "corps entier" uniquement (codé 2 régions au lieu de 3)</span>
             </label>
-
             <label class="checkbox-region">
               <input type="checkbox" class="region-cb" data-regions="0" data-label="Autres : précisez clairement le besoin ci-après">
-              <span class="cb-box"></span>
-              <span class="cb-text">Autres : précisez clairement le besoin ci-après</span>
+              <span class="cb-box"></span><span class="cb-text">Autres : précisez clairement le besoin ci-après</span>
             </label>
-
           </div>
 
-          <!-- Résumé sélection -->
           <div class="region-summary" id="regionSummary" style="display:none; margin-top:14px;">
             <div class="region-summary-icon">📋</div>
             <div>
@@ -990,14 +912,11 @@
             <div class="region-count-badge" id="regionCount">0 région</div>
           </div>
 
-          <!-- Champ texte libre pour "Autres" -->
-          <div class="field" style="margin-top:12px;" id="autreBesoins">
+          <div class="field" style="margin-top:12px;">
             <label>Précisez votre besoin si nécessaire</label>
             <textarea style="min-height:60px;" placeholder="Décrivez ici tout besoin spécifique non listé ci-dessus..."></textarea>
           </div>
-
         </div>
-        <!-- ── FIN RÉGION(S) ── -->
 
         <!-- DICOM Checker -->
         <div class="field">
@@ -1010,31 +929,30 @@
             <div class="dicom-info">
               <div class="dicom-label">Serveur DICOM — Orthanc</div>
               <div class="dicom-state waiting" id="dicomState">En attente de vérification...</div>
+              <div id="dicomDetail" style="font-size:0.75rem; color:rgba(255,255,255,0.45); margin-top:4px;"></div>
             </div>
             <button class="dicom-check-btn">Vérifier</button>
           </div>
         </div>
 
-        <!-- Upload documents -->
+        <!-- Upload -->
         <div class="field">
           <label>Documents complémentaires (compte-rendu, ordonnance, biologie...)</label>
           <div class="upload-zone-uc" id="uploadZone">
             <div class="upload-icon">
               <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
             </div>
-            <div class="upload-text">
-              <strong>Cliquez pour ajouter des fichiers</strong>
-            </div>
+            <div class="upload-text"><strong>Cliquez pour ajouter des fichiers</strong></div>
             <div class="upload-limit">PDF, JPG, PNG — max 100 MB par fichier</div>
           </div>
           <div id="uploadedFiles" style="margin-top:12px; display:flex; flex-direction:column; gap:8px;"></div>
-          <div id="uploadStatus" style="display:none; margin-top:8px; font-size:0.82rem; color:var(--teal); font-weight:500;"></div>
+          <div id="uploadStatus" style="display:none; margin-top:8px; font-size:0.82rem; color:var(--teal); font-weight:400;"></div>
         </div>
 
       </div>
     </div>
 
-    <!-- Section 5 : Options -->
+    <!-- Section 5 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">
@@ -1042,7 +960,6 @@
         </div>
         <span class="section-title">Options de traitement</span>
       </div>
-
       <div class="grid-2">
         <div class="field">
           <label>Demande de télé-expertise médicale <span class="req">*</span></label>
@@ -1068,48 +985,22 @@
         <strong>VetResolution</strong><br>
         Votre rapport sera transmis par email dans les délais convenus.
       </div>
-      <button class="submit-btn" id="submitBtn">
-        Soumettre la fiche →
-      </button>
+      <button class="submit-btn" id="submitBtn">Soumettre la fiche →</button>
     </div>
 
   </div>
 </div>
 
 <!-- Overlay succès -->
-<div id="successOverlay" style="
-  display:none; position:fixed; inset:0; z-index:9999;
-  background:rgba(240,244,247,0.97);
-  flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; padding:40px;
-">
-  <div style="
-    background:white; border-radius:24px; padding:48px 40px;
-    box-shadow:0 8px 60px rgba(0,0,0,0.12); max-width:460px; width:100%;
-  ">
-    <div style="
-      width:72px; height:72px; background:#1a7a8a; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      margin:0 auto 24px; font-size:2rem;
-    ">✓</div>
-    <h2 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:#0d1f3c; margin-bottom:12px;">
-      Fiche envoyée avec succès !
-    </h2>
-    <p style="color:#6b7f91; font-size:0.92rem; line-height:1.6; margin-bottom:8px;">
-      Votre demande a bien été transmise à VetResolution.<br>
-      Vous recevrez une confirmation par email.
-    </p>
-    <div id="successUrgence" style="display:none; margin:16px 0; padding:12px 20px;
-      background:#fff3cd; border-radius:10px; border-left:3px solid #c9a84c;
-      font-size:0.85rem; color:#7a5c00; font-weight:500;">
+<div id="successOverlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(240,244,247,0.97); flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px;">
+  <div style="background:white; border-radius:24px; padding:48px 40px; box-shadow:0 8px 60px rgba(0,0,0,0.12); max-width:460px; width:100%;">
+    <div style="width:72px; height:72px; background:#1a7a8a; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:2rem;">✓</div>
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:#0d1f3c; margin-bottom:12px;">Fiche envoyée avec succès !</h2>
+    <p style="color:#6b7f91; font-size:0.92rem; line-height:1.6; margin-bottom:8px; font-weight:300;">Votre demande a bien été transmise à VetResolution.<br>Vous recevrez une confirmation par email.</p>
+    <div id="successUrgence" style="display:none; margin:16px 0; padding:12px 20px; background:#fff3cd; border-radius:10px; border-left:3px solid #c9a84c; font-size:0.85rem; color:#7a5c00; font-weight:400;">
       ⚡ Demande urgente — traitement prioritaire en cours
     </div>
-    <button style="
-      margin-top:24px; background:#1a7a8a; color:white;
-      border:none; border-radius:10px; padding:12px 28px;
-      font-family:'DM Sans',sans-serif; font-size:0.92rem;
-      font-weight:600; cursor:pointer; letter-spacing:0.03em;
-    ">Nouvelle demande</button>
+    <button style="margin-top:24px; background:#1a7a8a; color:white; border:none; border-radius:10px; padding:12px 28px; font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:400; cursor:pointer; letter-spacing:0.03em;">Nouvelle demande</button>
   </div>
 </div>
 
@@ -1122,11 +1013,7 @@
   function initUploadcare() {
     if (typeof uploadcare === 'undefined') return;
     document.getElementById('uploadZone').addEventListener('click', function() {
-      const dialog = uploadcare.openDialog(null, {
-        multiple: true,
-        imagesOnly: false,
-        publicKey: 'ac78eea68d9ec156e585'
-      });
+      const dialog = uploadcare.openDialog(null, { multiple: true, imagesOnly: false, publicKey: 'ac78eea68d9ec156e585' });
       dialog.done(function(fileGroup) {
         fileGroup.files().forEach(function(file) {
           file.done(function(fileInfo) {
@@ -1151,88 +1038,94 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ── Régions checkboxes ──────────────────────────────────────
   function updateRegionSummary() {
     const checked = document.querySelectorAll('.region-cb:checked');
     const summary = document.getElementById('regionSummary');
     const summaryText = document.getElementById('regionSummaryText');
     const countBadge = document.getElementById('regionCount');
-
-    if (checked.length === 0) {
-      summary.style.display = 'none';
-      return;
-    }
-
+    if (checked.length === 0) { summary.style.display = 'none'; return; }
     summary.style.display = 'flex';
-
     let totalRegions = 0;
     const names = [];
-    checked.forEach(cb => {
-      const r = parseInt(cb.dataset.regions || 0);
-      totalRegions += r;
-      names.push(cb.dataset.label);
-    });
-
+    checked.forEach(cb => { totalRegions += parseInt(cb.dataset.regions || 0); names.push(cb.dataset.label); });
     summaryText.textContent = names.join(' + ');
-
-    if (totalRegions === 0) {
-      countBadge.textContent = 'Supplément';
-    } else {
-      countBadge.textContent = `${totalRegions} région${totalRegions > 1 ? 's' : ''}`;
-    }
+    countBadge.textContent = totalRegions === 0 ? 'Supplément' : `${totalRegions} région${totalRegions > 1 ? 's' : ''}`;
   }
 
-  document.querySelectorAll('.region-cb').forEach(cb => {
-    cb.addEventListener('change', updateRegionSummary);
-  });
+  document.querySelectorAll('.region-cb').forEach(cb => cb.addEventListener('change', updateRegionSummary));
 
-  // ── Antécédents ─────────────────────────────────────────────
-  document.querySelectorAll('.antecedent-tag').forEach(el => {
-    el.addEventListener('click', () => el.classList.toggle('selected'));
-  });
-
-  // ── Toggles Oui/Non ─────────────────────────────────────────
   function setToggle(btn, group, val) {
-    const parent = btn.parentElement;
-    parent.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active-yes','active-no'));
+    btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active-yes','active-no'));
     btn.classList.add(val === 'yes' ? 'active-yes' : 'active-no');
     toggleState[group] = val;
   }
 
   document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      setToggle(btn, btn.dataset.group, btn.dataset.val);
-    });
+    btn.addEventListener('click', () => setToggle(btn, btn.dataset.group, btn.dataset.val));
   });
 
-  // ── DICOM ────────────────────────────────────────────────────
-  function checkDicom() {
+  async function checkDicom() {
+    const ORTHANC_URL = 'http://100.84.243.6:8042';
     const state = document.getElementById('dicomState');
+    const detailEl = document.getElementById('dicomDetail');
+    const prenomInput = document.querySelector('input[placeholder="Prénom"]');
+    const prenom = prenomInput ? prenomInput.value.trim() : '';
+
+    if (!prenom) {
+      state.className = 'dicom-state pending';
+      state.textContent = '⚠️ Renseignez d\'abord le prénom de l\'animal';
+      if (detailEl) detailEl.textContent = '';
+      return;
+    }
+
     state.className = 'dicom-state pending';
-    state.textContent = 'Vérification en cours...';
-    setTimeout(() => {
-      const received = Math.random() > 0.4;
-      if (received) {
-        state.className = 'dicom-state received';
-        state.textContent = '✓ Examen reçu sur le serveur DICOM';
-      } else {
+    state.textContent = `Recherche de "${prenom}" en cours...`;
+    if (detailEl) detailEl.textContent = '';
+
+    try {
+      const res = await fetch(`${ORTHANC_URL}/tools/find`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ Level: 'Patient', Query: { PatientName: `*${prenom.toUpperCase()}*` }, Expand: true })
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const patients = await res.json();
+
+      if (patients.length === 0) {
         state.className = 'dicom-state pending';
-        state.textContent = '⏳ Examen non encore reçu — veuillez patienter';
+        state.textContent = `⏳ "${prenom}" non trouvé sur le serveur DICOM`;
+        if (detailEl) detailEl.textContent = 'Les images ne sont peut-être pas encore arrivées.';
+      } else {
+        let totalInstances = 0, totalSeries = 0, lastUpdate = '';
+        patients.forEach(p => {
+          totalInstances += parseInt(p.MainDicomTags?.NumberOfPatientRelatedInstances || 0);
+          totalSeries += parseInt(p.MainDicomTags?.NumberOfPatientRelatedSeries || 0);
+          if (p.LastUpdate) lastUpdate = p.LastUpdate.substring(0, 10);
+        });
+        state.className = 'dicom-state received';
+        state.textContent = `✓ "${prenom}" présent sur le serveur DICOM`;
+        if (detailEl) detailEl.textContent = [
+          totalInstances ? `${totalInstances} image${totalInstances > 1 ? 's' : ''}` : '',
+          totalSeries ? `${totalSeries} série${totalSeries > 1 ? 's' : ''}` : '',
+          lastUpdate ? `dernière mise à jour : ${lastUpdate}` : ''
+        ].filter(Boolean).join(' · ');
       }
-    }, 1800);
+    } catch (err) {
+      state.className = 'dicom-state pending';
+      state.textContent = err.name === 'TypeError' ? '🔴 Impossible de contacter le serveur DICOM' : `🔴 Erreur : ${err.message}`;
+      if (detailEl) detailEl.textContent = err.name === 'TypeError' ? 'Vérifiez que vous êtes connecté au réseau Tailscale.' : '';
+    }
   }
 
   document.querySelector('.dicom-check-btn').addEventListener('click', checkDicom);
 
-  // ── Stepper ──────────────────────────────────────────────────
   function updateStepper() {
     const sections = document.querySelectorAll('.section');
     const steps = ['step1','step2','step3','step4','step5'].map(id => document.getElementById(id));
     const lines = ['line1','line2','line3','line4'].map(id => document.getElementById(id));
-
     sections.forEach((section, i) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.5 && steps[i]) {
+      if (section.getBoundingClientRect().top < window.innerHeight * 0.5 && steps[i]) {
         steps.forEach((s, j) => {
           if (!s) return;
           if (j < i) { s.classList.add('done'); s.classList.remove('active'); s.querySelector('.step-dot').textContent = '✓'; }
@@ -1246,52 +1139,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.addEventListener('scroll', updateStepper);
 
-  // ── Submit ───────────────────────────────────────────────────
   async function submitForm() {
     const btn = document.getElementById('submitBtn');
     const errors = [];
 
-    function markError(el) {
-      el.style.border = '1.5px solid #c0392b';
-      el.style.background = '#fff5f5';
-      errors.push(el);
-    }
+    document.querySelectorAll('input, select, textarea').forEach(el => { el.style.border = ''; el.style.background = ''; });
 
-    // Clear previous errors
-    document.querySelectorAll('input, select, textarea').forEach(el => {
-      el.style.border = '';
-      el.style.background = '';
-    });
+    function markError(el) { el.style.border = '1.5px solid #c0392b'; el.style.background = '#fff5f5'; errors.push(el); }
 
-    // Validation
     const clinique = document.querySelector('input[placeholder="Nom de votre clinique vétérinaire"]');
     if (!clinique.value.trim()) markError(clinique);
-
-    const prenomVet = document.querySelector('input[placeholder="Prénom"]');
-    if (!prenomVet.value.trim()) markError(prenomVet);
-
     const nomVet = document.querySelector('input[placeholder="Nom"]');
     if (!nomVet.value.trim()) markError(nomVet);
-
-    const email = document.querySelector('input[type="email"]');
-    if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email);
-
+    const emails = document.querySelectorAll('input[type="email"]');
+    emails.forEach(email => { if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email); });
     const espece = document.querySelector('select');
     if (!espece.value) markError(espece);
-
     const anam = document.querySelector('textarea[placeholder="Décrivez le contexte clinique, les signes observés, l\'évolution..."]');
     if (anam && !anam.value.trim()) markError(anam);
-
-    // Au moins 1 région cochée
-    const checkedRegions = document.querySelectorAll('.region-cb:checked');
-    if (checkedRegions.length === 0) {
+    if (document.querySelectorAll('.region-cb:checked').length === 0) {
       document.getElementById('regionsList').style.outline = '2px solid #c0392b';
       document.getElementById('regionsList').style.borderRadius = '10px';
       errors.push(document.getElementById('regionsList'));
     } else {
       document.getElementById('regionsList').style.outline = '';
     }
-
     if (!toggleState['expertise']) errors.push(null);
     if (!toggleState['urgence']) errors.push(null);
 
@@ -1304,29 +1176,17 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Collecte données
     const data = {};
     document.querySelectorAll('input:not(.region-cb), select, textarea').forEach(el => {
       const label = el.closest('.field')?.querySelector('label')?.textContent?.replace('*','').trim() || el.name || el.id;
-      if (el.value && el.value !== 'Jour' && el.value !== 'Mois' && el.value !== 'Année') {
-        data[label] = el.value;
-      }
+      if (el.value && el.value !== 'Jour' && el.value !== 'Mois' && el.value !== 'Année') data[label] = el.value;
     });
-
-    // Régions cochées
     const regions = [...document.querySelectorAll('.region-cb:checked')].map(cb => cb.dataset.label);
     if (regions.length) data['Régions à interpréter'] = regions.join('\n');
-
-    const antecedents = [...document.querySelectorAll('.antecedent-tag.selected')].map(t => t.textContent.trim());
-    if (antecedents.length) data['Antécédents'] = antecedents.join(', ');
-
     data['Télé-expertise'] = toggleState['expertise'] === 'yes' ? 'Oui' : 'Non';
     data['Urgence'] = toggleState['urgence'] === 'yes' ? 'Oui' : 'Non';
     data['Statut DICOM'] = document.getElementById('dicomState').textContent.trim();
-
-    if (uploadedFileUrls.length > 0) {
-      data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
-    }
+    if (uploadedFileUrls.length > 0) data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
 
     btn.textContent = 'Envoi en cours...';
     btn.disabled = true;
@@ -1336,24 +1196,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `Nouvelle demande scanner — ${data['Prénom de l\'animal'] || 'Animal'} (${data['Espèce'] || ''})`,
-          ...data
-        })
+        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Nouvelle demande scanner — ${data['Prénom de l\'animal'] || 'Animal'} (${data['Espèce'] || ''})`, ...data })
       });
-
       const result = await res.json();
       if (result.success) {
-        const overlay = document.getElementById('successOverlay');
-        overlay.style.display = 'flex';
-        if (toggleState['urgence'] === 'yes') {
-          document.getElementById('successUrgence').style.display = 'block';
-        }
+        document.getElementById('successOverlay').style.display = 'flex';
+        if (toggleState['urgence'] === 'yes') document.getElementById('successUrgence').style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        throw new Error('Erreur serveur');
-      }
+      } else throw new Error('Erreur serveur');
     } catch (e) {
       btn.textContent = '✗ Erreur d\'envoi — réessayez';
       btn.style.background = '#c0392b';
@@ -1365,13 +1215,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById('submitBtn').addEventListener('click', submitForm);
 
-  // ── Reset ────────────────────────────────────────────────────
   function resetForm() {
     document.getElementById('successOverlay').style.display = 'none';
     document.querySelectorAll('input:not(.region-cb), textarea').forEach(el => el.value = '');
     document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
-    document.querySelectorAll('.region-cb').forEach(cb => { cb.checked = false; });
-    document.querySelectorAll('.antecedent-tag.selected').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.region-cb').forEach(cb => cb.checked = false);
     document.querySelectorAll('.toggle-btn').forEach(el => el.classList.remove('active-yes','active-no'));
     Object.keys(toggleState).forEach(k => delete toggleState[k]);
     uploadedFileUrls = [];
@@ -1380,23 +1228,20 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('regionSummary').style.display = 'none';
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Soumettre la fiche →';
-    btn.style.background = '';
-    btn.style.opacity = '1';
-    btn.disabled = false;
+    btn.style.background = ''; btn.style.opacity = '1'; btn.disabled = false;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   document.querySelector('#successOverlay button').addEventListener('click', resetForm);
 
-}); // fin DOMContentLoaded
+});
 </script>
 
 <script>
   window.UPLOADCARE_PUBLIC_KEY = 'ac78eea68d9ec156e585';
   window.UPLOADCARE_LOCALE = 'fr';
 </script>
-<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"
-  onload="initUploadcare()"></script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" onload="initUploadcare()"></script>
 
 </body>
 </html>
