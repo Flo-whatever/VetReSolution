@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vetalpha — Formulaire de référé</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #4a6741;
+    --sage-light: #6a8f60;
+    --sage-pale: #eef3ec;
+    --sand: #c8a96e;
+    --sand-light: #e8d5a8;
+    --cream: #faf8f4;
+    --white: #ffffff;
+    --grey-light: #f5f3ef;
+    --grey-mid: #ddd8ce;
+    --grey-text: #7a7268;
+    --text: #2a2520;
+    --navy: #1e2d1e;
+    --red: #c0392b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    background: var(--cream);
+    min-height: 100vh;
+    padding: 48px 20px 100px;
+    color: var(--text);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(74,103,65,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 100%, rgba(200,169,110,0.06) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .logo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    border: 1px solid var(--grey-mid);
+    border-radius: 20px;
+    padding: 20px 48px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+
+  .logo-img { height: 76px; width: auto; object-fit: contain; display: block; }
+
+  .logo-fallback {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 600;
+    color: var(--sage);
+    letter-spacing: 0.14em;
+    display: none;
+  }
+
+  .header-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem;
+    color: var(--navy);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+
+  .sep {
+    width: 48px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--sage), transparent);
+    margin: 18px auto;
+  }
+
+  .header-sub {
+    color: var(--grey-text);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+
+  /* ── Progress bar ── */
+  .progress-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 28px 0 0;
+  }
+
+  .prog-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .prog-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid var(--grey-mid);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--grey-text);
+    transition: all 0.3s;
+    z-index: 1;
+  }
+
+  .prog-step.active .prog-dot { background: var(--sage); border-color: var(--sage); color: white; }
+  .prog-step.done .prog-dot { background: var(--sage); border-color: var(--sage); color: white; font-size: 0.65rem; }
+
+  .prog-label {
+    font-size: 0.62rem;
+    color: var(--grey-text);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 300;
+    white-space: nowrap;
+  }
+
+  .prog-step.active .prog-label { color: var(--sage); font-weight: 500; }
+  .prog-step.done .prog-label { color: var(--sage); }
+
+  .prog-line {
+    width: 44px;
+    height: 1.5px;
+    background: var(--grey-mid);
+    margin-bottom: 22px;
+    transition: background 0.3s;
+  }
+
+  .prog-line.done { background: var(--sage); }
+
+  /* ── Card ── */
+  .card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08), 0 0 0 1px var(--grey-mid);
+  }
+
+  /* ── Section ── */
+  .section {
+    padding: 36px 44px;
+    border-bottom: 1px solid var(--grey-mid);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .section-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--sage);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-icon svg { width: 18px; height: 18px; fill: white; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .section-badge {
+    margin-left: auto;
+    font-size: 0.68rem;
+    background: var(--sage-pale);
+    color: var(--sage);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── Grid ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+
+  /* ── Subsection label ── */
+  .subsection-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 14px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .subsection-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--grey-mid);
+  }
+
+  /* ── Field ── */
+  .field { display: flex; flex-direction: column; gap: 6px; }
+
+  .field label {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--grey-text);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+  }
+
+  .field label .req { color: var(--sage); margin-left: 2px; }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 0.92rem;
+    color: var(--text);
+    background: var(--grey-light);
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 10px;
+    padding: 11px 14px;
+    transition: all 0.2s ease;
+    outline: none;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--sage-light);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(74,103,65,0.10);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder { color: #c0bab0; }
+
+  .field textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sage);
+    pointer-events: none;
+    font-size: 0.82rem;
+  }
+  .select-wrap select { padding-right: 36px; cursor: pointer; }
+
+  .date-row { display: grid; grid-template-columns: 1fr 2fr 1.2fr; gap: 10px; }
+
+  /* ── Checkbox exam ── */
+  .exam-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .exam-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 10px;
+    background: var(--grey-light);
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+  }
+
+  .exam-item:hover { border-color: var(--sage-light); background: var(--sage-pale); }
+
+  .exam-item input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .exam-cb {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 2px solid var(--grey-mid);
+    border-radius: 5px;
+    background: white;
+    transition: all 0.18s;
+    position: relative;
+  }
+
+  .exam-item input:checked ~ .exam-cb {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+
+  .exam-item input:checked ~ .exam-cb::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 4px; top: 1px;
+    width: 5px; height: 9px;
+    border: 2px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(45deg);
+  }
+
+  .exam-item:has(input:checked) { border-color: var(--sage); background: var(--sage-pale); }
+
+  .exam-text {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.45;
+    transition: color 0.18s;
+  }
+
+  .exam-item input:checked ~ .exam-text { color: var(--sage); font-weight: 400; }
+
+  .exam-note {
+    font-size: 0.74rem;
+    color: var(--grey-text);
+    font-style: italic;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── Urgence radio ── */
+  .urgence-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .urgence-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 10px;
+    background: var(--grey-light);
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+  }
+
+  .urgence-item:hover { border-color: var(--sage-light); background: var(--sage-pale); }
+  .urgence-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .urgence-radio {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-mid);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+    background: white;
+  }
+
+  .urgence-item input:checked ~ .urgence-radio {
+    border-color: var(--sage);
+    background: var(--sage);
+  }
+
+  .urgence-item input:checked ~ .urgence-radio::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: white;
+    display: block;
+  }
+
+  .urgence-item:has(input:checked) { border-color: var(--sage); background: var(--sage-pale); }
+
+  .urgence-content { flex: 1; }
+
+  .urgence-label {
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--text);
+    transition: color 0.18s;
+  }
+
+  .urgence-sub {
+    font-size: 0.74rem;
+    color: var(--grey-text);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .urgence-item input:checked ~ .urgence-content .urgence-label { color: var(--sage); font-weight: 500; }
+
+  .urgence-item.urgence-abs { border-color: rgba(192,57,43,0.25); }
+  .urgence-item.urgence-abs:hover { border-color: #c0392b; background: #fff8f7; }
+  .urgence-item.urgence-abs:has(input:checked) { border-color: #c0392b; background: #fff5f5; }
+  .urgence-item.urgence-abs input:checked ~ .urgence-radio { border-color: #c0392b; background: #c0392b; }
+  .urgence-item.urgence-abs input:checked ~ .urgence-content .urgence-label { color: #c0392b; }
+
+  .urgence-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .badge-red { background: rgba(192,57,43,0.12); color: #c0392b; }
+  .badge-orange { background: rgba(230,126,34,0.12); color: #e67e22; }
+  .badge-green { background: rgba(74,103,65,0.12); color: var(--sage); }
+
+  /* ── DICOM Checker ── */
+  .dicom-checker {
+    background: linear-gradient(135deg, var(--navy) 0%, #2a3d2a 100%);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .dicom-status {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative;
+  }
+
+  .dicom-status .pulse {
+    position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid var(--sage-light);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 0; transform: scale(1.3); }
+  }
+
+  .dicom-status svg { width: 20px; height: 20px; fill: var(--sand); }
+
+  .dicom-info { flex: 1; }
+
+  .dicom-label {
+    font-size: 0.68rem; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500;
+  }
+
+  .dicom-state {
+    font-size: 0.9rem; color: white; font-weight: 300; margin-top: 3px;
+  }
+
+  .dicom-state.waiting { color: rgba(255,255,255,0.35); font-style: italic; }
+  .dicom-state.received { color: #6ee7a0; }
+  .dicom-state.pending { color: #fcd34d; }
+
+  .dicom-check-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: white; font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem; font-weight: 300;
+    padding: 8px 16px; border-radius: 8px;
+    cursor: pointer; transition: all 0.2s;
+  }
+
+  .dicom-check-btn:hover { background: rgba(74,103,65,0.4); border-color: var(--sage-light); }
+
+  /* ── Info note ── */
+  .info-note {
+    display: flex; gap: 10px;
+    background: var(--sage-pale);
+    border-left: 3px solid var(--sage);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 0.82rem; color: var(--sage);
+    margin-top: 14px; line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  .form-footer {
+    background: linear-gradient(135deg, var(--navy) 0%, #243324 100%);
+    padding: 32px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-info {
+    font-size: 0.8rem; color: rgba(255,255,255,0.38); line-height: 1.6;
+  }
+
+  .footer-info strong { color: rgba(255,255,255,0.65); font-weight: 500; }
+
+  .submit-btn {
+    background: linear-gradient(135deg, var(--sand) 0%, #a8843a 100%);
+    color: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.92rem; font-weight: 600;
+    padding: 14px 36px; border: none; border-radius: 12px;
+    cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: all 0.2s; white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(200,169,110,0.35);
+  }
+
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(200,169,110,0.5); }
+  .submit-btn:active { transform: translateY(0); }
+
+  /* ── Upload ── */
+  .upload-zone {
+    border: 2px dashed var(--grey-mid);
+    border-radius: 12px; padding: 28px 20px;
+    text-align: center; cursor: pointer;
+    transition: all 0.2s; background: var(--grey-light);
+  }
+
+  .upload-zone:hover { border-color: var(--sage-light); background: var(--sage-pale); }
+
+  .upload-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--navy), var(--sage));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+  }
+
+  .upload-icon svg { width: 20px; height: 20px; fill: white; }
+  .upload-text { font-size: 0.86rem; color: var(--grey-text); }
+  .upload-text strong { color: var(--sage); font-weight: 500; }
+  .upload-limit { font-size: 0.74rem; color: #b0a898; margin-top: 5px; }
+
+  .uploaded-file-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--sage-pale); border: 1px solid var(--sage-light);
+    border-radius: 8px; padding: 8px 14px;
+    font-size: 0.82rem; color: var(--sage);
+  }
+
+  .uploaded-file-item a { color: var(--sage); text-decoration: none; font-weight: 400; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .uploaded-file-item a:hover { text-decoration: underline; }
+
+  /* ── Overlay succès ── */
+  #successOverlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(250,248,244,0.97);
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px;
+  }
+
+  .success-card {
+    background: white; border-radius: 24px; padding: 52px 44px;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.10); max-width: 480px; width: 100%;
+  }
+
+  .success-icon {
+    width: 72px; height: 72px; background: var(--sage); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px; font-size: 2rem; color: white;
+  }
+
+  @media (max-width: 600px) {
+    .section { padding: 24px 20px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .span-2, .span-3 { grid-column: span 1; }
+    .date-row { grid-template-columns: 1fr 1fr; }
+    .form-footer { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-container">
+      <img class="logo-img" src="/Vetalpha.png" alt="Vetalpha"
+        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+      <div class="logo-fallback" id="logo-fallback">Vetalpha</div>
+    </div>
+    <p class="header-eyebrow">Centre de référé vétérinaire</p>
+    <h1 class="header-title">Formulaire de référé en ligne</h1>
+    <div class="sep"></div>
+    <p class="header-sub">Merci de compléter ce formulaire pour initier la prise en charge de votre patient</p>
+
+    <div class="progress-track" style="margin-top:28px;">
+      <div class="prog-step active" id="step1"><div class="prog-dot">1</div><div class="prog-label">Référant</div></div>
+      <div class="prog-line" id="line1"></div>
+      <div class="prog-step" id="step2"><div class="prog-dot">2</div><div class="prog-label">Propriétaire</div></div>
+      <div class="prog-line" id="line2"></div>
+      <div class="prog-step" id="step3"><div class="prog-dot">3</div><div class="prog-label">Patient</div></div>
+      <div class="prog-line" id="line3"></div>
+      <div class="prog-step" id="step4"><div class="prog-dot">4</div><div class="prog-label">Examen</div></div>
+      <div class="prog-line" id="line4"></div>
+      <div class="prog-step" id="step5"><div class="prog-dot">5</div><div class="prog-label">Urgence</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <!-- Section 1 : Vétérinaire référant -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+        </div>
+        <span class="section-title">Vétérinaire référant</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="field span-2">
+          <label>Nom <span class="req">*</span></label>
+          <input type="text" placeholder="Nom du vétérinaire référant">
+        </div>
+        <div class="field span-2">
+          <label>Ville <span class="req">*</span></label>
+          <input type="text" placeholder="Ville de la clinique">
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 : Propriétaire -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <span class="section-title">Identité du propriétaire</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div class="grid-2">
+
+        <div class="span-2 subsection-label">Identité</div>
+
+        <div class="field">
+          <label>Prénom <span class="req">*</span></label>
+          <input type="text" placeholder="Prénom du propriétaire">
+        </div>
+        <div class="field">
+          <label>Nom <span class="req">*</span></label>
+          <input type="text" placeholder="Nom du propriétaire">
+        </div>
+
+        <div class="span-2 subsection-label" style="margin-top:8px;">Adresse postale</div>
+
+        <div class="field span-2">
+          <label>N° / Rue</label>
+          <input type="text" placeholder="Numéro et nom de rue">
+        </div>
+        <div class="field">
+          <label>Ville</label>
+          <input type="text" placeholder="Ville">
+        </div>
+        <div class="field">
+          <label>Code postal</label>
+          <input type="text" placeholder="Code postal" maxlength="10">
+        </div>
+
+        <div class="span-2 subsection-label" style="margin-top:8px;">Contact</div>
+
+        <div class="field">
+          <label>Adresse email <span class="req">*</span></label>
+          <input type="email" placeholder="email@exemple.fr">
+        </div>
+        <div class="field">
+          <label>Téléphone <span class="req">*</span></label>
+          <input type="tel" placeholder="06 00 00 00 00">
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 : Patient -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M4.5 9.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm6-1a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm5.5 1a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm-9 4c-.83 0-2 .67-2 2 0 2 1.5 4.5 4 4.5S13 17.5 13 17c0-.83-.67-2-1.5-2H7zm5.5 0c-.83 0-1.5 1.17-1.5 2 0 .5 1.5 3 4 3s4-2.5 4-4.5c0-1.33-1.17-2-2-2h-4.5z"/></svg>
+        </div>
+        <span class="section-title">Patient</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label>Prénom <span class="req">*</span></label>
+          <input type="text" placeholder="Prénom de l'animal">
+        </div>
+        <div class="field">
+          <label>Espèce / Race <span class="req">*</span></label>
+          <input type="text" placeholder="ex: Chien — Labrador">
+        </div>
+        <div class="field">
+          <label>Date de naissance</label>
+          <div class="date-row">
+            <div class="select-wrap">
+              <select>
+                <option>Jour</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+                <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+                <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
+                <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
+                <option>31</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <select>
+                <option>Mois</option>
+                <option>Janvier</option><option>Février</option><option>Mars</option><option>Avril</option>
+                <option>Mai</option><option>Juin</option><option>Juillet</option><option>Août</option>
+                <option>Septembre</option><option>Octobre</option><option>Novembre</option><option>Décembre</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <select><option>Année</option>
+                <script>for(let y=2026;y>=1990;y--) document.write(`<option>${y}</option>`)</script>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Poids (kg)</label>
+          <input type="number" placeholder="ex: 12.5" min="0.1" step="0.1">
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4 : Examen -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        </div>
+        <span class="section-title">Motif de référé & Examen souhaité</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:24px;">
+
+        <div class="field">
+          <label>Motif de référé <span class="req">*</span></label>
+          <textarea placeholder="Décrivez le motif de référé, les signes cliniques, l'évolution..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Examen souhaité <span class="req">*</span></label>
+          <div class="exam-list" id="examList">
+
+            <label class="exam-item">
+              <input type="checkbox" class="exam-cb-input" data-label="Scanner">
+              <span class="exam-cb"></span>
+              <span class="exam-text">Scanner</span>
+            </label>
+
+            <label class="exam-item">
+              <input type="checkbox" class="exam-cb-input" data-label="Endoscopie (respiratoire / digestive)">
+              <span class="exam-cb"></span>
+              <span class="exam-text">
+                Endoscopie (respiratoire / digestive)
+                <span class="exam-note">Une consultation préalable est indispensable</span>
+              </span>
+            </label>
+
+            <label class="exam-item">
+              <input type="checkbox" class="exam-cb-input" data-label="IRM">
+              <span class="exam-cb"></span>
+              <span class="exam-text">IRM</span>
+            </label>
+
+            <label class="exam-item">
+              <input type="checkbox" class="exam-cb-input" data-label="Autre examen (échographie / prélèvement...)">
+              <span class="exam-cb"></span>
+              <span class="exam-text">Autre examen (échographie / prélèvement...)</span>
+            </label>
+
+            <label class="exam-item">
+              <input type="checkbox" class="exam-cb-input" data-label="Prise en charge chirurgicale seule">
+              <span class="exam-cb"></span>
+              <span class="exam-text">Prise en charge chirurgicale seule</span>
+            </label>
+
+            <label class="exam-item">
+              <input type="checkbox" class="exam-cb-input" data-label="Prise en charge globale (examens diagnostics + prise en charge chirurgicale)">
+              <span class="exam-cb"></span>
+              <span class="exam-text">Prise en charge globale (examens diagnostics + prise en charge chirurgicale)</span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- DICOM Checker -->
+        <div class="field">
+          <label>Vérification de réception des images DICOM</label>
+          <div class="dicom-checker">
+            <div class="dicom-status">
+              <div class="pulse"></div>
+              <svg viewBox="0 0 24 24"><path d="M19.59 7L12 14.59 8.41 11 7 12.41l5 5 9-9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+            </div>
+            <div class="dicom-info">
+              <div class="dicom-label">Serveur DICOM — Orthanc</div>
+              <div class="dicom-state waiting" id="dicomState">En attente de vérification...</div>
+              <div id="dicomDetail" style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-top:3px;"></div>
+            </div>
+            <button class="dicom-check-btn" id="dicomBtn">Vérifier</button>
+          </div>
+        </div>
+
+        <!-- Upload -->
+        <div class="field">
+          <label>Documents complémentaires</label>
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+            </div>
+            <div class="upload-text"><strong>Cliquez pour ajouter des fichiers</strong></div>
+            <div class="upload-limit">PDF, JPG, PNG — max 100 MB par fichier</div>
+          </div>
+          <div id="uploadedFiles" style="margin-top:10px; display:flex; flex-direction:column; gap:8px;"></div>
+          <div id="uploadStatus" style="display:none; margin-top:6px; font-size:0.8rem; color:var(--sage); font-weight:400;"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 5 : Urgence + Commentaires -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        </div>
+        <span class="section-title">Niveau d'urgence & Commentaires</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:24px;">
+
+        <div class="field">
+          <label>Niveau d'urgence <span class="req">*</span></label>
+          <div class="urgence-list" id="urgenceList">
+
+            <label class="urgence-item urgence-abs">
+              <input type="radio" name="urgence" value="absolue" data-label="Absolue (doit être reçu dans les 12-24 heures)">
+              <span class="urgence-radio"></span>
+              <span class="urgence-content">
+                <span class="urgence-label">Absolue</span>
+                <span class="urgence-sub">Doit être reçu dans les 12–24 heures</span>
+              </span>
+              <span class="urgence-badge badge-red">Urgent</span>
+            </label>
+
+            <label class="urgence-item">
+              <input type="radio" name="urgence" value="relative" data-label="Relative (doit être reçu dans les 3 jours)">
+              <span class="urgence-radio"></span>
+              <span class="urgence-content">
+                <span class="urgence-label">Relative</span>
+                <span class="urgence-sub">Doit être reçu dans les 3 jours</span>
+              </span>
+              <span class="urgence-badge badge-orange">Sous 3 jours</span>
+            </label>
+
+            <label class="urgence-item">
+              <input type="radio" name="urgence" value="non-urgent" data-label="Non-urgent (prise en charge sous un délai raisonnable)">
+              <span class="urgence-radio"></span>
+              <span class="urgence-content">
+                <span class="urgence-label">Non-urgent</span>
+                <span class="urgence-sub">Prise en charge sous un délai raisonnable</span>
+              </span>
+              <span class="urgence-badge badge-green">Planifié</span>
+            </label>
+
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Éléments indispensables à la compréhension du dossier</label>
+          <textarea style="min-height:110px;"
+            placeholder="Inscrivez tout élément indispensable à une meilleure compréhension pour la gestion de votre patient..."></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="form-footer">
+      <div class="footer-info">
+        <strong>Vetalpha</strong><br>
+        Votre demande sera traitée dans les meilleurs délais.
+      </div>
+      <button class="submit-btn" id="submitBtn">Envoyer le référé →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Overlay succès -->
+<div id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">✓</div>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:1.7rem; color:var(--navy); margin-bottom:12px;">
+      Référé envoyé avec succès !
+    </h2>
+    <p style="color:var(--grey-text); font-size:0.92rem; line-height:1.6; font-weight:300;">
+      Votre demande a bien été transmise à Vetalpha.<br>
+      Vous recevrez une confirmation par email.
+    </p>
+    <div id="successUrgenceAbs" style="display:none; margin:18px 0; padding:12px 20px;
+      background:#fff5f5; border-radius:10px; border-left:3px solid #c0392b;
+      font-size:0.84rem; color:#c0392b; font-weight:400;">
+      🚨 Urgence absolue — notre équipe est alertée immédiatement
+    </div>
+    <button onclick="resetForm()" style="
+      margin-top:24px; background:var(--sage); color:white;
+      border:none; border-radius:10px; padding:12px 28px;
+      font-family:'Outfit',sans-serif; font-size:0.9rem;
+      font-weight:400; cursor:pointer; letter-spacing:0.03em;">
+      Nouveau référé
+    </button>
+  </div>
+</div>
+
+<script>
+  const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
+  const ORTHANC_URL   = 'http://100.84.243.6:8042'; // ← à adapter par client
+  let uploadedFileUrls = [];
+
+  /* ── Uploadcare ── */
+  function initUploadcare() {
+    if (typeof uploadcare === 'undefined') return;
+    document.getElementById('uploadZone').addEventListener('click', () => {
+      const dialog = uploadcare.openDialog(null, { multiple: true, imagesOnly: false, publicKey: 'ac78eea68d9ec156e585' });
+      dialog.done(fileGroup => {
+        fileGroup.files().forEach(file => {
+          file.done(info => {
+            const { cdnUrl: url, name } = info;
+            const ext = (name.split('.').pop() || '').toLowerCase();
+            const icon = ext === 'pdf' ? '📄' : ['jpg','jpeg','png'].includes(ext) ? '🖼️' : '📎';
+            uploadedFileUrls.push({ name, url });
+            const item = document.createElement('div');
+            item.className = 'uploaded-file-item';
+            item.innerHTML = `<span>${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
+            document.getElementById('uploadedFiles').appendChild(item);
+            const s = document.getElementById('uploadStatus');
+            s.style.display = 'block';
+            s.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
+          });
+        });
+      });
+    });
+  }
+
+  /* ── DICOM ── */
+  async function checkDicom() {
+    const state   = document.getElementById('dicomState');
+    const detail  = document.getElementById('dicomDetail');
+    const prenomEl = document.querySelector('input[placeholder="Prénom de l\'animal"]');
+    const prenom  = prenomEl ? prenomEl.value.trim() : '';
+
+    if (!prenom) {
+      state.className = 'dicom-state pending';
+      state.textContent = '⚠️ Renseignez d\'abord le prénom de l\'animal';
+      detail.textContent = '';
+      return;
+    }
+
+    state.className = 'dicom-state pending';
+    state.textContent = `Recherche de "${prenom}"…`;
+    detail.textContent = '';
+
+    try {
+      const res = await fetch(`${ORTHANC_URL}/tools/find`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ Level: 'Patient', Query: { PatientName: `*${prenom.toUpperCase()}*` }, Expand: true })
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const patients = await res.json();
+
+      if (!patients.length) {
+        state.className = 'dicom-state pending';
+        state.textContent = `⏳ "${prenom}" non trouvé sur le serveur DICOM`;
+        detail.textContent = 'Les images ne sont peut-être pas encore arrivées.';
+      } else {
+        let imgs = 0, series = 0, date = '';
+        patients.forEach(p => {
+          imgs   += parseInt(p.MainDicomTags?.NumberOfPatientRelatedInstances || 0);
+          series += parseInt(p.MainDicomTags?.NumberOfPatientRelatedSeries || 0);
+          if (p.LastUpdate) date = p.LastUpdate.substring(0, 10);
+        });
+        state.className = 'dicom-state received';
+        state.textContent = `✓ "${prenom}" présent sur le serveur DICOM`;
+        detail.textContent = [
+          imgs   ? `${imgs} image${imgs > 1 ? 's' : ''}` : '',
+          series ? `${series} série${series > 1 ? 's' : ''}` : '',
+          date   ? `mise à jour : ${date}` : ''
+        ].filter(Boolean).join(' · ');
+      }
+    } catch (err) {
+      state.className = 'dicom-state pending';
+      state.textContent = err.name === 'TypeError' ? '🔴 Serveur DICOM inaccessible' : `🔴 Erreur : ${err.message}`;
+      detail.textContent = err.name === 'TypeError' ? 'Vérifiez la connexion réseau.' : '';
+    }
+  }
+
+  /* ── Stepper ── */
+  function updateStepper() {
+    const sections = document.querySelectorAll('.section');
+    const steps = ['step1','step2','step3','step4','step5'].map(id => document.getElementById(id));
+    const lines = ['line1','line2','line3','line4'].map(id => document.getElementById(id));
+    sections.forEach((sec, i) => {
+      if (sec.getBoundingClientRect().top < window.innerHeight * 0.5 && steps[i]) {
+        steps.forEach((s, j) => {
+          if (!s) return;
+          if (j < i)      { s.classList.add('done'); s.classList.remove('active'); s.querySelector('.prog-dot').textContent = '✓'; }
+          else if (j === i){ s.classList.add('active'); s.classList.remove('done'); }
+          else             { s.classList.remove('active','done'); }
+        });
+        lines.forEach((l, j) => { if (l) l.classList.toggle('done', j < i); });
+      }
+    });
+  }
+
+  /* ── Submit ── */
+  async function submitForm() {
+    const btn = document.getElementById('submitBtn');
+    const errors = [];
+
+    document.querySelectorAll('input:not([type=checkbox]):not([type=radio]), select, textarea').forEach(el => {
+      el.style.border = ''; el.style.background = '';
+    });
+
+    function markError(el) {
+      el.style.border = '1.5px solid #c0392b';
+      el.style.background = '#fff5f5';
+      errors.push(el);
+    }
+
+    // Validations requises
+    [
+      ['input[placeholder="Nom du vétérinaire référant"]', true],
+      ['input[placeholder="Ville de la clinique"]', true],
+      ['input[placeholder="Prénom du propriétaire"]', true],
+      ['input[placeholder="Nom du propriétaire"]', true],
+      ['input[placeholder="Prénom de l\'animal"]', true],
+      ['input[placeholder="ex: Chien — Labrador"]', true],
+    ].forEach(([sel, req]) => {
+      if (!req) return;
+      const el = document.querySelector(sel);
+      if (el && !el.value.trim()) markError(el);
+    });
+
+    // Email propriétaire
+    const email = document.querySelector('input[type="email"]');
+    if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email);
+
+    // Téléphone
+    const tel = document.querySelector('input[type="tel"]');
+    if (!tel.value.trim()) markError(tel);
+
+    // Examen coché
+    if (!document.querySelector('.exam-cb-input:checked')) {
+      document.getElementById('examList').style.outline = '2px solid #c0392b';
+      document.getElementById('examList').style.borderRadius = '10px';
+      errors.push(document.getElementById('examList'));
+    } else {
+      document.getElementById('examList').style.outline = '';
+    }
+
+    // Urgence cochée
+    if (!document.querySelector('input[name="urgence"]:checked')) {
+      document.getElementById('urgenceList').style.outline = '2px solid #c0392b';
+      document.getElementById('urgenceList').style.borderRadius = '10px';
+      errors.push(document.getElementById('urgenceList'));
+    } else {
+      document.getElementById('urgenceList').style.outline = '';
+    }
+
+    if (errors.length > 0) {
+      const firstEl = errors.find(e => e);
+      if (firstEl) firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      btn.textContent = `✗ ${errors.length} champ${errors.length > 1 ? 's' : ''} requis`;
+      btn.style.background = '#c0392b';
+      setTimeout(() => { btn.textContent = 'Envoyer le référé →'; btn.style.background = ''; }, 2500);
+      return;
+    }
+
+    // Collecte données
+    const data = {};
+    document.querySelectorAll('input:not([type=checkbox]):not([type=radio]):not(.exam-cb-input), select, textarea').forEach(el => {
+      const label = el.closest('.field')?.querySelector('label')?.textContent?.replace('*','').trim() || el.name || el.id || '';
+      if (el.value && !['Jour','Mois','Année'].includes(el.value)) data[label] = el.value;
+    });
+
+    const examens = [...document.querySelectorAll('.exam-cb-input:checked')].map(cb => cb.dataset.label);
+    if (examens.length) data['Examen souhaité'] = examens.join('\n');
+
+    const urgence = document.querySelector('input[name="urgence"]:checked');
+    if (urgence) data['Niveau d\'urgence'] = urgence.dataset.label;
+
+    data['Statut DICOM'] = document.getElementById('dicomState').textContent.trim();
+    if (uploadedFileUrls.length) data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
+
+    const prenomAnimal = document.querySelector('input[placeholder="Prénom de l\'animal"]')?.value || 'Animal';
+
+    btn.textContent = 'Envoi en cours...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Nouveau référé — ${prenomAnimal} (${urgence?.value || ''})`,
+          ...data
+        })
+      });
+      const result = await res.json();
+      if (result.success) {
+        document.getElementById('successOverlay').style.display = 'flex';
+        if (urgence?.value === 'absolue') document.getElementById('successUrgenceAbs').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else throw new Error('Erreur serveur');
+    } catch (e) {
+      btn.textContent = '✗ Erreur — réessayez';
+      btn.style.background = '#c0392b';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Envoyer le référé →'; btn.style.background = ''; }, 4000);
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('successOverlay').style.display = 'none';
+    document.getElementById('successUrgenceAbs').style.display = 'none';
+    document.querySelectorAll('input:not([type=checkbox]):not([type=radio]), textarea').forEach(el => el.value = '');
+    document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+    document.querySelectorAll('input[type=checkbox], input[type=radio]').forEach(el => el.checked = false);
+    uploadedFileUrls = [];
+    document.getElementById('uploadedFiles').innerHTML = '';
+    document.getElementById('uploadStatus').style.display = 'none';
+    document.getElementById('dicomState').className = 'dicom-state waiting';
+    document.getElementById('dicomState').textContent = 'En attente de vérification...';
+    document.getElementById('dicomDetail').textContent = '';
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Envoyer le référé →';
+    btn.style.background = ''; btn.style.opacity = '1'; btn.disabled = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('submitBtn').addEventListener('click', submitForm);
+    document.getElementById('dicomBtn').addEventListener('click', checkDicom);
+    window.addEventListener('scroll', updateStepper);
+  });
+</script>
+
+<script>
+  window.UPLOADCARE_PUBLIC_KEY = 'ac78eea68d9ec156e585';
+  window.UPLOADCARE_LOCALE = 'fr';
+</script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" onload="initUploadcare()"></script>
+
+</body>
+</html>
