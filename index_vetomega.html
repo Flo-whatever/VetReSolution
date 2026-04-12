@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulaire de référé</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate:       #2c3e55;
+    --slate-mid:   #3d526b;
+    --slate-light: #5a728a;
+    --slate-pale:  #edf1f5;
+    --burgundy:    #8b2635;
+    --burgundy-light: #b03a4a;
+    --burgundy-pale:  #fdf0f1;
+    --warm:        #f7f4f0;
+    --white:       #ffffff;
+    --grey-light:  #f2f0ed;
+    --grey-mid:    #dbd7d0;
+    --grey-text:   #7a7570;
+    --text:        #23201d;
+    --line:        #e5e1db;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 300;
+    background: var(--warm);
+    min-height: 100vh;
+    padding: 52px 20px 100px;
+    color: var(--text);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(44,62,85,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 0% 100%, rgba(139,38,53,0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .logo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    border: 1px solid var(--grey-mid);
+    border-radius: 16px;
+    padding: 22px 52px;
+    margin-bottom: 36px;
+    box-shadow: 0 2px 24px rgba(44,62,85,0.08);
+  }
+
+  .logo-img { height: 72px; width: auto; object-fit: contain; display: block; }
+
+  .logo-fallback {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--slate);
+    letter-spacing: 0.06em;
+    display: none;
+  }
+
+  .header-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: 12px;
+  }
+
+  .header-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.9rem;
+    color: var(--slate);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  .header-title em {
+    font-style: italic;
+    color: var(--slate-light);
+  }
+
+  .sep {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px auto;
+  }
+
+  .sep-line { width: 40px; height: 1px; background: var(--grey-mid); }
+  .sep-dot  { width: 5px; height: 5px; border-radius: 50%; background: var(--burgundy); }
+
+  .header-sub {
+    color: var(--grey-text);
+    font-size: 0.94rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── Stepper ── */
+  .stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid var(--grey-mid);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 600;
+    color: var(--grey-text);
+    transition: all 0.3s;
+    z-index: 1;
+  }
+
+  .step.active .step-dot { background: var(--slate); border-color: var(--slate); color: white; }
+  .step.done   .step-dot { background: var(--slate); border-color: var(--slate); color: white; }
+
+  .step-label {
+    font-size: 0.6rem;
+    color: var(--grey-text);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .step.active .step-label { color: var(--slate); font-weight: 600; }
+  .step.done   .step-label { color: var(--slate); }
+
+  .step-line {
+    width: 36px; height: 1.5px;
+    background: var(--grey-mid);
+    margin-bottom: 24px;
+    transition: background 0.3s;
+  }
+
+  .step-line.done { background: var(--slate); }
+
+  /* ── Card ── */
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 48px rgba(44,62,85,0.10), 0 0 0 1px var(--line);
+  }
+
+  /* ── Section ── */
+  .section {
+    padding: 36px 44px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1.5px solid var(--line);
+  }
+
+  .section-num {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--slate);
+    color: white;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    color: var(--slate);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    flex: 1;
+  }
+
+  .section-badge {
+    font-size: 0.66rem;
+    background: var(--slate-pale);
+    color: var(--slate-light);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .section-badge.opt {
+    background: var(--grey-light);
+    color: var(--grey-text);
+  }
+
+  /* ── Grid ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .span-2 { grid-column: span 2; }
+
+  /* ── Subsection ── */
+  .subsec {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin: 20px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .subsec::after { content: ''; flex: 1; height: 1px; background: var(--burgundy-pale); border: 1px solid var(--line); }
+
+  /* ── Field ── */
+  .field { display: flex; flex-direction: column; gap: 6px; }
+
+  .field label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--grey-text);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+  }
+
+  .field label .req { color: var(--burgundy); margin-left: 2px; }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 300;
+    font-size: 0.91rem;
+    color: var(--text);
+    background: var(--grey-light);
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 9px;
+    padding: 11px 14px;
+    transition: all 0.2s;
+    outline: none;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--slate-light);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(44,62,85,0.09);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder { color: #c2bdb6; }
+
+  .field textarea { resize: vertical; min-height: 110px; line-height: 1.65; }
+
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '▾';
+    position: absolute; right: 13px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--slate-light); pointer-events: none; font-size: 0.8rem;
+  }
+  .select-wrap select { padding-right: 34px; cursor: pointer; }
+
+  .date-row { display: grid; grid-template-columns: 1fr 2fr 1.2fr; gap: 10px; }
+
+  /* ── Dr. prefix field ── */
+  .dr-field {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 10px;
+  }
+
+  /* ── Checkbox items ── */
+  .choice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .choice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 15px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 9px;
+    background: var(--grey-light);
+    cursor: pointer;
+    transition: all 0.17s;
+    user-select: none;
+  }
+
+  .choice-item:hover { border-color: var(--slate-light); background: var(--slate-pale); }
+
+  .choice-item input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .choice-box {
+    flex-shrink: 0;
+    width: 17px; height: 17px;
+    margin-top: 2px;
+    border: 2px solid var(--grey-mid);
+    border-radius: 4px;
+    background: white;
+    transition: all 0.17s;
+    position: relative;
+  }
+
+  .choice-item input:checked ~ .choice-box {
+    background: var(--slate);
+    border-color: var(--slate);
+  }
+
+  .choice-item input:checked ~ .choice-box::after {
+    content: '';
+    position: absolute;
+    left: 3px; top: 0px;
+    width: 5px; height: 9px;
+    border: 2px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(45deg);
+  }
+
+  .choice-item:has(input:checked) {
+    border-color: var(--slate);
+    background: var(--slate-pale);
+  }
+
+  .choice-text {
+    font-size: 0.87rem;
+    font-weight: 300;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.45;
+    transition: color 0.17s;
+  }
+
+  .choice-item input:checked ~ .choice-text { color: var(--slate); font-weight: 500; }
+
+  .choice-sub {
+    display: block;
+    font-size: 0.73rem;
+    color: var(--grey-text);
+    font-style: italic;
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  /* ── Radio urgence ── */
+  .urgence-list { display: flex; flex-direction: column; gap: 7px; }
+
+  .urgence-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 9px;
+    background: var(--grey-light);
+    cursor: pointer;
+    transition: all 0.17s;
+    user-select: none;
+  }
+
+  .urgence-item input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .urgence-radio {
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-mid);
+    background: white;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.17s;
+  }
+
+  .urgence-item input:checked ~ .urgence-radio {
+    border-color: var(--slate);
+    background: var(--slate);
+  }
+
+  .urgence-item input:checked ~ .urgence-radio::after {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: white;
+    display: block;
+  }
+
+  .urgence-content { flex: 1; }
+
+  .urgence-title {
+    font-size: 0.87rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: color 0.17s;
+  }
+
+  .urgence-desc {
+    font-size: 0.73rem;
+    color: var(--grey-text);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .urgence-item:has(input:checked) { border-color: var(--slate); background: var(--slate-pale); }
+  .urgence-item input:checked ~ .urgence-content .urgence-title { color: var(--slate); }
+
+  /* Urgence absolue */
+  .urgence-item.u-abs { border-color: rgba(139,38,53,0.2); }
+  .urgence-item.u-abs:hover { border-color: var(--burgundy); background: var(--burgundy-pale); }
+  .urgence-item.u-abs:has(input:checked) { border-color: var(--burgundy); background: var(--burgundy-pale); }
+  .urgence-item.u-abs input:checked ~ .urgence-radio { border-color: var(--burgundy); background: var(--burgundy); }
+  .urgence-item.u-abs input:checked ~ .urgence-content .urgence-title { color: var(--burgundy); }
+
+  .urgence-pill {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .pill-red    { background: rgba(139,38,53,0.1); color: var(--burgundy); }
+  .pill-orange { background: rgba(211,110,40,0.1); color: #c05a10; }
+  .pill-green  { background: rgba(44,85,55,0.1); color: #2c5537; }
+
+  /* ── Info note ── */
+  .info-note {
+    display: flex; gap: 10px;
+    background: var(--slate-pale);
+    border-left: 3px solid var(--slate);
+    border-radius: 0 8px 8px 0;
+    padding: 11px 15px;
+    font-size: 0.8rem; color: var(--slate-mid);
+    margin-top: 14px; line-height: 1.55;
+  }
+
+  /* ── Upload ── */
+  .upload-zone {
+    border: 2px dashed var(--grey-mid);
+    border-radius: 10px;
+    padding: 26px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--grey-light);
+  }
+
+  .upload-zone:hover { border-color: var(--slate-light); background: var(--slate-pale); }
+
+  .upload-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--slate), var(--slate-mid));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+  }
+
+  .upload-icon svg { width: 19px; height: 19px; fill: white; }
+  .upload-text { font-size: 0.85rem; color: var(--grey-text); }
+  .upload-text strong { color: var(--slate); font-weight: 500; }
+  .upload-limit { font-size: 0.72rem; color: #b5b0a8; margin-top: 5px; }
+
+  .uploaded-file-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--slate-pale);
+    border: 1px solid var(--slate-light);
+    border-radius: 7px; padding: 8px 13px;
+    font-size: 0.81rem; color: var(--slate);
+  }
+
+  .uploaded-file-item a { color: var(--slate); text-decoration: none; font-weight: 400; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .uploaded-file-item a:hover { text-decoration: underline; }
+
+  /* ── Footer ── */
+  .form-footer {
+    background: linear-gradient(135deg, var(--slate) 0%, var(--slate-mid) 100%);
+    padding: 32px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-info {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.38);
+    line-height: 1.6;
+  }
+
+  .footer-info strong { color: rgba(255,255,255,0.65); font-weight: 500; }
+
+  .submit-btn {
+    background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+    color: white;
+    font-family: 'Mulish', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    padding: 14px 36px; border: none; border-radius: 11px;
+    cursor: pointer; letter-spacing: 0.07em; text-transform: uppercase;
+    transition: all 0.2s; white-space: nowrap;
+    box-shadow: 0 4px 18px rgba(139,38,53,0.35);
+  }
+
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(139,38,53,0.45); }
+  .submit-btn:active { transform: translateY(0); }
+
+  /* ── Success overlay ── */
+  #successOverlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(247,244,240,0.97);
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px;
+  }
+
+  .success-card {
+    background: white; border-radius: 22px; padding: 52px 44px;
+    box-shadow: 0 8px 60px rgba(44,62,85,0.12); max-width: 480px; width: 100%;
+  }
+
+  .success-icon {
+    width: 68px; height: 68px; background: var(--slate); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 22px; font-size: 1.8rem; color: white;
+  }
+
+  @media (max-width: 600px) {
+    .section { padding: 24px 20px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .span-2 { grid-column: span 1; }
+    .date-row { grid-template-columns: 1fr 1fr; }
+    .dr-field { grid-template-columns: 70px 1fr; }
+    .form-footer { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-container">
+      <img class="logo-img" src="/LogoVO.png" alt="Clinique vétérinaire"
+        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+      <div class="logo-fallback" id="logo-fallback">Clinique Vétérinaire</div>
+    </div>
+    <p class="header-eyebrow">Formulaire de référé</p>
+    <h1 class="header-title">Demande de prise en charge<br><em>d'un patient référé</em></h1>
+    <div class="sep">
+      <div class="sep-line"></div>
+      <div class="sep-dot"></div>
+      <div class="sep-line"></div>
+    </div>
+    <p class="header-sub">Merci de remplir ce formulaire pour initier la prise en charge de votre patient</p>
+
+    <div class="stepper" style="margin-top:32px;">
+      <div class="step active" id="step1"><div class="step-dot">1</div><div class="step-label">Référant</div></div>
+      <div class="step-line" id="line1"></div>
+      <div class="step" id="step2"><div class="step-dot">2</div><div class="step-label">Maîtres</div></div>
+      <div class="step-line" id="line2"></div>
+      <div class="step" id="step3"><div class="step-dot">3</div><div class="step-label">Animal</div></div>
+      <div class="step-line" id="line3"></div>
+      <div class="step" id="step4"><div class="step-dot">4</div><div class="step-label">Examen</div></div>
+      <div class="step-line" id="line4"></div>
+      <div class="step" id="step5"><div class="step-dot">5</div><div class="step-label">Urgence</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <!-- Section 1 : Vétérinaire référant -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <span class="section-title">Coordonnées du vétérinaire référant</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="field">
+          <label>Titre & Nom <span class="req">*</span></label>
+          <div class="dr-field">
+            <div class="select-wrap">
+              <select id="drTitle">
+                <option value="Dr.">Dr.</option>
+                <option value="Pr.">Pr.</option>
+                <option value="M.">M.</option>
+                <option value="Mme">Mme</option>
+              </select>
+            </div>
+            <input type="text" id="drName" placeholder="Nom du vétérinaire référant">
+          </div>
+        </div>
+        <div class="field">
+          <label>Clinique vétérinaire <span class="req">*</span></label>
+          <input type="text" placeholder="Nom de la clinique">
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 : Maîtres -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <span class="section-title">Coordonnées des maîtres</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div class="grid-2">
+
+        <div class="subsec span-2">Identité</div>
+
+        <div class="field">
+          <label>Prénom <span class="req">*</span></label>
+          <input type="text" placeholder="Prénom">
+        </div>
+        <div class="field">
+          <label>Nom <span class="req">*</span></label>
+          <input type="text" placeholder="Nom">
+        </div>
+
+        <div class="subsec span-2">Contact</div>
+
+        <div class="field">
+          <label>Téléphone <span class="req">*</span></label>
+          <input type="tel" placeholder="06 00 00 00 00">
+        </div>
+        <div class="field">
+          <label>Courriel <span class="req">*</span></label>
+          <input type="email" placeholder="email@exemple.fr">
+        </div>
+
+        <div class="subsec span-2">Adresse postale</div>
+
+        <div class="field span-2">
+          <label>Rue</label>
+          <input type="text" placeholder="Numéro et nom de rue">
+        </div>
+        <div class="field">
+          <label>Ville</label>
+          <input type="text" placeholder="Ville">
+        </div>
+        <div class="field">
+          <label>Code postal</label>
+          <input type="text" placeholder="Code postal" maxlength="10">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 3 : Animal -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <span class="section-title">Coordonnées de l'animal</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label>Prénom <span class="req">*</span></label>
+          <input type="text" placeholder="Prénom de l'animal">
+        </div>
+        <div class="field">
+          <label>Espèce / Race <span class="req">*</span></label>
+          <input type="text" placeholder="ex : Chien — Golden Retriever">
+        </div>
+        <div class="field">
+          <label>N° d'identification</label>
+          <input type="text" placeholder="Puce électronique / tatouage">
+        </div>
+        <div class="field">
+          <label>Poids (kg)</label>
+          <input type="number" placeholder="ex : 14.5" min="0.1" step="0.1">
+        </div>
+        <div class="field span-2">
+          <label>Date de naissance</label>
+          <div class="date-row">
+            <div class="select-wrap">
+              <select>
+                <option>Jour</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+                <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+                <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
+                <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
+                <option>31</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <select>
+                <option>Mois</option>
+                <option>Janvier</option><option>Février</option><option>Mars</option><option>Avril</option>
+                <option>Mai</option><option>Juin</option><option>Juillet</option><option>Août</option>
+                <option>Septembre</option><option>Octobre</option><option>Novembre</option><option>Décembre</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <select><option>Année</option>
+                <script>for(let y=2026;y>=1990;y--) document.write(`<option>${y}</option>`)</script>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4 : Informations cliniques + Examens + PEC -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <span class="section-title">Informations clés & Examens souhaités</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:22px;">
+
+        <!-- Anamnèse -->
+        <div class="field">
+          <label>Anamnèse / Hypothèses / Résultats d'examens / Traitements en cours <span class="req">*</span></label>
+          <textarea placeholder="Décrivez le contexte clinique, vos hypothèses diagnostiques, les résultats d'examens déjà réalisés et les traitements en cours..."></textarea>
+          <div class="info-note">
+            ℹ️ Plus ces informations sont complètes, meilleure sera la prise en charge de votre patient.
+          </div>
+        </div>
+
+        <!-- Type d'examen -->
+        <div class="field">
+          <label>Quel type d'examen est souhaité ? <span class="req">*</span></label>
+          <div class="choice-list" id="examList">
+
+            <label class="choice-item">
+              <input type="checkbox" class="exam-input" data-label="Scanner">
+              <span class="choice-box"></span>
+              <span class="choice-text">Scanner</span>
+            </label>
+
+            <label class="choice-item">
+              <input type="checkbox" class="exam-input" data-label="Endoscopie">
+              <span class="choice-box"></span>
+              <span class="choice-text">Endoscopie</span>
+            </label>
+
+            <label class="choice-item">
+              <input type="checkbox" class="exam-input" data-label="Échographie">
+              <span class="choice-box"></span>
+              <span class="choice-text">Échographie</span>
+            </label>
+
+            <label class="choice-item">
+              <input type="checkbox" class="exam-input" data-label="Prélèvements">
+              <span class="choice-box"></span>
+              <span class="choice-text">Prélèvements</span>
+            </label>
+
+            <label class="choice-item">
+              <input type="checkbox" class="exam-input" data-label="Prise en charge chirurgicale (devis possible sur demande par mail)">
+              <span class="choice-box"></span>
+              <span class="choice-text">
+                Prise en charge chirurgicale
+                <span class="choice-sub">Devis possible sur demande par mail</span>
+              </span>
+            </label>
+
+            <label class="choice-item">
+              <input type="checkbox" class="exam-input" data-label="Autres">
+              <span class="choice-box"></span>
+              <span class="choice-text">Autres</span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Type de PEC -->
+        <div class="field">
+          <label>Quel type de prise en charge est souhaitée ? <span class="req">*</span></label>
+          <div class="choice-list" id="pecList">
+
+            <label class="choice-item">
+              <input type="checkbox" class="pec-input" data-label="Prise en charge globale (examen, diagnostic, prise en charge notamment chirurgicale, soins, hospitalisation)">
+              <span class="choice-box"></span>
+              <span class="choice-text">
+                Prise en charge globale
+                <span class="choice-sub">Examen, diagnostic, prise en charge notamment chirurgicale, soins, hospitalisation</span>
+              </span>
+            </label>
+
+            <label class="choice-item">
+              <input type="checkbox" class="pec-input" data-label="Examen complémentaire seul : suivi par vos soins">
+              <span class="choice-box"></span>
+              <span class="choice-text">
+                Examen complémentaire seul
+                <span class="choice-sub">Suivi par vos soins</span>
+              </span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Upload -->
+        <div class="field">
+          <label>Documents complémentaires</label>
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+            </div>
+            <div class="upload-text"><strong>Cliquez pour ajouter des fichiers</strong></div>
+            <div class="upload-limit">PDF, JPG, PNG — max 100 MB par fichier</div>
+          </div>
+          <div id="uploadedFiles" style="margin-top:10px; display:flex; flex-direction:column; gap:7px;"></div>
+          <div id="uploadStatus" style="display:none; margin-top:6px; font-size:0.79rem; color:var(--slate); font-weight:400;"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 5 : Urgence -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <span class="section-title">Degré d'urgence</span>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+
+      <div class="urgence-list" id="urgenceList">
+
+        <label class="urgence-item u-abs">
+          <input type="radio" name="urgence" value="absolue" data-label="Absolue : doit être reçu dans la journée">
+          <span class="urgence-radio"></span>
+          <span class="urgence-content">
+            <span class="urgence-title">Absolue</span>
+            <span class="urgence-desc">Doit être reçu dans la journée</span>
+          </span>
+          <span class="urgence-pill pill-red">Urgent</span>
+        </label>
+
+        <label class="urgence-item">
+          <input type="radio" name="urgence" value="relative" data-label="Relative : doit être reçu dans les 48 heures idéalement">
+          <span class="urgence-radio"></span>
+          <span class="urgence-content">
+            <span class="urgence-title">Relative</span>
+            <span class="urgence-desc">Doit être reçu dans les 48 heures idéalement</span>
+          </span>
+          <span class="urgence-pill pill-orange">48 h</span>
+        </label>
+
+        <label class="urgence-item">
+          <input type="radio" name="urgence" value="non-urgent" data-label="Absence d'urgence">
+          <span class="urgence-radio"></span>
+          <span class="urgence-content">
+            <span class="urgence-title">Absence d'urgence</span>
+            <span class="urgence-desc">Prise en charge sous un délai raisonnable</span>
+          </span>
+          <span class="urgence-pill pill-green">Planifié</span>
+        </label>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="form-footer">
+      <div class="footer-info">
+        <strong>Formulaire de référé</strong><br>
+        Votre demande sera traitée dans les meilleurs délais.
+      </div>
+      <button class="submit-btn" id="submitBtn">Envoyer le référé →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Overlay succès -->
+<div id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">✓</div>
+    <h2 style="font-family:'Libre Baskerville',serif; font-size:1.65rem; color:var(--slate); margin-bottom:12px;">
+      Référé envoyé avec succès !
+    </h2>
+    <p style="color:var(--grey-text); font-size:0.91rem; line-height:1.6; font-weight:300;">
+      Votre demande a bien été transmise.<br>
+      Vous recevrez une confirmation par email.
+    </p>
+    <div id="urgenceAbsMsg" style="display:none; margin:18px 0; padding:12px 20px;
+      background:var(--burgundy-pale); border-radius:9px; border-left:3px solid var(--burgundy);
+      font-size:0.83rem; color:var(--burgundy); font-weight:400;">
+      🚨 Urgence absolue — notre équipe est alertée immédiatement
+    </div>
+    <button onclick="resetForm()" style="
+      margin-top:24px; background:var(--slate); color:white;
+      border:none; border-radius:10px; padding:12px 28px;
+      font-family:'Mulish',sans-serif; font-size:0.9rem;
+      font-weight:500; cursor:pointer; letter-spacing:0.04em;">
+      Nouveau référé
+    </button>
+  </div>
+</div>
+
+<script>
+  const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
+  let uploadedFileUrls = [];
+
+  /* ── Uploadcare ── */
+  function initUploadcare() {
+    if (typeof uploadcare === 'undefined') return;
+    document.getElementById('uploadZone').addEventListener('click', () => {
+      const dialog = uploadcare.openDialog(null, {
+        multiple: true, imagesOnly: false, publicKey: 'ac78eea68d9ec156e585'
+      });
+      dialog.done(fileGroup => {
+        fileGroup.files().forEach(file => {
+          file.done(info => {
+            const { cdnUrl: url, name } = info;
+            const ext = (name.split('.').pop() || '').toLowerCase();
+            const icon = ext === 'pdf' ? '📄' : ['jpg','jpeg','png'].includes(ext) ? '🖼️' : '📎';
+            uploadedFileUrls.push({ name, url });
+            const item = document.createElement('div');
+            item.className = 'uploaded-file-item';
+            item.innerHTML = `<span>${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
+            document.getElementById('uploadedFiles').appendChild(item);
+            const s = document.getElementById('uploadStatus');
+            s.style.display = 'block';
+            s.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
+          });
+        });
+      });
+    });
+  }
+
+  /* ── Stepper ── */
+  function updateStepper() {
+    const sections = document.querySelectorAll('.section');
+    const steps = ['step1','step2','step3','step4','step5'].map(id => document.getElementById(id));
+    const lines = ['line1','line2','line3','line4'].map(id => document.getElementById(id));
+    sections.forEach((sec, i) => {
+      if (sec.getBoundingClientRect().top < window.innerHeight * 0.5 && steps[i]) {
+        steps.forEach((s, j) => {
+          if (!s) return;
+          if (j < i)       { s.classList.add('done'); s.classList.remove('active'); s.querySelector('.step-dot').textContent = '✓'; }
+          else if (j === i){ s.classList.add('active'); s.classList.remove('done'); }
+          else             { s.classList.remove('active', 'done'); }
+        });
+        lines.forEach((l, j) => { if (l) l.classList.toggle('done', j < i); });
+      }
+    });
+  }
+
+  /* ── Submit ── */
+  async function submitForm() {
+    const btn = document.getElementById('submitBtn');
+    const errors = [];
+
+    // Reset styles
+    document.querySelectorAll('input:not([type=checkbox]):not([type=radio]), select:not(#drTitle), textarea').forEach(el => {
+      el.style.border = ''; el.style.background = '';
+    });
+    ['examList','pecList','urgenceList'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.style.outline = ''; }
+    });
+
+    function markError(el) {
+      el.style.border = '1.5px solid #8b2635';
+      el.style.background = '#fdf0f1';
+      errors.push(el);
+    }
+
+    function markListError(id) {
+      const el = document.getElementById(id);
+      el.style.outline = '2px solid #8b2635';
+      el.style.borderRadius = '9px';
+      errors.push(el);
+    }
+
+    // Vétérinaire
+    const drName = document.getElementById('drName');
+    if (!drName.value.trim()) markError(drName);
+
+    const clinique = document.querySelector('input[placeholder="Nom de la clinique"]');
+    if (!clinique.value.trim()) markError(clinique);
+
+    // Maîtres
+    ['Prénom','Nom'].forEach(ph => {
+      const el = document.querySelector(`input[placeholder="${ph}"]`);
+      if (el && !el.value.trim()) markError(el);
+    });
+
+    const tel = document.querySelector('input[type="tel"]');
+    if (!tel.value.trim()) markError(tel);
+
+    const email = document.querySelector('input[type="email"]');
+    if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email);
+
+    // Animal
+    const prenomAnimal = document.querySelector('input[placeholder="Prénom de l\'animal"]');
+    if (!prenomAnimal.value.trim()) markError(prenomAnimal);
+
+    const especeRace = document.querySelector('input[placeholder="ex : Chien — Golden Retriever"]');
+    if (!especeRace.value.trim()) markError(especeRace);
+
+    // Anamnèse
+    const anam = document.querySelector('textarea');
+    if (anam && !anam.value.trim()) markError(anam);
+
+    // Examen
+    if (!document.querySelector('.exam-input:checked')) markListError('examList');
+
+    // PEC
+    if (!document.querySelector('.pec-input:checked')) markListError('pecList');
+
+    // Urgence
+    if (!document.querySelector('input[name="urgence"]:checked')) markListError('urgenceList');
+
+    if (errors.length > 0) {
+      const firstEl = errors.find(e => e);
+      if (firstEl) firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      btn.textContent = `✗ ${errors.length} champ${errors.length > 1 ? 's' : ''} requis`;
+      btn.style.background = '#8b2635';
+      setTimeout(() => { btn.textContent = 'Envoyer le référé →'; btn.style.background = ''; }, 2500);
+      return;
+    }
+
+    // Collecte données
+    const data = {};
+
+    // Vétérinaire : titre + nom
+    const titre = document.getElementById('drTitle').value;
+    data['Vétérinaire référant'] = `${titre} ${drName.value.trim()}`;
+    data['Clinique'] = clinique.value.trim();
+
+    // Tous les autres champs texte
+    document.querySelectorAll('input:not([type=checkbox]):not([type=radio]):not(#drName), select:not(#drTitle), textarea').forEach(el => {
+      const label = el.closest('.field')?.querySelector('label')?.textContent?.replace('*','').trim() || el.name || '';
+      if (el.value && !['Jour','Mois','Année'].includes(el.value) && label) {
+        data[label] = el.value;
+      }
+    });
+
+    // Examens
+    const examens = [...document.querySelectorAll('.exam-input:checked')].map(cb => cb.dataset.label);
+    if (examens.length) data['Type d\'examen souhaité'] = examens.join('\n');
+
+    // PEC
+    const pecs = [...document.querySelectorAll('.pec-input:checked')].map(cb => cb.dataset.label);
+    if (pecs.length) data['Type de prise en charge'] = pecs.join('\n');
+
+    // Urgence
+    const urgence = document.querySelector('input[name="urgence"]:checked');
+    if (urgence) data['Degré d\'urgence'] = urgence.dataset.label;
+
+    // Fichiers
+    if (uploadedFileUrls.length) {
+      data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
+    }
+
+    btn.textContent = 'Envoi en cours...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Nouveau référé — ${prenomAnimal.value.trim()} (${urgence?.value || ''})`,
+          ...data
+        })
+      });
+      const result = await res.json();
+      if (result.success) {
+        document.getElementById('successOverlay').style.display = 'flex';
+        if (urgence?.value === 'absolue') {
+          document.getElementById('urgenceAbsMsg').style.display = 'block';
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else throw new Error('Erreur serveur');
+    } catch (e) {
+      btn.textContent = '✗ Erreur — réessayez';
+      btn.style.background = '#8b2635';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Envoyer le référé →'; btn.style.background = ''; }, 4000);
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('successOverlay').style.display = 'none';
+    document.getElementById('urgenceAbsMsg').style.display = 'none';
+    document.querySelectorAll('input:not([type=checkbox]):not([type=radio]), textarea').forEach(el => el.value = '');
+    document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+    document.querySelectorAll('input[type=checkbox], input[type=radio]').forEach(el => el.checked = false);
+    uploadedFileUrls = [];
+    document.getElementById('uploadedFiles').innerHTML = '';
+    document.getElementById('uploadStatus').style.display = 'none';
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Envoyer le référé →';
+    btn.style.background = ''; btn.style.opacity = '1'; btn.disabled = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('submitBtn').addEventListener('click', submitForm);
+    window.addEventListener('scroll', updateStepper);
+  });
+</script>
+
+<script>
+  window.UPLOADCARE_PUBLIC_KEY = 'ac78eea68d9ec156e585';
+  window.UPLOADCARE_LOCALE = 'fr';
+</script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" onload="initUploadcare()"></script>
+
+</body>
+</html>
