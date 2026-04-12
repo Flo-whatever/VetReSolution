@@ -474,63 +474,6 @@
   .badge-orange { background: rgba(230,126,34,0.12); color: #e67e22; }
   .badge-green { background: rgba(74,103,65,0.12); color: var(--sage); }
 
-  /* ── DICOM Checker ── */
-  .dicom-checker {
-    background: linear-gradient(135deg, var(--navy) 0%, #2a3d2a 100%);
-    border-radius: 14px;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .dicom-status {
-    width: 46px; height: 46px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; position: relative;
-  }
-
-  .dicom-status .pulse {
-    position: absolute; inset: -4px; border-radius: 50%;
-    border: 2px solid var(--sage-light);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 0; transform: scale(1.3); }
-  }
-
-  .dicom-status svg { width: 20px; height: 20px; fill: var(--sand); }
-
-  .dicom-info { flex: 1; }
-
-  .dicom-label {
-    font-size: 0.68rem; color: rgba(255,255,255,0.4);
-    text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500;
-  }
-
-  .dicom-state {
-    font-size: 0.9rem; color: white; font-weight: 300; margin-top: 3px;
-  }
-
-  .dicom-state.waiting { color: rgba(255,255,255,0.35); font-style: italic; }
-  .dicom-state.received { color: #6ee7a0; }
-  .dicom-state.pending { color: #fcd34d; }
-
-  .dicom-check-btn {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.18);
-    color: white; font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem; font-weight: 300;
-    padding: 8px 16px; border-radius: 8px;
-    cursor: pointer; transition: all 0.2s;
-  }
-
-  .dicom-check-btn:hover { background: rgba(74,103,65,0.4); border-color: var(--sage-light); }
-
   /* ── Info note ── */
   .info-note {
     display: flex; gap: 10px;
@@ -855,39 +798,6 @@
 
           </div>
         </div>
-
-        <!-- DICOM Checker -->
-        <div class="field">
-          <label>Vérification de réception des images DICOM</label>
-          <div class="dicom-checker">
-            <div class="dicom-status">
-              <div class="pulse"></div>
-              <svg viewBox="0 0 24 24"><path d="M19.59 7L12 14.59 8.41 11 7 12.41l5 5 9-9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-            </div>
-            <div class="dicom-info">
-              <div class="dicom-label">Serveur DICOM — Orthanc</div>
-              <div class="dicom-state waiting" id="dicomState">En attente de vérification...</div>
-              <div id="dicomDetail" style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-top:3px;"></div>
-            </div>
-            <button class="dicom-check-btn" id="dicomBtn">Vérifier</button>
-          </div>
-        </div>
-
-        <!-- Upload -->
-        <div class="field">
-          <label>Documents complémentaires</label>
-          <div class="upload-zone" id="uploadZone">
-            <div class="upload-icon">
-              <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
-            </div>
-            <div class="upload-text"><strong>Cliquez pour ajouter des fichiers</strong></div>
-            <div class="upload-limit">PDF, JPG, PNG — max 100 MB par fichier</div>
-          </div>
-          <div id="uploadedFiles" style="margin-top:10px; display:flex; flex-direction:column; gap:8px;"></div>
-          <div id="uploadStatus" style="display:none; margin-top:6px; font-size:0.8rem; color:var(--sage); font-weight:400;"></div>
-        </div>
-
-      </div>
     </div>
 
     <!-- Section 5 : Urgence + Commentaires -->
@@ -1016,59 +926,6 @@
     });
   }
 
-  /* ── DICOM ── */
-  async function checkDicom() {
-    const state   = document.getElementById('dicomState');
-    const detail  = document.getElementById('dicomDetail');
-    const prenomEl = document.querySelector('input[placeholder="Prénom de l\'animal"]');
-    const prenom  = prenomEl ? prenomEl.value.trim() : '';
-
-    if (!prenom) {
-      state.className = 'dicom-state pending';
-      state.textContent = '⚠️ Renseignez d\'abord le prénom de l\'animal';
-      detail.textContent = '';
-      return;
-    }
-
-    state.className = 'dicom-state pending';
-    state.textContent = `Recherche de "${prenom}"…`;
-    detail.textContent = '';
-
-    try {
-      const res = await fetch(`${ORTHANC_URL}/tools/find`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ Level: 'Patient', Query: { PatientName: `*${prenom.toUpperCase()}*` }, Expand: true })
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const patients = await res.json();
-
-      if (!patients.length) {
-        state.className = 'dicom-state pending';
-        state.textContent = `⏳ "${prenom}" non trouvé sur le serveur DICOM`;
-        detail.textContent = 'Les images ne sont peut-être pas encore arrivées.';
-      } else {
-        let imgs = 0, series = 0, date = '';
-        patients.forEach(p => {
-          imgs   += parseInt(p.MainDicomTags?.NumberOfPatientRelatedInstances || 0);
-          series += parseInt(p.MainDicomTags?.NumberOfPatientRelatedSeries || 0);
-          if (p.LastUpdate) date = p.LastUpdate.substring(0, 10);
-        });
-        state.className = 'dicom-state received';
-        state.textContent = `✓ "${prenom}" présent sur le serveur DICOM`;
-        detail.textContent = [
-          imgs   ? `${imgs} image${imgs > 1 ? 's' : ''}` : '',
-          series ? `${series} série${series > 1 ? 's' : ''}` : '',
-          date   ? `mise à jour : ${date}` : ''
-        ].filter(Boolean).join(' · ');
-      }
-    } catch (err) {
-      state.className = 'dicom-state pending';
-      state.textContent = err.name === 'TypeError' ? '🔴 Serveur DICOM inaccessible' : `🔴 Erreur : ${err.message}`;
-      detail.textContent = err.name === 'TypeError' ? 'Vérifiez la connexion réseau.' : '';
-    }
-  }
-
   /* ── Stepper ── */
   function updateStepper() {
     const sections = document.querySelectorAll('.section');
@@ -1163,8 +1020,6 @@
 
     const urgence = document.querySelector('input[name="urgence"]:checked');
     if (urgence) data['Niveau d\'urgence'] = urgence.dataset.label;
-
-    data['Statut DICOM'] = document.getElementById('dicomState').textContent.trim();
     if (uploadedFileUrls.length) data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
 
     const prenomAnimal = document.querySelector('input[placeholder="Prénom de l\'animal"]')?.value || 'Animal';
@@ -1207,9 +1062,6 @@
     uploadedFileUrls = [];
     document.getElementById('uploadedFiles').innerHTML = '';
     document.getElementById('uploadStatus').style.display = 'none';
-    document.getElementById('dicomState').className = 'dicom-state waiting';
-    document.getElementById('dicomState').textContent = 'En attente de vérification...';
-    document.getElementById('dicomDetail').textContent = '';
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Envoyer le référé →';
     btn.style.background = ''; btn.style.opacity = '1'; btn.disabled = false;
@@ -1218,7 +1070,6 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('submitBtn').addEventListener('click', submitForm);
-    document.getElementById('dicomBtn').addEventListener('click', checkDicom);
     window.addEventListener('scroll', updateStepper);
   });
 </script>
