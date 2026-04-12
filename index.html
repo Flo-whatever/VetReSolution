@@ -45,629 +45,153 @@
     z-index: 0;
   }
 
-  .page-wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
-    margin: 0 auto;
-  }
-
-  .header {
-    text-align: center;
-    margin-bottom: 36px;
-  }
+  .page-wrapper { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 36px; }
 
   .logo-container {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff;
-    border: 1px solid var(--grey-mid);
-    border-radius: 18px;
-    padding: 18px 42px;
-    margin-bottom: 28px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #ffffff; border: 1px solid var(--grey-mid); border-radius: 18px;
+    padding: 18px 42px; margin-bottom: 28px; box-shadow: 0 2px 16px rgba(0,0,0,0.07);
   }
 
-  .logo-img {
-    height: 83px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
+  .logo-img { height: 83px; width: auto; object-fit: contain; display: block; }
 
   .logo-img-fallback {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: 0.12em;
-    line-height: 1;
-    display: none;
+    font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 600;
+    color: var(--navy); letter-spacing: 0.12em; line-height: 1; display: none;
   }
-
   .logo-img-fallback span { color: var(--teal); }
 
   .header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.84rem;
-    color: var(--navy);
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    font-family: 'Playfair Display', serif; font-size: 1.84rem;
+    color: var(--navy); font-weight: 400; letter-spacing: 0.02em;
   }
+  .header-sub { color: var(--grey-text); font-size: 1.01rem; margin-top: 8px; font-weight: 300; }
+  .sep { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--teal), transparent); margin: 16px auto; }
 
-  .header-sub {
-    color: var(--grey-text);
-    font-size: 1.01rem;
-    margin-top: 8px;
-    font-weight: 300;
-  }
-
-  .sep {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--teal), transparent);
-    margin: 16px auto;
-  }
-
-  .card {
-    background: var(--white);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 0 0 1px var(--grey-mid);
-  }
-
-  .section {
-    padding: 32px 40px;
-    border-bottom: 1px solid var(--grey-mid);
-  }
-
+  .card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 0 0 1px var(--grey-mid); }
+  .section { padding: 32px 40px; border-bottom: 1px solid var(--grey-mid); }
   .section:last-of-type { border-bottom: none; }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .section-icon {
-    width: 36px;
-    height: 36px;
-    background: #1a7a8a;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .section-icon svg {
-    width: 18px;
-    height: 18px;
-    fill: white;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: var(--navy);
-    font-weight: 600;
-  }
-
-  .section-badge {
-    margin-left: auto;
-    font-size: 0.72rem;
-    background: var(--teal-pale);
-    color: var(--teal);
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .section-icon { width: 36px; height: 36px; background: #1a7a8a; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-icon svg { width: 18px; height: 18px; fill: white; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); font-weight: 600; }
+  .section-badge { margin-left: auto; font-size: 0.72rem; background: var(--teal-pale); color: var(--teal); padding: 3px 10px; border-radius: 20px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
   .span-2 { grid-column: span 2; }
-
   .field { display: flex; flex-direction: column; gap: 6px; }
 
-  .field label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--grey-text);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
+  .field label { font-size: 0.78rem; font-weight: 600; color: var(--grey-text); text-transform: uppercase; letter-spacing: 0.08em; }
+  .field label .req { color: var(--teal); margin-left: 2px; }
 
-  .field label .req {
-    color: var(--teal);
-    margin-left: 2px;
+  .field input, .field select, .field textarea {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.92rem;
+    color: var(--text); background: var(--grey-light); border: 1.5px solid var(--grey-mid);
+    border-radius: 10px; padding: 11px 14px; transition: all 0.2s ease;
+    outline: none; width: 100%; appearance: none; -webkit-appearance: none;
   }
-
-  .field input,
-  .field select,
-  .field textarea {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: 0.92rem;
-    color: var(--text);
-    background: var(--grey-light);
-    border: 1.5px solid var(--grey-mid);
-    border-radius: 10px;
-    padding: 11px 14px;
-    transition: all 0.2s ease;
-    outline: none;
-    width: 100%;
-    appearance: none;
-    -webkit-appearance: none;
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--teal-light); background: var(--white); box-shadow: 0 0 0 3px rgba(26,160,181,0.12);
   }
-
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    border-color: var(--teal-light);
-    background: var(--white);
-    box-shadow: 0 0 0 3px rgba(26,160,181,0.12);
-  }
-
-  .field input::placeholder,
-  .field textarea::placeholder {
-    color: #b0bec5;
-  }
-
-  .field textarea {
-    resize: vertical;
-    min-height: 90px;
-    line-height: 1.5;
-  }
+  .field input::placeholder, .field textarea::placeholder { color: #b0bec5; }
+  .field textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 
   .select-wrap { position: relative; }
-  .select-wrap::after {
-    content: '▾';
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--teal);
-    pointer-events: none;
-    font-size: 0.85rem;
-  }
+  .select-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--teal); pointer-events: none; font-size: 0.85rem; }
   .select-wrap select { padding-right: 36px; cursor: pointer; }
 
   .date-row { display: grid; grid-template-columns: 2fr 3fr 2fr; gap: 10px; }
-
   .toggle-group { display: flex; gap: 10px; }
 
   .toggle-btn {
-    flex: 1;
-    padding: 11px;
-    border: 1.5px solid var(--grey-mid);
-    border-radius: 10px;
-    background: var(--grey-light);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: 0.92rem;
-    color: var(--grey-text);
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
+    flex: 1; padding: 11px; border: 1.5px solid var(--grey-mid); border-radius: 10px;
+    background: var(--grey-light); font-family: 'DM Sans', sans-serif; font-weight: 300;
+    font-size: 0.92rem; color: var(--grey-text); cursor: pointer; transition: all 0.2s; text-align: center;
   }
-
   .toggle-btn:hover { border-color: var(--teal-light); color: var(--teal); }
   .toggle-btn.active-yes { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); font-weight: 500; }
   .toggle-btn.active-no { background: #fef3f2; border-color: #e74c3c; color: #e74c3c; font-weight: 500; }
 
-  .upload-zone-uc {
-    border: 2px dashed var(--grey-mid);
-    border-radius: 12px;
-    padding: 28px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--grey-light);
-    position: relative;
-  }
-
-  .upload-zone-uc:hover {
-    border-color: var(--teal-light);
-    background: var(--teal-pale);
-  }
-
+  .upload-zone-uc { border: 2px dashed var(--grey-mid); border-radius: 12px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--grey-light); }
+  .upload-zone-uc:hover { border-color: var(--teal-light); background: var(--teal-pale); }
   .uploadcare-widget { display: none !important; }
   .uploadcare-widget-button { display: none !important; }
 
-  .uploaded-file-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--teal-pale);
-    border: 1px solid var(--teal-light);
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 0.84rem;
-    color: var(--teal);
-  }
-
-  .uploaded-file-item a {
-    color: var(--teal);
-    text-decoration: none;
-    font-weight: 400;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
+  .uploaded-file-item { display: flex; align-items: center; gap: 10px; background: var(--teal-pale); border: 1px solid var(--teal-light); border-radius: 8px; padding: 8px 14px; font-size: 0.84rem; color: var(--teal); }
+  .uploaded-file-item a { color: var(--teal); text-decoration: none; font-weight: 400; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .uploaded-file-item a:hover { text-decoration: underline; }
   .uploaded-file-icon { font-size: 1.1rem; flex-shrink: 0; }
 
-  .upload-icon {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, var(--navy), var(--teal));
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-  }
-
+  .upload-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--navy), var(--teal)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
   .upload-icon svg { width: 22px; height: 22px; fill: white; }
-
-  .upload-text {
-    font-size: 0.88rem;
-    color: var(--grey-text);
-    line-height: 1.5;
-  }
-
+  .upload-text { font-size: 0.88rem; color: var(--grey-text); line-height: 1.5; }
   .upload-text strong { color: var(--teal); font-weight: 500; }
   .upload-limit { font-size: 0.75rem; color: #b0bec5; margin-top: 6px; }
 
-  .dicom-checker {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    border-radius: 14px;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 4px;
-  }
-
-  .dicom-status {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-  }
-
-  .dicom-status .pulse {
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 2px solid var(--teal-light);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 0; transform: scale(1.3); }
-  }
-
+  .dicom-checker { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+  .dicom-status { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+  .dicom-status .pulse { position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--teal-light); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 0; transform: scale(1.3); } }
   .dicom-status svg { width: 22px; height: 22px; fill: var(--gold); }
-
   .dicom-info { flex: 1; }
-
-  .dicom-label {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.45);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-  }
-
-  .dicom-state {
-    font-size: 0.95rem;
-    color: var(--white);
-    font-weight: 300;
-    margin-top: 3px;
-  }
-
+  .dicom-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+  .dicom-state { font-size: 0.95rem; color: var(--white); font-weight: 300; margin-top: 3px; }
   .dicom-state.waiting { color: rgba(255,255,255,0.4); font-style: italic; }
   .dicom-state.received { color: #4ade80; }
   .dicom-state.pending { color: var(--gold-light); }
+  .dicom-check-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 300; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+  .dicom-check-btn:hover { background: rgba(26,160,181,0.3); border-color: var(--teal-light); }
 
-  .dicom-check-btn {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 300;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.03em;
-  }
+  .urgency-note { font-size: 0.76rem; color: var(--grey-text); margin-top: 6px; font-style: italic; }
 
-  .dicom-check-btn:hover {
-    background: rgba(26,160,181,0.3);
-    border-color: var(--teal-light);
-  }
-
-  .urgency-note {
-    font-size: 0.76rem;
-    color: var(--grey-text);
-    margin-top: 6px;
-    font-style: italic;
-  }
-
-  .form-footer {
-    background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
-    padding: 32px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  .footer-info {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.5;
-  }
-
+  .form-footer { background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%); padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .footer-info { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
   .footer-info strong { color: rgba(255,255,255,0.7); font-weight: 500; }
-
-  .submit-btn {
-    background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%);
-    color: var(--navy);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 14px 36px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(201,168,76,0.35);
-  }
-
-  .submit-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 30px rgba(201,168,76,0.5);
-  }
-
+  .submit-btn { background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; padding: 14px 36px; border: none; border-radius: 12px; cursor: pointer; letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.2s; white-space: nowrap; box-shadow: 0 4px 20px rgba(201,168,76,0.35); }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(201,168,76,0.5); }
   .submit-btn:active { transform: translateY(0); }
 
-  .info-note {
-    display: flex;
-    gap: 10px;
-    background: var(--teal-pale);
-    border-left: 3px solid var(--teal);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 0.82rem;
-    color: var(--teal);
-    margin-top: 16px;
-    line-height: 1.5;
-  }
+  .info-note { display: flex; gap: 10px; background: var(--teal-pale); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 0.82rem; color: var(--teal); margin-top: 16px; line-height: 1.5; }
 
-  /* ── CHECKBOX REGIONS ── */
-  .region-field-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--grey-text);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-    display: block;
-  }
-
+  .region-field-label { font-size: 0.78rem; font-weight: 600; color: var(--grey-text); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: block; }
   .region-field-label .req { color: var(--teal); margin-left: 2px; }
 
-  .checkbox-region {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 11px 16px;
-    border: 1.5px solid var(--grey-mid);
-    border-radius: 10px;
-    background: var(--grey-light);
-    cursor: pointer;
-    transition: all 0.18s ease;
-    user-select: none;
-    line-height: 1.45;
-  }
-
-  .checkbox-region:hover {
-    border-color: var(--teal-light);
-    background: var(--teal-pale);
-  }
-
-  .checkbox-region input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .cb-box {
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    border: 2px solid var(--grey-mid);
-    border-radius: 5px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.18s ease;
-    position: relative;
-  }
-
-  .checkbox-region input:checked ~ .cb-box {
-    background: var(--navy);
-    border-color: var(--navy);
-  }
-
-  .checkbox-region input:checked ~ .cb-box::after {
-    content: '';
-    display: block;
-    width: 5px;
-    height: 9px;
-    border: 2px solid white;
-    border-top: none;
-    border-left: none;
-    transform: rotate(45deg) translate(-1px, -1px);
-  }
-
-  .checkbox-region input:checked ~ .cb-text {
-    color: var(--navy);
-    font-weight: 400;
-  }
-
-  .checkbox-region:has(input:checked) {
-    border-color: var(--navy);
-    background: #eef2f7;
-  }
-
+  .checkbox-region { display: flex; align-items: flex-start; gap: 12px; padding: 11px 16px; border: 1.5px solid var(--grey-mid); border-radius: 10px; background: var(--grey-light); cursor: pointer; transition: all 0.18s ease; user-select: none; line-height: 1.45; }
+  .checkbox-region:hover { border-color: var(--teal-light); background: var(--teal-pale); }
+  .checkbox-region input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .cb-box { flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; border: 2px solid var(--grey-mid); border-radius: 5px; background: white; display: flex; align-items: center; justify-content: center; transition: all 0.18s ease; position: relative; }
+  .checkbox-region input:checked ~ .cb-box { background: var(--navy); border-color: var(--navy); }
+  .checkbox-region input:checked ~ .cb-box::after { content: ''; display: block; width: 5px; height: 9px; border: 2px solid white; border-top: none; border-left: none; transform: rotate(45deg) translate(-1px, -1px); }
+  .checkbox-region input:checked ~ .cb-text { color: var(--navy); font-weight: 400; }
+  .checkbox-region:has(input:checked) { border-color: var(--navy); background: #eef2f7; }
   .checkbox-region.is-supplement .cb-box { border-color: var(--teal); }
   .checkbox-region.is-supplement:has(input:checked) { border-color: var(--teal); background: var(--teal-pale); }
   .checkbox-region.is-supplement input:checked ~ .cb-box { background: var(--teal); border-color: var(--teal); }
   .checkbox-region.is-supplement input:checked ~ .cb-text { color: var(--teal); }
+  .cb-text { font-size: 0.88rem; color: var(--text); font-weight: 300; flex: 1; transition: color 0.18s; }
 
-  .cb-text {
-    font-size: 0.88rem;
-    color: var(--text);
-    font-weight: 300;
-    flex: 1;
-    transition: color 0.18s;
-  }
-
-  .region-summary {
-    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 14px;
-  }
-
+  .region-summary { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; margin-top: 14px; }
   .region-summary-icon { font-size: 1.4rem; }
+  .region-summary-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+  .region-summary-value { font-size: 0.88rem; color: var(--white); font-weight: 300; margin-top: 2px; }
+  .region-count-badge { margin-left: auto; background: var(--gold); color: var(--navy); font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
 
-  .region-summary-label {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.4);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-  }
-
-  .region-summary-value {
-    font-size: 0.88rem;
-    color: var(--white);
-    font-weight: 300;
-    margin-top: 2px;
-  }
-
-  .region-count-badge {
-    margin-left: auto;
-    background: var(--gold);
-    color: var(--navy);
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 5px 14px;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-
-  .antecedent-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .antecedent-tag {
-    padding: 6px 12px;
-    border: 1.5px solid var(--grey-mid);
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: var(--grey-text);
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--grey-light);
-    font-weight: 300;
-  }
-  .antecedent-tag:hover { border-color: var(--teal-light); color: var(--teal); }
-  .antecedent-tag.selected { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); }
-
-  .stepper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    margin-bottom: 28px;
-  }
-
-  .step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    position: relative;
-  }
-
-  .step-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--grey-mid);
-    border: 2px solid var(--grey-mid);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--grey-text);
-    transition: all 0.3s;
-    z-index: 1;
-  }
-
+  .stepper { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 28px; }
+  .step { display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; }
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--grey-mid); border: 2px solid var(--grey-mid); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 500; color: var(--grey-text); transition: all 0.3s; z-index: 1; }
   .step.active .step-dot { background: var(--teal); border-color: var(--teal); color: white; }
   .step.done .step-dot { background: var(--teal); border-color: var(--teal); color: white; }
-
-  .step-label {
-    font-size: 0.65rem;
-    color: var(--grey-text);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    font-weight: 300;
-  }
-
+  .step-label { font-size: 0.65rem; color: var(--grey-text); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; font-weight: 300; }
   .step.active .step-label { color: var(--teal); font-weight: 500; }
   .step.done .step-label { color: var(--teal); }
-
-  .step-line {
-    width: 40px;
-    height: 2px;
-    background: var(--grey-mid);
-    margin-bottom: 20px;
-  }
-
+  .step-line { width: 40px; height: 2px; background: var(--grey-mid); margin-bottom: 20px; }
   .step-line.done { background: var(--teal); }
 
   @media (max-width: 600px) {
     .section { padding: 24px 20px; }
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
     .span-2 { grid-column: span 1; }
     .date-row { grid-template-columns: 1fr 1fr; }
     .form-footer { flex-direction: column; align-items: stretch; }
@@ -678,8 +202,6 @@
 <body>
 
 <div class="page-wrapper">
-
-  <!-- Header -->
   <div class="header">
     <div class="logo-container">
       <img class="logo-img" src="/VetResolution.png" alt="VetResolution"
@@ -708,9 +230,7 @@
     <!-- Section 1 -->
     <div class="section">
       <div class="section-header">
-        <div class="section-icon">
-          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-        </div>
+        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
         <span class="section-title">Clinique & Vétérinaire référent</span>
         <span class="section-badge">Obligatoire</span>
       </div>
@@ -733,9 +253,7 @@
     <!-- Section 2 -->
     <div class="section">
       <div class="section-header">
-        <div class="section-icon">
-          <svg viewBox="0 0 24 24"><path d="M4.5 9.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm6-1a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm5.5 1a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm-9 4c-.83 0-2 .67-2 2 0 2 1.5 4.5 4 4.5S13 17.5 13 17c0-.83-.67-2-1.5-2H7zm5.5 0c-.83 0-1.5 1.17-1.5 2 0 .5 1.5 3 4 3s4-2.5 4-4.5c0-1.33-1.17-2-2-2h-4.5z"/></svg>
-        </div>
+        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M4.5 9.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm6-1a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm5.5 1a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm-9 4c-.83 0-2 .67-2 2 0 2 1.5 4.5 4 4.5S13 17.5 13 17c0-.83-.67-2-1.5-2H7zm5.5 0c-.83 0-1.5 1.17-1.5 2 0 .5 1.5 3 4 3s4-2.5 4-4.5c0-1.33-1.17-2-2-2h-4.5z"/></svg></div>
         <span class="section-title">Identification du patient</span>
         <span class="section-badge">Obligatoire</span>
       </div>
@@ -757,12 +275,8 @@
           <div class="select-wrap">
             <select>
               <option value="">Sélectionner...</option>
-              <option>Chien</option>
-              <option>Chat</option>
-              <option>Lapin</option>
-              <option>Furet</option>
-              <option>NAC</option>
-              <option>Autre</option>
+              <option>Chien</option><option>Chat</option><option>Lapin</option>
+              <option>Furet</option><option>NAC</option><option>Autre</option>
             </select>
           </div>
         </div>
@@ -803,8 +317,7 @@
           <div class="select-wrap">
             <select>
               <option value="">Sélectionner...</option>
-              <option>Mâle</option>
-              <option>Femelle</option>
+              <option>Mâle</option><option>Femelle</option>
             </select>
           </div>
         </div>
@@ -818,28 +331,20 @@
     <!-- Section 3 -->
     <div class="section">
       <div class="section-header">
-        <div class="section-icon">
-          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-        </div>
+        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
         <span class="section-title">Contexte clinique</span>
       </div>
-      <div style="display:flex; flex-direction:column; gap:18px;">
-        <div class="field">
-          <label>Anamnèse <span class="req">*</span></label>
-          <textarea placeholder="Décrivez le contexte clinique, les signes observés, l'évolution..."></textarea>
-          <div class="info-note">
-            ℹ️ Si l'anamnèse n'est pas communiquée, la mention <strong>«&nbsp;NA&nbsp;»</strong> sera indiquée dans le rapport.
-          </div>
-        </div>
+      <div class="field">
+        <label>Anamnèse <span class="req">*</span></label>
+        <textarea placeholder="Décrivez le contexte clinique, les signes observés, l'évolution..."></textarea>
+        <div class="info-note">ℹ️ Si l'anamnèse n'est pas communiquée, la mention <strong>«&nbsp;NA&nbsp;»</strong> sera indiquée dans le rapport.</div>
       </div>
     </div>
 
     <!-- Section 4 -->
     <div class="section">
       <div class="section-header">
-        <div class="section-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-        </div>
+        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
         <span class="section-title">Examen & Images DICOM</span>
         <span class="section-badge">Obligatoire</span>
       </div>
@@ -853,54 +358,20 @@
           </div>
         </div>
 
-        <!-- Régions -->
         <div>
           <span class="region-field-label">Région(s) à interpréter <span class="req">*</span></span>
           <div style="display:flex; flex-direction:column; gap:8px;" id="regionsList">
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Massif facical / cou">
-              <span class="cb-box"></span><span class="cb-text">1 région : Massif facical / cou</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Thorax">
-              <span class="cb-box"></span><span class="cb-text">1 région : Thorax</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Abdomen">
-              <span class="cb-box"></span><span class="cb-text">1 région : Abdomen</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)">
-              <span class="cb-box"></span><span class="cb-text">1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)">
-              <span class="cb-box"></span><span class="cb-text">1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)</span>
-            </label>
-            <label class="checkbox-region is-supplement">
-              <input type="checkbox" class="region-cb" data-regions="0" data-label="Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)">
-              <span class="cb-box"></span><span class="cb-text">Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)">
-              <span class="cb-box"></span><span class="cb-text">1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="2" data-label="2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)">
-              <span class="cb-box"></span><span class="cb-text">2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="3" data-label="3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)">
-              <span class="cb-box"></span><span class="cb-text">3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="2" data-label='2 régions : Étude "membres" dans le cadre d&apos;un bilan d&apos;extension "corps entier" uniquement (codé 2 régions au lieu de 3)'>
-              <span class="cb-box"></span><span class="cb-text">2 régions : Étude "membres" dans le cadre d'un bilan d'extension "corps entier" uniquement (codé 2 régions au lieu de 3)</span>
-            </label>
-            <label class="checkbox-region">
-              <input type="checkbox" class="region-cb" data-regions="0" data-label="Autres : précisez clairement le besoin ci-après">
-              <span class="cb-box"></span><span class="cb-text">Autres : précisez clairement le besoin ci-après</span>
-            </label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Massif facical / cou"><span class="cb-box"></span><span class="cb-text">1 région : Massif facical / cou</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Thorax"><span class="cb-box"></span><span class="cb-text">1 région : Thorax</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Abdomen"><span class="cb-box"></span><span class="cb-text">1 région : Abdomen</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)"><span class="cb-box"></span><span class="cb-text">1 région : Colonne cervico-thoracique (spécifique aux cas d'atteinte du rachis)</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)"><span class="cb-box"></span><span class="cb-text">1 région : Colonne thoraco-lombaire (spécifique aux cas d'atteinte du rachis)</span></label>
+            <label class="checkbox-region is-supplement"><input type="checkbox" class="region-cb" data-regions="0" data-label="Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)"><span class="cb-box"></span><span class="cb-text">Supplément (myéloscanner / angioscanner multiphase / lymphangioscanner / fistulographie...)</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="1" data-label="1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)"><span class="cb-box"></span><span class="cb-text">1 région : 1 articulation (coudes ou épaules ou carpes / pelvis ou grassets ou tarses)</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="2" data-label="2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)"><span class="cb-box"></span><span class="cb-text">2 régions : 2 articulations (coudes / épaules ou carpes / coudes ou carpes / épaules - pelvis / grassets ou grassets / tarses ou pelvis / tarses)</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="3" data-label="3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)"><span class="cb-box"></span><span class="cb-text">3 régions : 3 articulations (carpes / coudes / épaules ou pelvis / grassets / tarses)</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="2" data-label='2 régions : Étude "membres" dans le cadre d&apos;un bilan d&apos;extension "corps entier" uniquement (codé 2 régions au lieu de 3)'><span class="cb-box"></span><span class="cb-text">2 régions : Étude "membres" dans le cadre d'un bilan d'extension "corps entier" uniquement (codé 2 régions au lieu de 3)</span></label>
+            <label class="checkbox-region"><input type="checkbox" class="region-cb" data-regions="0" data-label="Autres : précisez clairement le besoin ci-après"><span class="cb-box"></span><span class="cb-text">Autres : précisez clairement le besoin ci-après</span></label>
           </div>
 
           <div class="region-summary" id="regionSummary" style="display:none; margin-top:14px;">
@@ -918,7 +389,7 @@
           </div>
         </div>
 
-        <!-- DICOM Checker -->
+        <!-- DICOM Checker — pointe vers le VPS Ionos public -->
         <div class="field">
           <label>Vérification de réception des images DICOM</label>
           <div class="dicom-checker">
@@ -927,7 +398,7 @@
               <svg viewBox="0 0 24 24"><path d="M19.59 7L12 14.59 8.41 11 7 12.41l5 5 9-9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
             </div>
             <div class="dicom-info">
-              <div class="dicom-label">Serveur DICOM — Orthanc</div>
+              <div class="dicom-label">Serveur DICOM — Orthanc VRS</div>
               <div class="dicom-state waiting" id="dicomState">En attente de vérification...</div>
               <div id="dicomDetail" style="font-size:0.75rem; color:rgba(255,255,255,0.45); margin-top:4px;"></div>
             </div>
@@ -939,9 +410,7 @@
         <div class="field">
           <label>Documents complémentaires (compte-rendu, ordonnance, biologie...)</label>
           <div class="upload-zone-uc" id="uploadZone">
-            <div class="upload-icon">
-              <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
-            </div>
+            <div class="upload-icon"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg></div>
             <div class="upload-text"><strong>Cliquez pour ajouter des fichiers</strong></div>
             <div class="upload-limit">PDF, JPG, PNG — max 100 MB par fichier</div>
           </div>
@@ -955,9 +424,7 @@
     <!-- Section 5 -->
     <div class="section">
       <div class="section-header">
-        <div class="section-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
+        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <span class="section-title">Options de traitement</span>
       </div>
       <div class="grid-2">
@@ -979,12 +446,8 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="form-footer">
-      <div class="footer-info">
-        <strong>VetResolution</strong><br>
-        Votre rapport sera transmis par email dans les délais convenus.
-      </div>
+      <div class="footer-info"><strong>VetResolution</strong><br>Votre rapport sera transmis par email dans les délais convenus.</div>
       <button class="submit-btn" id="submitBtn">Soumettre la fiche →</button>
     </div>
 
@@ -997,16 +460,18 @@
     <div style="width:72px; height:72px; background:#1a7a8a; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:2rem;">✓</div>
     <h2 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:#0d1f3c; margin-bottom:12px;">Fiche envoyée avec succès !</h2>
     <p style="color:#6b7f91; font-size:0.92rem; line-height:1.6; margin-bottom:8px; font-weight:300;">Votre demande a bien été transmise à VetResolution.<br>Vous recevrez une confirmation par email.</p>
-    <div id="successUrgence" style="display:none; margin:16px 0; padding:12px 20px; background:#fff3cd; border-radius:10px; border-left:3px solid #c9a84c; font-size:0.85rem; color:#7a5c00; font-weight:400;">
-      ⚡ Demande urgente — traitement prioritaire en cours
-    </div>
+    <div id="successUrgence" style="display:none; margin:16px 0; padding:12px 20px; background:#fff3cd; border-radius:10px; border-left:3px solid #c9a84c; font-size:0.85rem; color:#7a5c00; font-weight:400;">⚡ Demande urgente — traitement prioritaire en cours</div>
     <button style="margin-top:24px; background:#1a7a8a; color:white; border:none; border-radius:10px; padding:12px 28px; font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:400; cursor:pointer; letter-spacing:0.03em;">Nouvelle demande</button>
   </div>
 </div>
 
 <script>
-  const FORMSPREE_ENDPOINT = 'https://api.web3forms.com/submit';
   const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
+  // ── Orthanc VPS Ionos ─────────────────────────────────────────
+  const ORTHANC_URL  = 'http://212.227.164.133:8042';
+  const ORTHANC_USER = 'vetresolution';
+  const ORTHANC_PASS = 'vetresolution';
+  // ─────────────────────────────────────────────────────────────
   let uploadedFileUrls = [];
   const toggleState = {};
 
@@ -1022,14 +487,13 @@
             const ext = (name.split('.').pop() || '').toLowerCase();
             const icon = ext === 'pdf' ? '📄' : ['jpg','jpeg','png'].includes(ext) ? '🖼️' : '📎';
             uploadedFileUrls.push({ name, url });
-            const list = document.getElementById('uploadedFiles');
             const item = document.createElement('div');
             item.className = 'uploaded-file-item';
             item.innerHTML = `<span class="uploaded-file-icon">${icon}</span><a href="${url}" target="_blank">${name}</a><span>✓</span>`;
-            list.appendChild(item);
-            const status = document.getElementById('uploadStatus');
-            status.style.display = 'block';
-            status.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
+            document.getElementById('uploadedFiles').appendChild(item);
+            const s = document.getElementById('uploadStatus');
+            s.style.display = 'block';
+            s.textContent = `✓ ${uploadedFileUrls.length} fichier${uploadedFileUrls.length > 1 ? 's' : ''} uploadé${uploadedFileUrls.length > 1 ? 's' : ''}`;
           });
         });
       });
@@ -1059,17 +523,16 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.classList.add(val === 'yes' ? 'active-yes' : 'active-no');
     toggleState[group] = val;
   }
-
   document.querySelectorAll('.toggle-btn').forEach(btn => {
     btn.addEventListener('click', () => setToggle(btn, btn.dataset.group, btn.dataset.val));
   });
 
+  // ── Vérification DICOM → VPS Ionos public ───────────────────
   async function checkDicom() {
-    const ORTHANC_URL = 'http://100.84.243.6:8042';
-    const state = document.getElementById('dicomState');
+    const state    = document.getElementById('dicomState');
     const detailEl = document.getElementById('dicomDetail');
     const prenomInput = document.querySelector('input[placeholder="Prénom"]');
-    const prenom = prenomInput ? prenomInput.value.trim() : '';
+    const prenom   = prenomInput ? prenomInput.value.trim() : '';
 
     if (!prenom) {
       state.className = 'dicom-state pending';
@@ -1083,10 +546,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (detailEl) detailEl.textContent = '';
 
     try {
+      const credentials = btoa(`${ORTHANC_USER}:${ORTHANC_PASS}`);
       const res = await fetch(`${ORTHANC_URL}/tools/find`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ Level: 'Patient', Query: { PatientName: `*${prenom.toUpperCase()}*` }, Expand: true })
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${credentials}`
+        },
+        body: JSON.stringify({
+          Level: 'Patient',
+          Query: { PatientName: `*${prenom.toUpperCase()}*` },
+          Expand: true
+        })
       });
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1100,23 +571,28 @@ document.addEventListener('DOMContentLoaded', function() {
         let totalInstances = 0, totalSeries = 0, lastUpdate = '';
         patients.forEach(p => {
           totalInstances += parseInt(p.MainDicomTags?.NumberOfPatientRelatedInstances || 0);
-          totalSeries += parseInt(p.MainDicomTags?.NumberOfPatientRelatedSeries || 0);
+          totalSeries    += parseInt(p.MainDicomTags?.NumberOfPatientRelatedSeries || 0);
           if (p.LastUpdate) lastUpdate = p.LastUpdate.substring(0, 10);
         });
         state.className = 'dicom-state received';
         state.textContent = `✓ "${prenom}" présent sur le serveur DICOM`;
         if (detailEl) detailEl.textContent = [
           totalInstances ? `${totalInstances} image${totalInstances > 1 ? 's' : ''}` : '',
-          totalSeries ? `${totalSeries} série${totalSeries > 1 ? 's' : ''}` : '',
-          lastUpdate ? `dernière mise à jour : ${lastUpdate}` : ''
+          totalSeries    ? `${totalSeries} série${totalSeries > 1 ? 's' : ''}` : '',
+          lastUpdate     ? `dernière mise à jour : ${lastUpdate}` : ''
         ].filter(Boolean).join(' · ');
       }
     } catch (err) {
       state.className = 'dicom-state pending';
-      state.textContent = err.name === 'TypeError' ? '🔴 Impossible de contacter le serveur DICOM' : `🔴 Erreur : ${err.message}`;
-      if (detailEl) detailEl.textContent = err.name === 'TypeError' ? 'Vérifiez que vous êtes connecté au réseau Tailscale.' : '';
+      state.textContent = err.name === 'TypeError'
+        ? '🔴 Impossible de contacter le serveur DICOM'
+        : `🔴 Erreur : ${err.message}`;
+      if (detailEl) detailEl.textContent = err.name === 'TypeError'
+        ? 'Vérifiez que le port 8042 est accessible (CORS peut bloquer depuis HTTPS).'
+        : '';
     }
   }
+  // ────────────────────────────────────────────────────────────
 
   document.querySelector('.dicom-check-btn').addEventListener('click', checkDicom);
 
@@ -1136,23 +612,21 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-
   window.addEventListener('scroll', updateStepper);
 
   async function submitForm() {
     const btn = document.getElementById('submitBtn');
     const errors = [];
-
     document.querySelectorAll('input, select, textarea').forEach(el => { el.style.border = ''; el.style.background = ''; });
-
     function markError(el) { el.style.border = '1.5px solid #c0392b'; el.style.background = '#fff5f5'; errors.push(el); }
 
     const clinique = document.querySelector('input[placeholder="Nom de votre clinique vétérinaire"]');
     if (!clinique.value.trim()) markError(clinique);
     const nomVet = document.querySelector('input[placeholder="Nom"]');
     if (!nomVet.value.trim()) markError(nomVet);
-    const emails = document.querySelectorAll('input[type="email"]');
-    emails.forEach(email => { if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email); });
+    document.querySelectorAll('input[type="email"]').forEach(email => {
+      if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email);
+    });
     const espece = document.querySelector('select');
     if (!espece.value) markError(espece);
     const anam = document.querySelector('textarea[placeholder="Décrivez le contexte clinique, les signes observés, l\'évolution..."]');
@@ -1184,8 +658,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const regions = [...document.querySelectorAll('.region-cb:checked')].map(cb => cb.dataset.label);
     if (regions.length) data['Régions à interpréter'] = regions.join('\n');
     data['Télé-expertise'] = toggleState['expertise'] === 'yes' ? 'Oui' : 'Non';
-    data['Urgence'] = toggleState['urgence'] === 'yes' ? 'Oui' : 'Non';
-    data['Statut DICOM'] = document.getElementById('dicomState').textContent.trim();
+    data['Urgence']        = toggleState['urgence']   === 'yes' ? 'Oui' : 'Non';
+    data['Statut DICOM']   = document.getElementById('dicomState').textContent.trim();
     if (uploadedFileUrls.length > 0) data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
 
     btn.textContent = 'Envoi en cours...';
@@ -1193,10 +667,14 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.style.opacity = '0.7';
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Nouvelle demande scanner — ${data['Prénom de l\'animal'] || 'Animal'} (${data['Espèce'] || ''})`, ...data })
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Nouvelle demande scanner — ${data['Prénom de l\'animal'] || 'Animal'} (${data['Espèce'] || ''})`,
+          ...data
+        })
       });
       const result = await res.json();
       if (result.success) {
