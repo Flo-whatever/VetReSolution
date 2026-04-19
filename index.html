@@ -298,8 +298,7 @@
 </div>
 
 <script>
-  const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
-  const ORTHANC_URL = 'https://orthanc.cosypy.fr';
+  const ORTHANC_URL  = 'http://212.227.164.133';
   const ORTHANC_USER = 'vetresolution';
   const ORTHANC_PASS = 'vetresolution';
   let uploadedFileUrls = [];
@@ -458,10 +457,10 @@
       if (uploadedFileUrls.length > 0) data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
       btn.textContent = 'Envoi en cours...'; btn.disabled = true; btn.style.opacity = '0.7';
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('https://api.cosypy.fr/send', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Nouvelle demande scanner — ${data["Prénom de l'animal"] || 'Animal'} (${data['Espèce'] || ''})`, ...data })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
         });
         const result = await res.json();
         if (result.success) {
