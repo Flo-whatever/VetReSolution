@@ -9,6 +9,7 @@
     --navy: #0d1f3c; --navy-mid: #162d50; --teal: #1a7a8a; --teal-light: #24a0b5;
     --teal-pale: #e8f5f8; --gold: #c9a84c; --gold-light: #f0d98c; --white: #ffffff;
     --grey-light: #f4f7f9; --grey-mid: #d8e2e8; --grey-text: #6b7f91; --text: #1a2b3c;
+    --error: #c0392b; --warn: #e67e22;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -23,16 +24,10 @@
   }
   .page-wrapper { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
   .header { text-align: center; margin-bottom: 36px; }
-
-  /* LOGO — pleine largeur, sans encadrement */
   .logo-container { display: block; width: 100%; margin-bottom: 28px; }
   .logo-img { width: 100%; height: auto; max-height: 180px; object-fit: contain; display: block; }
-  .logo-img-fallback {
-    font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 2.8rem; font-weight: 700;
-    color: var(--navy); letter-spacing: 0.12em; line-height: 1; display: none; text-align: center; padding: 20px;
-  }
+  .logo-img-fallback { font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 2.8rem; font-weight: 700; color: var(--navy); letter-spacing: 0.12em; line-height: 1; display: none; text-align: center; padding: 20px; }
   .logo-img-fallback span { color: var(--teal); }
-
   .header-title { font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 1.84rem; color: var(--navy); font-weight: 600; letter-spacing: 0.02em; }
   .header-sub { color: var(--grey-text); font-size: 1.01rem; margin-top: 8px; font-weight: 300; }
   .sep { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--teal), transparent); margin: 16px auto; }
@@ -63,11 +58,7 @@
   .select-wrap select { padding-right: 36px; cursor: pointer; }
   .date-row { display: grid; grid-template-columns: 2fr 3fr 2fr; gap: 10px; }
   .toggle-group { display: flex; gap: 10px; }
-  .toggle-btn {
-    flex: 1; padding: 11px; border: 1.5px solid var(--grey-mid); border-radius: 10px;
-    background: var(--grey-light); font-family: 'Calibri', 'Segoe UI', sans-serif; font-weight: 300;
-    font-size: 0.95rem; color: var(--grey-text); cursor: pointer; transition: all 0.2s; text-align: center;
-  }
+  .toggle-btn { flex: 1; padding: 11px; border: 1.5px solid var(--grey-mid); border-radius: 10px; background: var(--grey-light); font-family: 'Calibri', 'Segoe UI', sans-serif; font-weight: 300; font-size: 0.95rem; color: var(--grey-text); cursor: pointer; transition: all 0.2s; text-align: center; }
   .toggle-btn:hover { border-color: var(--teal-light); color: var(--teal); }
   .toggle-btn.active-yes { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); font-weight: 500; }
   .toggle-btn.active-no { background: #fef3f2; border-color: #e74c3c; color: #e74c3c; font-weight: 500; }
@@ -93,9 +84,11 @@
   .dicom-state { font-size: 0.95rem; color: var(--white); font-weight: 300; margin-top: 3px; }
   .dicom-state.waiting { color: rgba(255,255,255,0.4); font-style: italic; }
   .dicom-state.received { color: #4ade80; }
-  .dicom-state.pending { color: var(--gold-light); }
-  .dicom-check-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 0.82rem; font-weight: 300; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+  .dicom-state.not-found { color: #fbbf24; }
+  .dicom-state.error { color: #f87171; }
+  .dicom-check-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 0.82rem; font-weight: 300; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
   .dicom-check-btn:hover { background: rgba(26,160,181,0.3); border-color: var(--teal-light); }
+  .dicom-check-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .urgency-note { font-size: 0.76rem; color: var(--grey-text); margin-top: 6px; font-style: italic; }
   .form-footer { background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%); padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .footer-info { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
@@ -103,7 +96,10 @@
   .submit-btn { background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%); color: var(--navy); font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 0.95rem; font-weight: 700; padding: 14px 36px; border: none; border-radius: 12px; cursor: pointer; letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.2s; white-space: nowrap; box-shadow: 0 4px 20px rgba(201,168,76,0.35); }
   .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(201,168,76,0.5); }
   .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
   .info-note { display: flex; gap: 10px; background: var(--teal-pale); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 0.82rem; color: var(--teal); margin-top: 16px; line-height: 1.5; }
+  .warn-note { display: flex; gap: 10px; background: #fff8ee; border-left: 3px solid var(--warn); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 0.82rem; color: var(--warn); margin-top: 8px; line-height: 1.5; }
+  .dicom-required-note { font-size: 0.76rem; color: rgba(255,255,255,0.45); margin-top: 8px; font-style: italic; text-align: center; }
   .region-field-label { font-size: 0.78rem; font-weight: 600; color: var(--grey-text); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: block; }
   .region-field-label .req { color: var(--teal); margin-left: 2px; }
   .checkbox-region { display: flex; align-items: flex-start; gap: 12px; padding: 11px 16px; border: 1.5px solid var(--grey-mid); border-radius: 10px; background: var(--grey-light); cursor: pointer; transition: all 0.18s ease; user-select: none; line-height: 1.45; }
@@ -134,6 +130,20 @@
   .step.done .step-label { color: var(--teal); }
   .step-line { width: 40px; height: 2px; background: var(--grey-mid); margin-bottom: 20px; }
   .step-line.done { background: var(--teal); }
+
+  /* Modal avertissement DICOM */
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 8000; background: rgba(13,31,60,0.7); align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.visible { display: flex; }
+  .modal-box { background: white; border-radius: 20px; padding: 36px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.2); text-align: center; }
+  .modal-icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .modal-title { font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+  .modal-text { font-size: 0.9rem; color: var(--grey-text); line-height: 1.6; margin-bottom: 24px; }
+  .modal-actions { display: flex; gap: 12px; justify-content: center; }
+  .modal-btn-cancel { padding: 11px 24px; border: 1.5px solid var(--grey-mid); border-radius: 10px; background: var(--grey-light); color: var(--grey-text); font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+  .modal-btn-cancel:hover { border-color: var(--teal); color: var(--teal); }
+  .modal-btn-confirm { padding: 11px 24px; border: none; border-radius: 10px; background: var(--warn); color: white; font-family: 'Calibri', 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .modal-btn-confirm:hover { background: #d35400; }
+
   @media (max-width: 600px) {
     .section { padding: 24px 20px; }
     .grid-2 { grid-template-columns: 1fr; }
@@ -189,7 +199,7 @@
         <span class="section-badge">Obligatoire</span>
       </div>
       <div class="grid-2">
-        <div class="field"><label>Prénom de l'animal <span class="req">*</span></label><input type="text" placeholder="Prénom"></div>
+        <div class="field"><label>Prénom de l'animal <span class="req">*</span></label><input type="text" id="prenomAnimal" placeholder="Prénom"></div>
         <div class="field"><label>Identité des maîtres</label><input type="text" placeholder="Nom — Prénom"></div>
         <div class="field"><label>Email du propriétaire <span class="req">*</span></label><input type="email" placeholder="dupont@propriétaire.fr"></div>
         <div class="field"><label>Espèce <span class="req">*</span></label><div class="select-wrap"><select><option value="">Sélectionner...</option><option>Chien</option><option>Chat</option><option>Lapin</option><option>Furet</option><option>NAC</option><option>Autre</option></select></div></div>
@@ -198,7 +208,7 @@
           <div class="date-row">
             <div class="select-wrap"><select><option>Jour</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select></div>
             <div class="select-wrap"><select><option>Mois</option><option>Janvier</option><option>Février</option><option>Mars</option><option>Avril</option><option>Mai</option><option>Juin</option><option>Juillet</option><option>Août</option><option>Septembre</option><option>Octobre</option><option>Novembre</option><option>Décembre</option></select></div>
-            <div class="select-wrap"><select><option>Année</option><script>for(let y=2026;y>=1990;y--) document.write(`<option>${y}</option>`)</script></select></div>
+            <div class="select-wrap"><select><option>Année</option><script>const currentYear = new Date().getFullYear(); for(let y=currentYear;y>=1990;y--) document.write(`<option>${y}</option>`)</script></select></div>
           </div>
         </div>
         <div class="field"><label>Sexe</label><div class="select-wrap"><select><option value="">Sélectionner...</option><option>Mâle</option><option>Femelle</option></select></div></div>
@@ -248,14 +258,23 @@
           </div>
           <div class="field" style="margin-top:12px;"><label>Précisez votre besoin si nécessaire</label><textarea style="min-height:60px;" placeholder="Décrivez ici tout besoin spécifique non listé ci-dessus..."></textarea></div>
         </div>
+
+        <!-- DICOM Checker -->
         <div class="field">
-          <label>Vérification de réception des images DICOM</label>
+          <label>Vérification de réception des images DICOM <span class="req">*</span></label>
           <div class="dicom-checker">
             <div class="dicom-status"><div class="pulse"></div><svg viewBox="0 0 24 24"><path d="M19.59 7L12 14.59 8.41 11 7 12.41l5 5 9-9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg></div>
-            <div class="dicom-info"><div class="dicom-label">Serveur DICOM — Orthanc VRS</div><div class="dicom-state waiting" id="dicomState">En attente de vérification...</div><div id="dicomDetail" style="font-size:0.75rem; color:rgba(255,255,255,0.45); margin-top:4px;"></div></div>
-            <button class="dicom-check-btn">Vérifier</button>
+            <div class="dicom-info">
+              <div class="dicom-label">Serveur DICOM — Orthanc VRS</div>
+              <div class="dicom-state waiting" id="dicomState">Vérification requise avant soumission</div>
+              <div id="dicomDetail" style="font-size:0.75rem; color:rgba(255,255,255,0.45); margin-top:4px;"></div>
+            </div>
+            <button class="dicom-check-btn" id="dicomCheckBtn">Vérifier</button>
           </div>
+          <p class="dicom-required-note" id="dicomRequiredNote">⚠️ Vous devez cliquer sur "Vérifier" avant de pouvoir soumettre le formulaire</p>
         </div>
+
+        <!-- Upload -->
         <div class="field">
           <label>Documents complémentaires (compte-rendu, ordonnance, biologie...)</label>
           <div class="upload-zone-uc" id="uploadZone">
@@ -282,11 +301,29 @@
 
     <div class="form-footer">
       <div class="footer-info"><strong>VetResolution</strong><br>Votre rapport sera transmis par email dans les délais convenus.</div>
-      <button class="submit-btn" id="submitBtn">Soumettre la fiche →</button>
+      <button class="submit-btn" id="submitBtn" disabled>Soumettre la fiche →</button>
     </div>
   </div>
 </div>
 
+<!-- Modal avertissement DICOM non trouvé -->
+<div class="modal-overlay" id="dicomModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <div class="modal-title">Images DICOM non détectées</div>
+    <div class="modal-text">
+      Le prénom "<strong id="modalPrenom"></strong>" n'a pas été trouvé sur le serveur DICOM au moment de la vérification.<br><br>
+      Assurez-vous que le prénom saisi dans ce formulaire correspond exactement à celui enregistré dans le logiciel d'imagerie.<br><br>
+      Souhaitez-vous quand même soumettre le dossier ?
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn-cancel" id="modalCancel">Annuler et corriger</button>
+      <button class="modal-btn-confirm" id="modalConfirm">Soumettre quand même</button>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay succès -->
 <div id="successOverlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(240,244,247,0.97); flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px;">
   <div style="background:white; border-radius:24px; padding:48px 40px; box-shadow:0 8px 60px rgba(0,0,0,0.12); max-width:460px; width:100%;">
     <div style="width:72px; height:72px; background:#1a7a8a; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:2rem;">✓</div>
@@ -298,11 +335,27 @@
 </div>
 
 <script>
-  const ORTHANC_URL  = 'https://orthanc.cosypy.fr';
-  const ORTHANC_USER = 'vetresolution';
-  const ORTHANC_PASS = 'vetresolution';
+  const API_URL = 'https://api.cosypy.fr';
   let uploadedFileUrls = [];
   const toggleState = {};
+
+  // État DICOM
+  let dicomVerified = false;      // true dès que le praticien a cliqué "Vérifier"
+  let dicomFound = false;         // true si un patient a été trouvé
+  let dicomStudyUuid = '';        // UUID de l'étude si trouvée
+  let pendingSubmit = false;      // true si on attend la confirmation du modal
+
+  function updateSubmitBtn() {
+    const btn = document.getElementById('submitBtn');
+    const note = document.getElementById('dicomRequiredNote');
+    if (dicomVerified) {
+      btn.disabled = false;
+      note.style.display = 'none';
+    } else {
+      btn.disabled = true;
+      note.style.display = 'block';
+    }
+  }
 
   function initUploadcare() {
     if (typeof uploadcare === 'undefined') return;
@@ -329,6 +382,10 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
+
+    updateSubmitBtn();
+
+    // Région summary
     function updateRegionSummary() {
       const checked = document.querySelectorAll('.region-cb:checked');
       const summary = document.getElementById('regionSummary');
@@ -343,6 +400,7 @@
     }
     document.querySelectorAll('.region-cb').forEach(cb => cb.addEventListener('change', updateRegionSummary));
 
+    // Toggle buttons
     function setToggle(btn, group, val) {
       btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active-yes','active-no'));
       btn.classList.add(val === 'yes' ? 'active-yes' : 'active-no');
@@ -352,51 +410,80 @@
       btn.addEventListener('click', () => setToggle(btn, btn.dataset.group, btn.dataset.val));
     });
 
+    // Reset DICOM state si le prénom change
+    document.getElementById('prenomAnimal').addEventListener('input', function() {
+      if (dicomVerified) {
+        dicomVerified = false;
+        dicomFound = false;
+        dicomStudyUuid = '';
+        const state = document.getElementById('dicomState');
+        state.className = 'dicom-state waiting';
+        state.textContent = 'Vérification requise avant soumission';
+        document.getElementById('dicomDetail').textContent = '';
+        updateSubmitBtn();
+      }
+    });
+
+    // Vérification DICOM
     async function checkDicom() {
       const state = document.getElementById('dicomState');
       const detailEl = document.getElementById('dicomDetail');
-      const prenomInput = document.querySelector('input[placeholder="Prénom"]');
-      const prenom = prenomInput ? prenomInput.value.trim() : '';
-      if (!prenom) { state.className = 'dicom-state pending'; state.textContent = "⚠️ Renseignez d'abord le prénom de l'animal"; if (detailEl) detailEl.textContent = ''; return; }
-      state.className = 'dicom-state pending';
+      const checkBtn = document.getElementById('dicomCheckBtn');
+      const prenom = document.getElementById('prenomAnimal').value.trim();
+
+      if (!prenom) {
+        state.className = 'dicom-state not-found';
+        state.textContent = "⚠️ Renseignez d'abord le prénom de l'animal";
+        detailEl.textContent = '';
+        return;
+      }
+
+      checkBtn.disabled = true;
+      checkBtn.textContent = '...';
+      state.className = 'dicom-state waiting';
       state.textContent = `Recherche de "${prenom}" en cours...`;
-      if (detailEl) detailEl.textContent = '';
+      detailEl.textContent = '';
+
       try {
-        const credentials = btoa(`${ORTHANC_USER}:${ORTHANC_PASS}`);
-        const res = await fetch(`${ORTHANC_URL}/tools/find`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${credentials}` },
-          body: JSON.stringify({ Level: 'Patient', Query: { PatientName: `*${prenom.toUpperCase()}*` }, Expand: true })
-        });
+        const res = await fetch(`${API_URL}/check-dicom?prenom=${encodeURIComponent(prenom)}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const patients = await res.json();
-        if (patients.length === 0) {
-          state.className = 'dicom-state pending';
-          state.textContent = `⏳ "${prenom}" non trouvé sur le serveur DICOM`;
-          if (detailEl) detailEl.textContent = 'Les images ne sont peut-être pas encore arrivées.';
+        const result = await res.json();
+
+        dicomVerified = true;
+
+        if (!result.found) {
+          dicomFound = false;
+          dicomStudyUuid = '';
+          state.className = 'dicom-state not-found';
+          state.textContent = `⚠️ "${prenom}" non trouvé sur le serveur DICOM`;
+          detailEl.textContent = 'Vous pouvez quand même soumettre — une confirmation vous sera demandée.';
         } else {
-          let totalInstances = 0, totalSeries = 0, lastUpdate = '';
-          patients.forEach(p => {
-            totalInstances += parseInt(p.MainDicomTags?.NumberOfPatientRelatedInstances || 0);
-            totalSeries += parseInt(p.MainDicomTags?.NumberOfPatientRelatedSeries || 0);
-            if (p.LastUpdate) lastUpdate = p.LastUpdate.substring(0, 10);
-          });
+          dicomFound = true;
+          dicomStudyUuid = result.studyUuid || '';
           state.className = 'dicom-state received';
           state.textContent = `✓ "${prenom}" présent sur le serveur DICOM`;
-          if (detailEl) detailEl.textContent = [
-            totalInstances ? `${totalInstances} image${totalInstances > 1 ? 's' : ''}` : '',
-            totalSeries ? `${totalSeries} série${totalSeries > 1 ? 's' : ''}` : '',
-            lastUpdate ? `dernière mise à jour : ${lastUpdate}` : ''
+          detailEl.textContent = [
+            result.totalInstances ? `${result.totalInstances} image${result.totalInstances > 1 ? 's' : ''}` : '',
+            result.totalSeries ? `${result.totalSeries} série${result.totalSeries > 1 ? 's' : ''}` : '',
+            result.lastUpdate ? `dernière mise à jour : ${result.lastUpdate}` : ''
           ].filter(Boolean).join(' · ');
         }
       } catch (err) {
-        state.className = 'dicom-state pending';
-        state.textContent = err.name === 'TypeError' ? '🔴 Impossible de contacter le serveur DICOM' : `🔴 Erreur : ${err.message}`;
-        if (detailEl) detailEl.textContent = err.name === 'TypeError' ? 'Vérifiez que le port 8042 est accessible (CORS peut bloquer depuis HTTPS).' : '';
+        dicomVerified = false;
+        dicomFound = false;
+        state.className = 'dicom-state error';
+        state.textContent = '🔴 Impossible de contacter le serveur DICOM';
+        detailEl.textContent = 'Vérifiez votre connexion et réessayez.';
       }
-    }
-    document.querySelector('.dicom-check-btn').addEventListener('click', checkDicom);
 
+      checkBtn.disabled = false;
+      checkBtn.textContent = 'Vérifier';
+      updateSubmitBtn();
+    }
+
+    document.getElementById('dicomCheckBtn').addEventListener('click', checkDicom);
+
+    // Stepper
     function updateStepper() {
       const sections = document.querySelectorAll('.section');
       const steps = ['step1','step2','step3','step4','step5'].map(id => document.getElementById(id));
@@ -415,16 +502,19 @@
     }
     window.addEventListener('scroll', updateStepper);
 
-    async function submitForm() {
-      const btn = document.getElementById('submitBtn');
+    // Validation et soumission
+    function validateForm() {
       const errors = [];
       document.querySelectorAll('input, select, textarea').forEach(el => { el.style.border = ''; el.style.background = ''; });
       function markError(el) { el.style.border = '1.5px solid #c0392b'; el.style.background = '#fff5f5'; errors.push(el); }
+
       const clinique = document.querySelector('input[placeholder="Nom de votre clinique vétérinaire"]');
       if (!clinique.value.trim()) markError(clinique);
       const nomVet = document.querySelector('input[placeholder="Nom"]');
       if (!nomVet.value.trim()) markError(nomVet);
-      document.querySelectorAll('input[type="email"]').forEach(email => { if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email); });
+      document.querySelectorAll('input[type="email"]').forEach(email => {
+        if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email);
+      });
       const espece = document.querySelector('select');
       if (!espece.value) markError(espece);
       const anam = document.querySelector('textarea[placeholder="Décrivez le contexte clinique, les signes observés, l\'évolution..."]');
@@ -436,14 +526,11 @@
       } else { document.getElementById('regionsList').style.outline = ''; }
       if (!toggleState['expertise']) errors.push(null);
       if (!toggleState['urgence']) errors.push(null);
-      if (errors.length > 0) {
-        const firstEl = errors.find(e => e);
-        if (firstEl) firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        btn.textContent = `✗ ${errors.length} champ${errors.length > 1 ? 's' : ''} requis`;
-        btn.style.background = '#c0392b';
-        setTimeout(() => { btn.textContent = 'Soumettre la fiche →'; btn.style.background = ''; }, 2500);
-        return;
-      }
+
+      return errors;
+    }
+
+    function buildData() {
       const data = {};
       document.querySelectorAll('input:not(.region-cb), select, textarea').forEach(el => {
         const label = el.closest('.field')?.querySelector('label')?.textContent?.replace('*','').trim() || el.name || el.id;
@@ -454,7 +541,15 @@
       data['Télé-expertise'] = toggleState['expertise'] === 'yes' ? 'Oui' : 'Non';
       data['Urgence'] = toggleState['urgence'] === 'yes' ? 'Oui' : 'Non';
       data['Statut DICOM'] = document.getElementById('dicomState').textContent.trim();
+      if (dicomFound && dicomStudyUuid) {
+        data['Lien DICOM'] = `https://orthanc.cosypy.fr/app/explorer.html#study?uuid=${dicomStudyUuid}`;
+      }
       if (uploadedFileUrls.length > 0) data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
+      return data;
+    }
+
+    async function doSubmit(data) {
+      const btn = document.getElementById('submitBtn');
       btn.textContent = 'Envoi en cours...'; btn.disabled = true; btn.style.opacity = '0.7';
       try {
         const res = await fetch('https://api.cosypy.fr/send', {
@@ -469,12 +564,55 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else throw new Error('Erreur serveur');
       } catch (e) {
-        btn.textContent = "✗ Erreur d'envoi — réessayez"; btn.style.background = '#c0392b'; btn.style.opacity = '1'; btn.disabled = false;
+        btn.textContent = "✗ Erreur d'envoi — réessayez";
+        btn.style.background = '#c0392b'; btn.style.opacity = '1'; btn.disabled = false;
         setTimeout(() => { btn.textContent = 'Soumettre la fiche →'; btn.style.background = ''; }, 4000);
       }
     }
+
+    async function submitForm() {
+      const errors = validateForm();
+      if (errors.length > 0) {
+        const firstEl = errors.find(e => e);
+        if (firstEl) firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const btn = document.getElementById('submitBtn');
+        btn.textContent = `✗ ${errors.length} champ${errors.length > 1 ? 's' : ''} requis`;
+        btn.style.background = '#c0392b';
+        setTimeout(() => { btn.textContent = 'Soumettre la fiche →'; btn.style.background = ''; }, 2500);
+        return;
+      }
+
+      const data = buildData();
+
+      // Si DICOM non trouvé → modal de confirmation
+      if (dicomVerified && !dicomFound) {
+        document.getElementById('modalPrenom').textContent = document.getElementById('prenomAnimal').value.trim();
+        document.getElementById('dicomModal').classList.add('visible');
+        // On stocke les données en attendant la confirmation
+        window._pendingData = data;
+        return;
+      }
+
+      await doSubmit(data);
+    }
+
     document.getElementById('submitBtn').addEventListener('click', submitForm);
 
+    // Gestion du modal
+    document.getElementById('modalCancel').addEventListener('click', function() {
+      document.getElementById('dicomModal').classList.remove('visible');
+      window._pendingData = null;
+    });
+
+    document.getElementById('modalConfirm').addEventListener('click', async function() {
+      document.getElementById('dicomModal').classList.remove('visible');
+      if (window._pendingData) {
+        await doSubmit(window._pendingData);
+        window._pendingData = null;
+      }
+    });
+
+    // Reset
     function resetForm() {
       document.getElementById('successOverlay').style.display = 'none';
       document.querySelectorAll('input:not(.region-cb), textarea').forEach(el => el.value = '');
@@ -486,8 +624,14 @@
       document.getElementById('uploadedFiles').innerHTML = '';
       document.getElementById('uploadStatus').style.display = 'none';
       document.getElementById('regionSummary').style.display = 'none';
+      dicomVerified = false; dicomFound = false; dicomStudyUuid = '';
+      const state = document.getElementById('dicomState');
+      state.className = 'dicom-state waiting';
+      state.textContent = 'Vérification requise avant soumission';
+      document.getElementById('dicomDetail').textContent = '';
       const btn = document.getElementById('submitBtn');
-      btn.textContent = 'Soumettre la fiche →'; btn.style.background = ''; btn.style.opacity = '1'; btn.disabled = false;
+      btn.textContent = 'Soumettre la fiche →'; btn.style.background = ''; btn.style.opacity = '1';
+      updateSubmitBtn();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     document.querySelector('#successOverlay button').addEventListener('click', resetForm);
