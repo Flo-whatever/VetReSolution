@@ -290,6 +290,7 @@
       <div class="grid-2">
         <div class="field span-2"><label>Nom <span class="req">*</span></label><input type="text" placeholder="Nom du vétérinaire référant"></div>
         <div class="field span-2"><label>Ville <span class="req">*</span></label><input type="text" placeholder="Ville de la clinique"></div>
+        <div class="field span-2"><label>Email du vétérinaire référant <span class="req">*</span></label><input type="email" id="emailReferant" placeholder="veterinaire@clinique.fr"></div>
       </div>
     </div>
 
@@ -437,7 +438,6 @@
 </div>
 
 <script>
-  const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
   let uploadedFileUrls = [];
 
   function initUploadcare() {
@@ -497,7 +497,9 @@
     if (!prenomProp.value.trim()) markError(prenomProp);
     const nomProp = document.querySelector('input[placeholder="Nom du propriétaire"]');
     if (!nomProp.value.trim()) markError(nomProp);
-    const email = document.querySelector('input[type="email"]');
+    const emailRef = document.getElementById('emailReferant');
+    if (!emailRef.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailRef.value.trim())) markError(emailRef);
+    const email = document.querySelector('input[placeholder="email@exemple.fr"]');
     if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) markError(email);
     const tel = document.querySelector('input[type="tel"]');
     if (!tel.value.trim()) markError(tel);
@@ -525,6 +527,7 @@
 
     const data = {};
     data['Vétérinaire référant'] = nomVet.value.trim();
+    data['Email référant'] = document.getElementById('emailReferant')?.value.trim() || '';
     data['Ville clinique'] = villeVet.value.trim();
     document.querySelectorAll('input:not([type=checkbox]):not([type=radio]), select, textarea').forEach(el => {
       const label = el.closest('.field')?.querySelector('label')?.textContent?.replace('*','').trim() || '';
@@ -542,10 +545,10 @@
     btn.textContent = 'Envoi en cours...'; btn.disabled = true; btn.style.opacity = '0.7';
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('https://api.cosypy.fr/send-vetalpha', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Nouveau référé Vetalpha — ${prenomAnimal.value.trim()} (${urgence?.value || ''})`, ...data })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
       });
       const result = await res.json();
       if (result.success) {
