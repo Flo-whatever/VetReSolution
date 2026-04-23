@@ -223,6 +223,7 @@
           </div>
         </div>
         <div class="field"><label>Clinique vétérinaire <span class="req">*</span></label><input type="text" placeholder="Nom de la clinique"></div>
+        <div class="field"><label>Email du vétérinaire référant <span class="req">*</span></label><input type="email" id="emailReferantVO" placeholder="veterinaire@clinique.fr"></div>
       </div>
     </div>
 
@@ -363,7 +364,6 @@
 </div>
 
 <script>
-  const WEB3FORMS_KEY = '290bd2d1-0bf4-45d2-8ee1-f524c8f6066a';
   let uploadedFileUrls = [];
 
   function initUploadcare() {
@@ -416,6 +416,8 @@
     function markError(el) { el.style.border = '1.5px solid #8b2635'; el.style.background = '#fdf0f1'; errors.push(el); }
     function markListError(id) { const el = document.getElementById(id); el.style.outline = '2px solid #8b2635'; el.style.borderRadius = '9px'; errors.push(el); }
 
+    const emailRefVO = document.getElementById('emailReferantVO');
+    if (!emailRefVO.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailRefVO.value.trim())) markError(emailRefVO);
     const drName = document.getElementById('drName');
     if (!drName.value.trim()) markError(drName);
     const clinique = document.querySelector('input[placeholder="Nom de la clinique"]');
@@ -460,13 +462,17 @@
     if (urgence) data['Degré d\'urgence'] = urgence.dataset.label;
     if (uploadedFileUrls.length) data['Documents joints'] = uploadedFileUrls.map(f => `${f.name} : ${f.url}`).join('\n');
 
+    data['Email référant'] = document.getElementById('emailReferantVO')?.value.trim() || '';
+    data['Prénom animal'] = prenomAnimal.value.trim();
+    data['Nom maître'] = document.querySelector('input[placeholder="Nom"]')?.value.trim() || '';
+
     btn.textContent = 'Envoi en cours...'; btn.disabled = true; btn.style.opacity = '0.7';
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('https://api.cosypy.fr/send-vetomega', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Nouveau référé VetOmega — ${prenomAnimal.value.trim()} (${urgence?.value || ''})`, ...data })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
       });
       const result = await res.json();
       if (result.success) {
